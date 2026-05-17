@@ -13,7 +13,7 @@ import {
   recommendClauses,
   aiExplanation,
 } from "@/lib/riskEngine";
-import { counterparties, ndaTypes } from "@/lib/mockData";
+import { counterparties, ndaTypes, recentRequests } from "@/lib/mockData";
 import {
   TEMPLATE_LIBRARY,
   getTemplateById,
@@ -32,7 +32,10 @@ import {
   createTasksForSubmission,
   createTask,
   getRequest,
+  hydrateFormFromRecord,
 } from "@/lib/requestStore";
+import { AUTO_ASSIGNMENT_RULES } from "@/lib/autoAssignmentRules";
+import { useCurrentRole, ACTIONS } from "@/lib/permissions";
 import {
   Check,
   ChevronLeft,
@@ -50,6 +53,7 @@ import {
   ListChecks,
   Eye,
   CheckCircle2,
+  GitBranch,
 } from "lucide-react";
 
 const STEPS = [
@@ -155,13 +159,19 @@ function IntakeInner() {
   const params = useSearchParams();
   const router = useRouter();
   const toast = useToast();
+  const { guard, can } = useCurrentRole();
+  const editId = params.get("edit");
+  const renewId = params.get("renew");
+  const existingId = editId || renewId;
+  const isEditMode = Boolean(editId);
+  const isRenewMode = Boolean(renewId);
   const ndaTypeId = params.get("type") || "mutual";
   const initialTemplateId = params.get("template");
   const ndaType = ndaTypes.find((t) => t.id === ndaTypeId) || ndaTypes[0];
 
   const [step, setStep] = useState(1);
   const [recordId] = useState(
-    () => "NDA-" + (2042 + Math.floor(Math.random() * 50))
+    () => existingId || "NDA-" + (2042 + Math.floor(Math.random() * 50))
   );
 
   const initialTemplate =
@@ -208,6 +218,40 @@ function IntakeInner() {
   const [answers, setAnswers] = useState({});
   const [previewMode, setPreviewMode] = useState("raw"); // raw | filled
   const [hasLoggedSelection, setHasLoggedSelection] = useState(false);
+
+  // Load existing record into form when in edit/renew mode
+  useEffect(() => {
+    if (!existingId) return;
+    // Try store first, then fall back to mock recentRequests so any record
+    // visible in the Repository can be edited/renewed without starting blank.
+    const rec =
+      getRequest(existingId) ||
+      recentRequests.find((r) => r.id === existingId) ||
+      null;
+    if (!rec) {
+      toast.warning(
+        "Record not found",
+        `${existingId} could not be loaded. Starting from a blank form.`
+      );
+      return;
+    }
+    const hydrated = hydrateFormFromRecord(rec);
+    setForm((prev) => ({ ...prev, ...hydrated }));
+    if (rec.answers) setAnswers(rec.answers);
+    if (isRenewMode) {
+      toast.info(
+        "Renewal mode",
+        `Reviewing ${existingId}. Update term and effective date, then re-submit.`
+      );
+      setStep(2); // jump to record details (term + effective date)
+    } else {
+      toast.info(
+        "Editing record",
+        `${existingId} loaded with all details prefilled. Make changes and re-submit.`
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [existingId]);
 
   const template = useMemo(
     () => getTemplateById(form.templateId) || initialTemplate,
@@ -286,14 +330,45 @@ function IntakeInner() {
   return (
     <>
       <Topbar
-        title={`Guided Intake — ${ndaType.name}`}
-        subtitle="NDAFlow AI computes risk and routes the request. Final NDA is generated from the original template — no AI rewriting of legal content."
+        title={
+          isRenewMode
+            ? `Renew NDA — ${recordId}`
+            : isEditMode
+            ? `Edit NDA — ${recordId}`
+            : `Guided Intake — ${ndaType.name}`
+        }
+        subtitle={
+          isRenewMode
+            ? "Review the existing agreement and update the term, effective date, or any other details before re-submitting."
+            : isEditMode
+            ? "Update the full NDA details (counterparty, parties, terms, template) and re-submit for legal review."
+            : "NDAFlow AI computes risk and routes the request. Final NDA is generated from the original template — no AI rewriting of legal content."
+        }
         actions={
           <button onClick={() => router.push("/requests/new")} className="btn-ghost">
             <ChevronLeft className="w-4 h-4" /> Change type
           </button>
         }
       />
+
+      {(isEditMode || isRenewMode) && (
+        <div
+          className={`mb-4 rounded-xl border px-4 py-3 text-sm flex items-center gap-3 ${
+            isRenewMode
+              ? "bg-amber-500/10 border-amber-400/30 text-amber-100"
+              : "bg-indigo-500/10 border-indigo-400/30 text-indigo-100"
+          }`}
+        >
+          <span className="font-semibold">
+            {isRenewMode ? "Renewal mode" : "Edit mode"}:
+          </span>
+          <span className="opacity-90">
+            {isRenewMode
+              ? `You are renewing ${recordId}. Update the term and effective date below, then re-submit.`
+              : `You are editing ${recordId}. Make your changes across any step and re-submit.`}
+          </span>
+        </div>
+      )}
 
       <Stepper current={step} />
 
@@ -684,6 +759,42 @@ function IntakeInner() {
           {step === 6 && (
             <div className="space-y-6">
               <GlassCard>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-semibold text-white text-lg flex items-center gap-2">
+                    <GitBranch className="w-5 h-5 text-cyanglow" /> Auto-Assignment & Routing Rules
+                  </h3>
+                  <span className="chip">
+                    {AUTO_ASSIGNMENT_RULES.filter((r) => r.enabled).length} active
+                  </span>
+                </div>
+                <div className="text-xs text-slate-400 mb-3">
+                  These organisational rules will be applied automatically to this request based on the answers captured above.
+                </div>
+                <div className="overflow-x-auto -mx-1">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="text-left text-[10px] uppercase tracking-wider text-slate-400 border-b border-white/5">
+                        <th className="px-2 py-2 font-medium">Rule Name</th>
+                        <th className="px-2 py-2 font-medium">Target Field</th>
+                        <th className="px-2 py-2 font-medium">When</th>
+                        <th className="px-2 py-2 font-medium">Then</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {AUTO_ASSIGNMENT_RULES.filter((r) => r.enabled).map((r) => (
+                        <tr key={r.id} className="border-b border-white/5 align-top">
+                          <td className="px-2 py-2.5 font-semibold text-white">{r.name}</td>
+                          <td className="px-2 py-2.5 text-cyanglow text-xs">{r.targetField}</td>
+                          <td className="px-2 py-2.5 text-slate-300 text-xs">{r.when}</td>
+                          <td className="px-2 py-2.5 text-slate-200 text-xs">{r.then}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </GlassCard>
+
+              <GlassCard>
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-semibold text-white text-lg">Risk Review</h3>
                   <RiskBadge level={risk.level} />
@@ -864,6 +975,7 @@ function IntakeInner() {
                   className="btn-primary"
                   disabled={!validation.isValid}
                   onClick={() => {
+                    if (guard(ACTIONS.SUBMIT, toast)) return;
                     if (!validation.isValid) {
                       toast.warning(
                         "Cannot submit",
@@ -874,10 +986,11 @@ function IntakeInner() {
                     const req = upsertRequest({
                       id: recordId,
                       title: form.recordTitle || `${form.counterpartyName || "New record"}`,
+                      recordType: "Non-Disclosure Agreement (NDA)",
                       type: ndaType.name,
                       risk: risk.level,
                       riskScore: risk.score,
-                      status: "Submitted",
+                      status: "In Review",
                       owner: form.recordOwner || "Sara Patel",
                       counterparty: form.counterpartyName,
                       templateId: template.id,
@@ -885,20 +998,27 @@ function IntakeInner() {
                       form,
                       answers,
                     });
-                    const nextStatus =
-                      risk.level === "Low" ? "In Review" : "Legal Review";
+                    const nextStatus = "In Review";
                     setRequestStatus(req.id, nextStatus);
                     const tasks = createTasksForSubmission(
                       { ...req, status: nextStatus },
                       answers
                     );
                     logAuditEvent({
-                      action: "Submitted for legal review",
+                      action: isRenewMode
+                        ? "Renewal submitted"
+                        : isEditMode
+                        ? "Updated and resubmitted"
+                        : "Submitted for legal review",
                       target: template.name,
                       recordId,
                     });
                     toast.success(
-                      "Submitted for legal review",
+                      isRenewMode
+                        ? "Renewal submitted"
+                        : isEditMode
+                        ? "Updated & resubmitted"
+                        : "Submitted for legal review",
                       `${recordId} → ${nextStatus} · ${tasks.length} task(s) created`
                     );
                     setTimeout(() => router.push("/legal-queue"), 600);
@@ -913,6 +1033,7 @@ function IntakeInner() {
                       id: recordId,
                       title:
                         form.recordTitle || `${form.counterpartyName || "Draft NDA"}`,
+                      recordType: "Non-Disclosure Agreement (NDA)",
                       type: ndaType.name,
                       risk: risk.level,
                       riskScore: risk.score,

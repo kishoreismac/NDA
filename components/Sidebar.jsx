@@ -12,14 +12,18 @@ import {
   Settings,
   Sparkles,
   ListChecks,
+  Calendar,
+  BarChart3,
 } from "lucide-react";
 
 const nav = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/requests/new", label: "New Request", icon: FilePlus2 },
+  { href: "/requests/new", label: "New Contract Request", icon: FilePlus2 },
   { href: "/legal-queue", label: "Legal Review Queue", icon: Scale },
   { href: "/tasks", label: "Tasks", icon: ListChecks },
+  { href: "/calendar", label: "Calendar", icon: Calendar },
   { href: "/repository", label: "Repository", icon: Database },
+  { href: "/reports", label: "Reports", icon: BarChart3 },
   { href: "/parties", label: "Parties", icon: Users },
   { href: "/rules", label: "Rules", icon: GitBranch },
   { href: "/templates", label: "Templates", icon: FileText },
@@ -35,9 +39,9 @@ export default function Sidebar() {
           <Sparkles className="w-5 h-5 text-white" />
         </div>
         <div className="leading-tight">
-          <div className="font-bold text-white text-lg tracking-tight">NDAFlow</div>
+          <div className="font-bold text-white text-lg tracking-tight">CLM</div>
           <div className="text-[10px] uppercase tracking-[0.2em] gradient-text font-semibold">
-            AI · Legal Ops
+            Contract Lifecycle
           </div>
         </div>
       </Link>
@@ -67,7 +71,7 @@ export default function Sidebar() {
           <span className="font-semibold gradient-text">AI Copilot</span>
         </div>
         <p className="text-[11px] text-slate-400 mt-2 leading-relaxed">
-          Drafting, redlining and clause suggestions are powered by NDAFlow AI.
+          Request, draft, review, sign, store, search and renew — across NDA, MSA, SOW, vendor & more.
         </p>
       </div>
     </aside>

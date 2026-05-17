@@ -3,186 +3,476 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Topbar from "@/components/Topbar";
-import { GlassCard, SectionTitle, StatCard, RiskBadge, StatusBadge } from "@/components/ui";
-import { VolumeChart, RiskPie, CycleTimeChart } from "@/components/Charts";
-import {
-  recentRequests,
-  pendingApprovals,
-  awaitingSignature,
-  priorityRequests,
-  openCollaborations,
-} from "@/lib/mockData";
+import { GlassCard, SectionTitle, StatusBadge, RiskBadge } from "@/components/ui";
 import {
   getRequests,
   getStatusCounts,
   getTaskCounts,
-  getHighRiskCount,
-  getTasks,
+  getRecordTypeCounts,
+  getRequestsByStatus,
+  getRequestsByRecordType,
+  RECORD_TYPES,
+  STATUSES,
 } from "@/lib/requestStore";
 import {
   FilePlus2,
-  FileSignature,
-  ShieldAlert,
-  Timer,
-  TrendingUp,
+  Database,
+  ListChecks,
+  Calendar,
+  Search,
+  BarChart3,
+  RefreshCw,
   CheckCircle2,
+  FileSignature,
   AlertTriangle,
   MessagesSquare,
   Clock,
-  ListChecks,
-  FileText,
+  X,
+  ExternalLink,
+  ChevronRight,
 } from "lucide-react";
+
+// CTA tiles in reference style
+const CTAS = [
+  { href: "/requests/new", label: "Request a Contract", icon: FilePlus2, gradient: "from-violet-500 to-fuchsia-500" },
+  { href: "/templates", label: "Create from Template", icon: FileSignature, gradient: "from-cyan-500 to-blue-500" },
+  { href: "/repository", label: "Repository", icon: Database, gradient: "from-emerald-500 to-teal-500" },
+  { href: "/repository?focus=search", label: "Search Contracts", icon: Search, gradient: "from-amber-500 to-orange-500" },
+  { href: "/tasks", label: "Tasks", icon: ListChecks, gradient: "from-rose-500 to-pink-500" },
+  { href: "/calendar", label: "Calendar", icon: Calendar, gradient: "from-indigo-500 to-violet-500" },
+  { href: "/reports", label: "Reports", icon: BarChart3, gradient: "from-sky-500 to-cyan-500" },
+  { href: "/repository?filter=renewals", label: "Renewals", icon: RefreshCw, gradient: "from-fuchsia-500 to-pink-500" },
+];
+
+const PERIODS = ["Current Year", "Last 3 Years", "Last 5 Years"];
+
+// Donut color palette per record type
+const TYPE_COLORS = [
+  "#22d3ee", // cyan
+  "#a855f7", // violet
+  "#f59e0b", // amber
+  "#10b981", // emerald
+  "#ec4899", // pink
+  "#3b82f6", // blue
+  "#f43f5e", // rose
+  "#84cc16", // lime
+  "#94a3b8", // slate
+];
+
+const STATUS_COLOR = {
+  "In Review": { bg: "from-indigo-600/40 to-blue-700/20", dot: "bg-indigo-300", text: "text-indigo-100" },
+  Approved: { bg: "from-emerald-600/40 to-emerald-700/20", dot: "bg-emerald-400", text: "text-emerald-200" },
+  "Awaiting Signature": { bg: "from-amber-600/40 to-amber-700/20", dot: "bg-amber-400", text: "text-amber-200" },
+  Signed: { bg: "from-cyan-700/50 to-teal-700/30", dot: "bg-cyan-300", text: "text-cyan-100" },
+  Archived: { bg: "from-slate-600/40 to-slate-700/20", dot: "bg-slate-500", text: "text-slate-300" },
+};
 
 export default function DashboardPage() {
   const router = useRouter();
-  const [refreshKey, setRefreshKey] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const [period, setPeriod] = useState("Current Year");
+  const [drillStatus, setDrillStatus] = useState(null);
+  const [drillType, setDrillType] = useState(null);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
 
-  const liveRequests = useMemo(() => (mounted ? getRequests() : []), [
-    mounted,
-    refreshKey,
-  ]);
-  const statusCounts = useMemo(
-    () => (mounted ? getStatusCounts() : {}),
-    [mounted, refreshKey]
-  );
+  const liveRequests = useMemo(() => (mounted ? getRequests() : []), [mounted]);
+  const statusCounts = useMemo(() => (mounted ? getStatusCounts() : {}), [mounted]);
+  const recordTypeCounts = useMemo(() => (mounted ? getRecordTypeCounts() : {}), [mounted]);
   const taskCounts = useMemo(
     () => (mounted ? getTaskCounts() : { total: 0, open: 0, overdue: 0, completed: 0 }),
-    [mounted, refreshKey]
+    [mounted]
   );
-  const highRisk = mounted ? getHighRiskCount() : 0;
-  const tasks = useMemo(() => (mounted ? getTasks() : []), [mounted, refreshKey]);
 
+  const totalRecords = liveRequests.length;
   const activeCount =
-    (statusCounts["Submitted"] || 0) +
     (statusCounts["In Review"] || 0) +
-    (statusCounts["Legal Review"] || 0) +
-    (statusCounts["Privacy Review"] || 0) +
     (statusCounts["Approved"] || 0) +
     (statusCounts["Awaiting Signature"] || 0);
 
-  const signedCount = statusCounts["Signed"] || 0;
-  const draftCount = statusCounts["Draft"] || 0;
-  const totalCount = liveRequests.length || 247;
-  const autoApprovedPct =
-    totalCount > 0 ? Math.round(((signedCount + (statusCounts["Approved"] || 0)) / totalCount) * 100) : 63;
+  const summary = [
+    {
+      label: "Active Requests",
+      value: activeCount,
+      filter: "status=Active",
+    },
+    {
+      label: "In Review",
+      value: statusCounts["In Review"] || 0,
+      filter: "status=In%20Review",
+    },
+    {
+      label: "Approved",
+      value: statusCounts["Approved"] || 0,
+      filter: "status=Approved",
+    },
+    {
+      label: "Awaiting Signature",
+      value: statusCounts["Awaiting Signature"] || 0,
+      filter: "status=Awaiting%20Signature",
+    },
+    {
+      label: "Signed",
+      value: statusCounts["Signed"] || 0,
+      filter: "status=Signed",
+    },
+    {
+      label: "Priority Requests",
+      value: liveRequests.filter((r) => r.risk === "High").length,
+      filter: "risk=High",
+    },
+    {
+      label: "Today Tasks",
+      value: taskCounts.overdue,
+      filter: "",
+      to: "/tasks?filter=today",
+    },
+    {
+      label: "Week Tasks",
+      value: taskCounts.open,
+      filter: "",
+      to: "/tasks?filter=week",
+    },
+  ];
 
-  // Sort live requests by updated desc + merge with mock for fuller display
-  const recent = useMemo(() => {
-    const live = [...liveRequests].sort(
-      (a, b) => (b.updatedAt || 0) - (a.updatedAt || 0)
-    );
-    const liveIds = new Set(live.map((r) => r.id));
-    const fallback = recentRequests.filter((r) => !liveIds.has(r.id));
-    return [...live, ...fallback].slice(0, 8);
-  }, [liveRequests]);
+  // record type donut with non-zero entries
+  const typeEntries = useMemo(() => {
+    const arr = Object.entries(recordTypeCounts).filter(([, v]) => v > 0);
+    if (arr.length === 0) {
+      return RECORD_TYPES.slice(0, 4).map((t) => [t, 0]);
+    }
+    return arr;
+  }, [recordTypeCounts]);
 
   return (
     <>
       <Topbar
-        title="Dashboard"
-        subtitle="Welcome back, Sara. Here's what's happening across your NDA portfolio today."
+        title="Contract Management Dashboard"
+        subtitle="Welcome back, Sara. Here's the status across all your contract types today."
         actions={
           <Link href="/requests/new" className="btn-primary">
-            <FilePlus2 className="w-4 h-4" /> New NDA Request
+            <FilePlus2 className="w-4 h-4" /> New Contract Request
           </Link>
         }
       />
 
-      {/* Metric strip — live */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <StatCard
-          label="Active NDAs"
-          value={mounted ? activeCount : "—"}
-          delta={`${draftCount} drafts`}
-          icon={FileSignature}
-          accent="indigo"
-        />
-        <StatCard
-          label="High-risk in flight"
-          value={mounted ? highRisk : "—"}
-          delta={`${statusCounts["Legal Review"] || 0} in legal review`}
-          icon={ShieldAlert}
-          accent="pink"
-        />
-        <StatCard
-          label="Open tasks"
-          value={mounted ? taskCounts.open : "—"}
-          delta={`${taskCounts.overdue} overdue`}
-          icon={ListChecks}
-          accent="cyan"
-        />
-        <StatCard
-          label="Signed / Approved"
-          value={mounted ? signedCount + (statusCounts["Approved"] || 0) : "—"}
-          delta={`${autoApprovedPct}% completion rate`}
-          icon={TrendingUp}
-          accent="emerald"
-        />
+      {/* Call to Action */}
+      <div className="mb-6">
+        <div className="text-sm font-semibold text-white mb-3">Call to Action</div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+          {CTAS.map((c) => {
+            const Icon = c.icon;
+            return (
+              <Link
+                key={c.label}
+                href={c.href}
+                className={`group relative overflow-hidden rounded-2xl p-4 border border-white/10 bg-gradient-to-br ${c.gradient} hover:scale-[1.03] transition shadow-lg`}
+              >
+                <Icon className="w-5 h-5 text-white mb-2" />
+                <div className="text-xs font-semibold text-white leading-tight">
+                  {c.label}
+                </div>
+                <ChevronRight className="absolute top-2 right-2 w-3.5 h-3.5 text-white/70 opacity-0 group-hover:opacity-100 transition" />
+              </Link>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Status breakdown strip */}
+      {/* Summary with period filter */}
       <GlassCard className="mb-6">
-        <SectionTitle title="NDA status pipeline" subtitle="Live counts across the workflow" />
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
-          {[
-            { k: "Draft", color: "bg-slate-500/15 text-slate-300" },
-            { k: "Submitted", color: "bg-cyan-500/15 text-cyan-300" },
-            { k: "Legal Review", color: "bg-violet-500/15 text-violet-300" },
-            { k: "Privacy Review", color: "bg-fuchsia-500/15 text-fuchsia-300" },
-            { k: "Approved", color: "bg-emerald-500/15 text-emerald-300" },
-            { k: "Awaiting Signature", color: "bg-amber-500/15 text-amber-300" },
-            { k: "Signed", color: "bg-emerald-600/15 text-emerald-200" },
-            { k: "In Review", color: "bg-cyan-500/15 text-cyan-300" },
-            { k: "Rejected", color: "bg-rose-500/15 text-rose-300" },
-            { k: "Cancelled", color: "bg-slate-500/15 text-slate-300" },
-          ].map((s) => (
-            <div
-              key={s.k}
-              className={`p-3 rounded-xl border border-white/5 ${s.color}`}
+        <div className="flex items-center justify-between mb-5">
+          <div className="text-sm font-semibold text-white">Summary</div>
+          <div className="flex items-center gap-1 bg-white/[0.04] border border-white/10 rounded-xl p-1">
+            {PERIODS.map((p) => (
+              <button
+                key={p}
+                onClick={() => setPeriod(p)}
+                className={`text-[11px] px-3 py-1.5 rounded-lg transition ${
+                  period === p
+                    ? "bg-grad-primary text-white shadow-glow"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                {p}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+          {summary.map((s) => (
+            <button
+              key={s.label}
+              onClick={() =>
+                router.push(s.to || `/repository?${s.filter}`)
+              }
+              className="group flex flex-col items-center text-center hover:scale-[1.04] transition"
             >
-              <div className="text-2xl font-bold">{statusCounts[s.k] || 0}</div>
-              <div className="text-[10px] uppercase tracking-wider opacity-80">
-                {s.k}
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400 to-amber-500 grid place-items-center text-white font-bold text-2xl shadow-glow ring-2 ring-amber-400/20 group-hover:ring-amber-400/60 transition">
+                {mounted ? s.value : "—"}
               </div>
-            </div>
+              <div className="text-[11px] text-slate-300 mt-2 flex items-center gap-1">
+                {s.label}
+                {s.info && <span className="text-cyanglow">ⓘ</span>}
+              </div>
+            </button>
           ))}
         </div>
       </GlassCard>
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        {/* Volume chart */}
-        <GlassCard className="xl:col-span-2">
-          <SectionTitle
-            title="NDA volume — created vs signed"
-            subtitle="Last 7 months"
-            action={<span className="chip">+24% YoY</span>}
-          />
-          <VolumeChart />
-        </GlassCard>
-
-        {/* Risk pie */}
+      {/* Record Types + Record Statuses panels */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+        {/* Record Types */}
         <GlassCard>
-          <SectionTitle title="Risk distribution" subtitle="In-flight requests" />
-          <RiskPie />
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <div className="text-sm font-semibold text-white">Record Types</div>
+              <div className="text-[11px] text-slate-400 mt-0.5">
+                Application Type: All Contracts
+              </div>
+            </div>
+            <button
+              onClick={() => router.push("/repository")}
+              className="w-7 h-7 rounded-full bg-grad-primary grid place-items-center text-white text-xs hover:scale-110 transition"
+              title="View all"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+            </button>
+          </div>
+          <div className="grid grid-cols-[180px_1fr] gap-6 items-center">
+            <Donut
+              entries={typeEntries}
+              total={totalRecords}
+              colors={TYPE_COLORS}
+            />
+            <ul className="space-y-2.5">
+              {typeEntries.slice(0, 6).map(([name, count], i) => (
+                <li key={name}>
+                  <button
+                    onClick={() => setDrillType(name)}
+                    className="w-full flex items-center justify-between gap-3 group"
+                  >
+                    <div className="flex items-center gap-2 min-w-0 flex-1">
+                      <span
+                        className="w-2.5 h-2.5 rounded-full shrink-0"
+                        style={{ background: TYPE_COLORS[i % TYPE_COLORS.length] }}
+                      />
+                      <span className="text-xs text-slate-200 truncate group-hover:text-white">
+                        {name}
+                      </span>
+                    </div>
+                    <span className="text-xs font-bold text-white shrink-0">
+                      {count}
+                    </span>
+                  </button>
+                  <div className="h-1 rounded-full bg-white/5 overflow-hidden mt-1.5">
+                    <div
+                      className="h-full rounded-full"
+                      style={{
+                        width: totalRecords ? `${(count / totalRecords) * 100}%` : "0%",
+                        background: TYPE_COLORS[i % TYPE_COLORS.length],
+                      }}
+                    />
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </GlassCard>
 
-        {/* Recent requests — live */}
-        <GlassCard className="xl:col-span-2">
-          <SectionTitle
-            title="Recent requests"
-            subtitle="Latest NDA activity (live)"
-            action={
-              <Link href="/repository" className="text-xs text-cyanglow hover:underline">
-                View all →
-              </Link>
-            }
-          />
-          <div className="overflow-x-auto -mx-2">
+        {/* Record Statuses */}
+        <GlassCard>
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <div className="text-sm font-semibold text-white">Record Statuses</div>
+              <div className="text-[11px] text-slate-400 mt-0.5">
+                Click any status to view documents
+              </div>
+            </div>
+            <button
+              onClick={() => router.push("/repository")}
+              className="w-7 h-7 rounded-full bg-grad-primary grid place-items-center text-white text-xs hover:scale-110 transition"
+              title="View all"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+            </button>
+          </div>
+          <div className="grid grid-cols-2 gap-2.5">
+            {STATUSES.map((s) => {
+              const c = STATUS_COLOR[s] || STATUS_COLOR.Draft;
+              const count = statusCounts[s] || 0;
+              return (
+                <button
+                  key={s}
+                  onClick={() => setDrillStatus(s)}
+                  className={`group relative overflow-hidden rounded-xl p-3 text-left border border-white/10 bg-gradient-to-br ${c.bg} hover:border-white/30 transition`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className={`text-2xl font-bold ${c.text}`}>{count}</div>
+                    <span className={`w-2.5 h-2.5 rounded-full ${c.dot} shadow-glow`} />
+                  </div>
+                  <div className={`text-[10px] uppercase tracking-wider mt-1 ${c.text}`}>
+                    {s}
+                  </div>
+                  <ChevronRight className="absolute bottom-2 right-2 w-3 h-3 text-white/40 opacity-0 group-hover:opacity-100 transition" />
+                </button>
+              );
+            })}
+          </div>
+        </GlassCard>
+      </div>
+
+      {/* Recent contracts */}
+      <GlassCard>
+        <SectionTitle
+          title="Recent contracts"
+          subtitle="Latest activity across all record types"
+          action={
+            <Link href="/repository" className="text-xs text-cyanglow hover:underline">
+              View all →
+            </Link>
+          }
+        />
+        <div className="overflow-x-auto -mx-2">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-left text-xs uppercase tracking-wider text-slate-400">
+                <th className="px-2 py-2 font-medium">ID</th>
+                <th className="px-2 py-2 font-medium">Title</th>
+                <th className="px-2 py-2 font-medium">Record Type</th>
+                <th className="px-2 py-2 font-medium">Risk</th>
+                <th className="px-2 py-2 font-medium">Status</th>
+                <th className="px-2 py-2 font-medium">Owner</th>
+              </tr>
+            </thead>
+            <tbody>
+              {liveRequests.slice(0, 10).map((r) => (
+                <tr
+                  key={r.id}
+                  className="table-row cursor-pointer"
+                  onClick={() =>
+                    router.push(`/repository?open=${encodeURIComponent(r.id)}`)
+                  }
+                >
+                  <td className="px-2 py-3 font-mono text-xs text-slate-300">{r.id}</td>
+                  <td className="px-2 py-3 font-medium text-white">{r.title}</td>
+                  <td className="px-2 py-3 text-slate-300 text-xs">
+                    {r.recordType || "Non-Disclosure Agreement (NDA)"}
+                  </td>
+                  <td className="px-2 py-3">
+                    <RiskBadge level={r.risk} />
+                  </td>
+                  <td className="px-2 py-3">
+                    <StatusBadge status={r.status} />
+                  </td>
+                  <td className="px-2 py-3 text-slate-300">{r.owner}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </GlassCard>
+
+      {/* Drill-down modals */}
+      {drillStatus && (
+        <DrillModal
+          title={`Contracts in "${drillStatus}"`}
+          rows={getRequestsByStatus(drillStatus)}
+          onClose={() => setDrillStatus(null)}
+          onOpen={(id) => {
+            setDrillStatus(null);
+            router.push(`/repository?open=${encodeURIComponent(id)}`);
+          }}
+        />
+      )}
+      {drillType && (
+        <DrillModal
+          title={drillType}
+          rows={getRequestsByRecordType(drillType)}
+          onClose={() => setDrillType(null)}
+          onOpen={(id) => {
+            setDrillType(null);
+            router.push(`/repository?open=${encodeURIComponent(id)}`);
+          }}
+        />
+      )}
+    </>
+  );
+}
+
+function Donut({ entries, total, colors }) {
+  const size = 168;
+  const stroke = 24;
+  const r = (size - stroke) / 2;
+  const C = 2 * Math.PI * r;
+  let offset = 0;
+  const safe = total || 1;
+  return (
+    <div className="relative w-[168px] h-[168px]">
+      <svg width={size} height={size} className="-rotate-90">
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          stroke="rgba(255,255,255,0.05)"
+          strokeWidth={stroke}
+          fill="none"
+        />
+        {entries.map(([name, v], i) => {
+          const len = (v / safe) * C;
+          const seg = (
+            <circle
+              key={name}
+              cx={size / 2}
+              cy={size / 2}
+              r={r}
+              stroke={colors[i % colors.length]}
+              strokeWidth={stroke}
+              strokeDasharray={`${len} ${C - len}`}
+              strokeDashoffset={-offset}
+              fill="none"
+              strokeLinecap="butt"
+            />
+          );
+          offset += len;
+          return seg;
+        })}
+      </svg>
+      <div className="absolute inset-0 grid place-items-center">
+        <div className="text-center">
+          <div className="text-3xl font-bold text-white">{total}</div>
+          <div className="text-[10px] uppercase tracking-wider text-slate-400">Records</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DrillModal({ title, rows, onClose, onOpen }) {
+  return (
+    <div
+      className="fixed inset-0 z-50 grid place-items-center p-4 bg-black/70 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div
+        className="w-full max-w-3xl bg-navy-950 border border-white/10 rounded-2xl p-6"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <div className="text-lg font-semibold text-white">{title}</div>
+            <div className="text-xs text-slate-400 mt-1">{rows.length} document(s)</div>
+          </div>
+          <button onClick={onClose} className="btn-ghost text-xs">
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+        {rows.length === 0 ? (
+          <div className="text-sm text-slate-400 text-center py-10">
+            No documents to display.
+          </div>
+        ) : (
+          <div className="overflow-x-auto max-h-[60vh]">
             <table className="w-full text-sm">
               <thead>
                 <tr className="text-left text-xs uppercase tracking-wider text-slate-400">
@@ -190,191 +480,37 @@ export default function DashboardPage() {
                   <th className="px-2 py-2 font-medium">Title</th>
                   <th className="px-2 py-2 font-medium">Type</th>
                   <th className="px-2 py-2 font-medium">Risk</th>
-                  <th className="px-2 py-2 font-medium">Status</th>
                   <th className="px-2 py-2 font-medium">Owner</th>
+                  <th className="px-2 py-2"></th>
                 </tr>
               </thead>
               <tbody>
-                {recent.map((r) => (
-                  <tr
-                    key={r.id}
-                    className="table-row cursor-pointer"
-                    onClick={() => router.push(`/repository?open=${encodeURIComponent(r.id)}`)}
-                  >
-                    <td className="px-2 py-3 font-mono text-xs text-slate-300">{r.id}</td>
-                    <td className="px-2 py-3 font-medium text-white">{r.title}</td>
-                    <td className="px-2 py-3 text-slate-300">{r.type}</td>
-                    <td className="px-2 py-3">
+                {rows.map((r) => (
+                  <tr key={r.id} className="table-row">
+                    <td className="px-2 py-2 font-mono text-xs text-slate-300">{r.id}</td>
+                    <td className="px-2 py-2 font-medium text-white">{r.title}</td>
+                    <td className="px-2 py-2 text-slate-300 text-xs">
+                      {r.recordType || "NDA"}
+                    </td>
+                    <td className="px-2 py-2">
                       <RiskBadge level={r.risk} />
                     </td>
-                    <td className="px-2 py-3">
-                      <StatusBadge status={r.status} />
+                    <td className="px-2 py-2 text-slate-300">{r.owner}</td>
+                    <td className="px-2 py-2 text-right">
+                      <button
+                        onClick={() => onOpen(r.id)}
+                        className="btn-ghost !py-1 !px-2 text-xs"
+                      >
+                        Open <ExternalLink className="w-3 h-3" />
+                      </button>
                     </td>
-                    <td className="px-2 py-3 text-slate-300">{r.owner}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-        </GlassCard>
-
-        {/* Cycle time */}
-        <GlassCard>
-          <SectionTitle title="Cycle time by NDA type" subtitle="Average days end-to-end" />
-          <CycleTimeChart />
-        </GlassCard>
-
-        {/* Tasks summary — live */}
-        <GlassCard>
-          <SectionTitle
-            title="My open tasks"
-            subtitle="Action items for you"
-            action={
-              <Link href="/tasks" className="text-xs text-cyanglow hover:underline">
-                Open Tasks →
-              </Link>
-            }
-          />
-          <ul className="space-y-3">
-            {tasks
-              .filter((t) => t.status === "Open" || t.status === "In Progress" || t.status === "Overdue")
-              .slice(0, 5)
-              .map((t) => (
-                <li
-                  key={t.id}
-                  className="flex items-start justify-between gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5"
-                >
-                  <div className="min-w-0">
-                    <div className="font-medium text-sm text-white truncate">
-                      {t.type} · {t.requestId}
-                    </div>
-                    <div className="text-xs text-slate-400 mt-0.5 truncate">
-                      {t.requestTitle} · {t.assignedTo}
-                    </div>
-                  </div>
-                  <span
-                    className={`chip ${
-                      t.status === "Overdue"
-                        ? "!text-rose-300 !border-rose-400/30 !bg-rose-500/10"
-                        : ""
-                    }`}
-                  >
-                    <Clock className="w-3 h-3" /> {t.status}
-                  </span>
-                </li>
-              ))}
-            {tasks.filter((t) => t.status !== "Completed" && t.status !== "Rejected").length === 0 && (
-              <li className="text-xs text-slate-400 p-3 text-center">
-                No open tasks. 🎉
-              </li>
-            )}
-          </ul>
-        </GlassCard>
-
-        {/* Pending approvals */}
-        <GlassCard>
-          <SectionTitle
-            title="Pending approvals"
-            subtitle="Awaiting your action"
-            action={
-              <span className="chip">
-                <CheckCircle2 className="w-3 h-3" /> {pendingApprovals.length}
-              </span>
-            }
-          />
-          <ul className="space-y-3">
-            {pendingApprovals.map((p) => (
-              <li
-                key={p.id}
-                className="flex items-start justify-between gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5"
-              >
-                <div>
-                  <div className="font-medium text-sm text-white">{p.title}</div>
-                  <div className="text-xs text-slate-400 mt-0.5">
-                    <span className="font-mono">{p.id}</span> · {p.approver}
-                  </div>
-                </div>
-                <span
-                  className={`chip ${
-                    p.sla.includes("Overdue")
-                      ? "!text-rose-300 !border-rose-400/30 !bg-rose-500/10"
-                      : ""
-                  }`}
-                >
-                  <Clock className="w-3 h-3" /> {p.sla}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </GlassCard>
-
-        {/* Awaiting signature */}
-        <GlassCard>
-          <SectionTitle title="Awaiting signature" subtitle="Sent to counterparty" />
-          <ul className="space-y-3">
-            {awaitingSignature.map((a) => (
-              <li
-                key={a.id}
-                className="flex items-start justify-between gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5"
-              >
-                <div>
-                  <div className="font-medium text-sm text-white">{a.title}</div>
-                  <div className="text-xs text-slate-400 mt-0.5">{a.party}</div>
-                </div>
-                <span className="chip">
-                  <FileSignature className="w-3 h-3" /> {a.sentAt}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </GlassCard>
-
-        {/* Priority requests */}
-        <GlassCard>
-          <SectionTitle title="Priority requests" subtitle="Auto-flagged by NDAFlow AI" />
-          <ul className="space-y-3">
-            {priorityRequests.map((p) => (
-              <li
-                key={p.id}
-                className="p-3 rounded-xl bg-rose-500/[0.06] border border-rose-400/20"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="font-medium text-sm text-white">{p.title}</div>
-                  <RiskBadge level={p.risk} />
-                </div>
-                <div className="text-xs text-slate-400 mt-1.5 flex items-center gap-1.5">
-                  <AlertTriangle className="w-3 h-3 text-rose-400" /> {p.reason}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </GlassCard>
-
-        {/* Open collaborations */}
-        <GlassCard>
-          <SectionTitle title="Open collaborations" subtitle="Active redline threads" />
-          <ul className="space-y-3">
-            {openCollaborations.map((c) => (
-              <li
-                key={c.id}
-                className="flex items-start justify-between gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5"
-              >
-                <div>
-                  <div className="font-medium text-sm text-white">{c.title}</div>
-                  <div className="text-xs text-slate-400 mt-0.5 flex items-center gap-1.5">
-                    <MessagesSquare className="w-3 h-3" /> {c.with}
-                  </div>
-                </div>
-                {c.unread > 0 && (
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-grad-primary">
-                    {c.unread}
-                  </span>
-                )}
-              </li>
-            ))}
-          </ul>
-        </GlassCard>
+        )}
       </div>
-    </>
+    </div>
   );
 }

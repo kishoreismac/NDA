@@ -1,9 +1,9 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "NDAFlow AI — Intelligent NDA Management",
+  title: "CLM — Contract Lifecycle Management",
   description:
-    "AI-powered NDA intake, risk scoring, review, signature and tracking platform.",
+    "AI-powered contract lifecycle management — request, draft, review, sign, store and renew. NDA, MSA, SOW, vendor and more.",
 };
 
 export default function RootLayout({ children }) {

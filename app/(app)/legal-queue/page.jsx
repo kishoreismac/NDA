@@ -12,6 +12,9 @@ import {
   upsertRequest,
 } from "@/lib/requestStore";
 import { exportToCsv } from "@/lib/csvExport";
+import { useCurrentRole, ACTIONS } from "@/lib/permissions";
+import { sendForSignature } from "@/lib/signatureService";
+import SignatureSentModal from "@/components/SignatureSentModal";
 import {
   Search,
   Sparkles,
@@ -24,18 +27,20 @@ import {
   Download,
   Eye,
   MoreHorizontal,
+  PenTool,
+  Pencil,
 } from "lucide-react";
 
 const fallbackQueue = [
   ...recentRequests.filter((r) =>
-    ["In Review", "Legal Review", "Priority", "Awaiting Signature"].includes(r.status)
+    ["In Review", "Approved", "Awaiting Signature"].includes(r.status)
   ),
   {
     id: "NDA-2033",
     title: "Gringotts Bank — Custody Talks",
     type: "Mutual",
     risk: "High",
-    status: "Legal Review",
+    status: "In Review",
     owner: "A. Kim",
     updated: "5h ago",
   },
@@ -44,7 +49,7 @@ const fallbackQueue = [
     title: "Tyrell Corp — Genome Pilot",
     type: "One-Way In",
     risk: "High",
-    status: "Legal Review",
+    status: "In Review",
     owner: "J. Nguyen",
     updated: "8h ago",
   },
@@ -59,24 +64,19 @@ const fallbackQueue = [
   },
 ];
 
-const REVIEW_STATUSES = [
-  "Submitted",
-  "In Review",
-  "Legal Review",
-  "Privacy Review",
-  "Priority",
-  "Awaiting Signature",
-];
+const REVIEW_STATUSES = ["In Review", "Approved", "Awaiting Signature"];
 
-const tabs = ["All", "Mine", "High risk", "Overdue", "Awaiting Signature"];
+const tabs = ["All", "Mine", "High risk", "Overdue", "Approved", "Awaiting Signature"];
 
 export default function LegalQueuePage() {
   const router = useRouter();
   const toast = useToast();
+  const { guard, can } = useCurrentRole();
   const [tab, setTab] = useState("All");
   const [q, setQ] = useState("");
   const [refreshKey, setRefreshKey] = useState(0);
   const [openMenu, setOpenMenu] = useState(null);
+  const [sigInfo, setSigInfo] = useState(null);
 
   const items = useMemo(() => {
     const stored = getRequests().filter((r) => REVIEW_STATUSES.includes(r.status));
@@ -94,7 +94,9 @@ export default function LegalQueuePage() {
       );
     if (tab === "High risk") list = list.filter((i) => i.risk === "High");
     if (tab === "Overdue")
-      list = list.filter((i) => i.status === "Priority" || i.risk === "High");
+      list = list.filter((i) => i.risk === "High");
+    if (tab === "Approved")
+      list = list.filter((i) => i.status === "Approved");
     if (tab === "Awaiting Signature")
       list = list.filter((i) => i.status === "Awaiting Signature");
     if (q) {
@@ -133,18 +135,74 @@ export default function LegalQueuePage() {
   };
 
   const onApprove = (row) => {
+    if (guard(ACTIONS.APPROVE, toast)) return;
     const r = ensureRequest(row);
     setRequestStatus(r.id, "Approved", "Approved from Legal Queue");
     toast.success("NDA approved", `${r.id} → Approved`);
     refresh();
   };
   const onReject = (row) => {
+    if (guard(ACTIONS.REJECT, toast)) return;
     const r = ensureRequest(row);
-    setRequestStatus(r.id, "Rejected", "Rejected from Legal Queue");
-    toast.error("NDA rejected", `${r.id} → Rejected`);
+    setRequestStatus(r.id, "Archived", "Rejected & archived from Legal Queue");
+    toast.error("NDA rejected", `${r.id} → Archived`);
+    refresh();
+  };
+  const onSendForSign = async (row) => {
+    if (guard(ACTIONS.SEND_FOR_SIGN, toast)) return;
+    const r = ensureRequest(row);
+    if (r.status !== "Approved") {
+      toast.warning(
+        "Approve first",
+        "This NDA must be Approved before it can be sent for signature."
+      );
+      return;
+    }
+    const res = await sendForSignature(r.id);
+    if (!res.ok) {
+      toast.error("Could not send for signature", res.error);
+      return;
+    }
+    createTask({
+      requestId: r.id,
+      requestTitle: r.title,
+      type: "Signature",
+      assignedTo: r.owner || "Sara Patel",
+      priority: "High",
+      dueDate: Date.now() + 5 * 24 * 60 * 60 * 1000,
+    });
+    setSigInfo({
+      recordId: r.id,
+      recordTitle: r.title,
+      counterpartyName: res.counterpartyName,
+      email: res.email,
+      url: res.url,
+      reused: res.reused,
+      emailDelivered: res.emailDelivered,
+      emailConfigured: res.emailConfigured,
+      emailError: res.emailError,
+      messageId: res.messageId,
+    });
+    if (res.emailDelivered) {
+      toast.success(
+        res.reused ? "Signing link reused · email sent" : "Email sent to counterparty",
+        `${r.id} → Awaiting Signature · ${res.email}`
+      );
+    } else if (res.emailConfigured === false) {
+      toast.warning(
+        "Link ready · SMTP not configured",
+        `Use 'Send via my mail client' in the dialog to deliver the link to ${res.email}.`
+      );
+    } else {
+      toast.error(
+        "Link ready · email delivery failed",
+        res.emailError || "Use the mail-client fallback in the dialog."
+      );
+    }
     refresh();
   };
   const onMoreInfo = (row) => {
+    if (guard(ACTIONS.EDIT, toast)) return;
     const r = ensureRequest(row);
     createTask({
       requestId: r.id,
@@ -157,19 +215,9 @@ export default function LegalQueuePage() {
     toast.info("Information requested", `Task created for ${r.id}.`);
     refresh();
   };
-  const onSendPrivacy = (row) => {
-    const r = ensureRequest(row);
-    setRequestStatus(r.id, "Privacy Review", "Forwarded to Privacy Office");
-    createTask({
-      requestId: r.id,
-      requestTitle: r.title,
-      type: "Privacy Review",
-      assignedTo: "Privacy Office",
-      priority: "High",
-      dueDate: Date.now() + 3 * 24 * 60 * 60 * 1000,
-    });
-    toast.info("Sent to Privacy Office", `${r.id} → Privacy Review`);
-    refresh();
+  const onEdit = (row) => {
+    if (guard(ACTIONS.EDIT, toast)) return;
+    router.push(`/requests/intake?edit=${encodeURIComponent(row.id)}`);
   };
   const onOpen = (row) => {
     router.push(`/repository?open=${encodeURIComponent(row.id)}`);
@@ -269,18 +317,30 @@ export default function LegalQueuePage() {
                     <td className="px-3 py-3 text-slate-300">{r.owner}</td>
                     <td className="px-3 py-3 text-right">
                       <div className="flex flex-wrap items-center justify-end gap-1">
-                        <button
-                          onClick={() => onApprove(r)}
-                          className="btn-ghost !py-1 !px-2 text-xs text-emerald-300 hover:!text-emerald-200"
-                        >
-                          <CheckCircle2 className="w-3 h-3" /> Approve
-                        </button>
-                        <button
-                          onClick={() => onReject(r)}
-                          className="btn-ghost !py-1 !px-2 text-xs text-rose-300 hover:!text-rose-200"
-                        >
-                          <XCircle className="w-3 h-3" /> Reject
-                        </button>
+                        {can(ACTIONS.APPROVE) && (
+                          <button
+                            onClick={() => onApprove(r)}
+                            className="btn-ghost !py-1 !px-2 text-xs text-emerald-300 hover:!text-emerald-200"
+                          >
+                            <CheckCircle2 className="w-3 h-3" /> Approve
+                          </button>
+                        )}
+                        {can(ACTIONS.REJECT) && (
+                          <button
+                            onClick={() => onReject(r)}
+                            className="btn-ghost !py-1 !px-2 text-xs text-rose-300 hover:!text-rose-200"
+                          >
+                            <XCircle className="w-3 h-3" /> Reject
+                          </button>
+                        )}
+                        {can(ACTIONS.SEND_FOR_SIGN) && r.status === "Approved" && (
+                          <button
+                            onClick={() => onSendForSign(r)}
+                            className="btn-ghost !py-1 !px-2 text-xs text-cyan-300 hover:!text-cyan-200"
+                          >
+                            <PenTool className="w-3 h-3" /> Send to Sign
+                          </button>
+                        )}
                         <div className="relative" onClick={(e) => e.stopPropagation()}>
                           <button
                             onClick={() =>
@@ -292,20 +352,31 @@ export default function LegalQueuePage() {
                           </button>
                           {openMenu === r.id && (
                             <div className="absolute right-0 top-full mt-1 z-30 w-52 bg-navy-900 border border-white/10 rounded-lg shadow-2xl py-1">
-                              <button
-                                onClick={() => onMoreInfo(r)}
-                                className="w-full flex items-center gap-2 text-left px-3 py-1.5 text-xs text-slate-200 hover:bg-white/5"
-                              >
-                                <HelpCircle className="w-3 h-3 text-amber-300" />{" "}
-                                Request More Info
-                              </button>
-                              <button
-                                onClick={() => onSendPrivacy(r)}
-                                className="w-full flex items-center gap-2 text-left px-3 py-1.5 text-xs text-slate-200 hover:bg-white/5"
-                              >
-                                <Shield className="w-3 h-3 text-violet-300" /> Send to
-                                Privacy
-                              </button>
+                              {can(ACTIONS.SEND_FOR_SIGN) && r.status !== "Approved" && (
+                                <button
+                                  onClick={() => onSendForSign(r)}
+                                  className="w-full flex items-center gap-2 text-left px-3 py-1.5 text-xs text-slate-200 hover:bg-white/5"
+                                >
+                                  <PenTool className="w-3 h-3 text-cyan-300" /> Send to Sign
+                                </button>
+                              )}
+                              {can(ACTIONS.EDIT) && (
+                                <button
+                                  onClick={() => onEdit(r)}
+                                  className="w-full flex items-center gap-2 text-left px-3 py-1.5 text-xs text-slate-200 hover:bg-white/5"
+                                >
+                                  <Pencil className="w-3 h-3 text-amber-300" /> Edit NDA
+                                </button>
+                              )}
+                              {can(ACTIONS.EDIT) && (
+                                <button
+                                  onClick={() => onMoreInfo(r)}
+                                  className="w-full flex items-center gap-2 text-left px-3 py-1.5 text-xs text-slate-200 hover:bg-white/5"
+                                >
+                                  <HelpCircle className="w-3 h-3 text-amber-300" />{" "}
+                                  Request More Info
+                                </button>
+                              )}
                               <div className="border-t border-white/5 my-1" />
                               <button
                                 onClick={() => onOpen(r)}
@@ -378,6 +449,8 @@ export default function LegalQueuePage() {
           </GlassCard>
         </div>
       </div>
+
+      <SignatureSentModal info={sigInfo} onClose={() => setSigInfo(null)} />
     </>
   );
 }

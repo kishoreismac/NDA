@@ -1,6 +1,6 @@
 "use client";
-import { Suspense, useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Topbar from "@/components/Topbar";
 import { GlassCard, RiskBadge, StatusBadge } from "@/components/ui";
 import DocumentAuditTrail from "@/components/DocumentAuditTrail";
@@ -17,6 +17,11 @@ import {
   Calendar,
   User,
   Trash2,
+  MoreHorizontal,
+  Tag,
+  Pencil,
+  RefreshCw,
+  CheckCircle2,
 } from "lucide-react";
 import { recentRequests } from "@/lib/mockData";
 import {
@@ -36,8 +41,13 @@ import {
   getRequests,
   setRequestStatus,
   deleteRequest,
+  upsertRequest,
+  hydrateFormFromRecord,
 } from "@/lib/requestStore";
 import { exportToCsv } from "@/lib/csvExport";
+import { useCurrentRole, ACTIONS } from "@/lib/permissions";
+import { sendForSignature, buildSignedPdfBlob } from "@/lib/signatureService";
+import SignatureSentModal from "@/components/SignatureSentModal";
 
 const archive = [
   { id: "NDA-2025", title: "Pied Piper — Algorithm Review", type: "Mutual", risk: "High", status: "Signed", owner: "S. Patel", updated: "Apr 28" },
@@ -50,13 +60,20 @@ const archive = [
 
 function RepositoryInner() {
   const params = useSearchParams();
+  const router = useRouter();
   const toast = useToast();
+  const { guard } = useCurrentRole();
   const [q, setQ] = useState("");
   const [type, setType] = useState("All");
   const [risk, setRisk] = useState("All");
   const [status, setStatus] = useState("All");
   const [openId, setOpenId] = useState(null);
   const [refreshKey, setRefreshKey] = useState(0);
+  const [menuOpenId, setMenuOpenId] = useState(null);
+  const [tagModal, setTagModal] = useState(null); // record being tagged
+  const [sigInfo, setSigInfo] = useState(null); // signature sent modal
+  const [tags, setTags] = useState({}); // { recordId: ["tag1", ...] }
+  const menuRef = useRef(null);
 
   const allRecords = useMemo(() => {
     const stored = getRequests();
@@ -72,10 +89,50 @@ function RepositoryInner() {
   useEffect(() => {
     const id = params.get("open");
     if (id) setOpenId(id);
+    const s = params.get("status");
+    const rk = params.get("risk");
+    if (s) {
+      if (s === "Active") setStatus("All"); // active = multiple, handled below
+      else if (s === "Approval") setStatus("In Review");
+      else setStatus(s);
+    }
+    if (rk) setRisk(rk);
   }, [params]);
+
+  // Load tags from localStorage on mount
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem("clm.tags.v1");
+      if (raw) setTags(JSON.parse(raw));
+    } catch {}
+  }, []);
+
+  const persistTags = (next) => {
+    setTags(next);
+    try {
+      window.localStorage.setItem("clm.tags.v1", JSON.stringify(next));
+    } catch {}
+  };
+
+  // Close menu on outside click
+  useEffect(() => {
+    const fn = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) setMenuOpenId(null);
+    };
+    document.addEventListener("mousedown", fn);
+    return () => document.removeEventListener("mousedown", fn);
+  }, []);
+
+  const ACTIVE_STATUSES = [
+    "In Review",
+    "Approved",
+    "Awaiting Signature",
+  ];
+  const isActiveFilter = params.get("status") === "Active";
 
   const filtered = useMemo(() => {
     return allRecords.filter((r) => {
+      if (isActiveFilter && !ACTIVE_STATUSES.includes(r.status)) return false;
       if (type !== "All" && r.type !== type) return false;
       if (risk !== "All" && r.risk !== risk) return false;
       if (status !== "All" && r.status !== status) return false;
@@ -86,9 +143,38 @@ function RepositoryInner() {
       }
       return true;
     });
-  }, [allRecords, q, type, risk, status]);
+  }, [allRecords, q, type, risk, status, isActiveFilter]);
 
   const openRecord = allRecords.find((r) => r.id === openId);
+
+  // Quick-download the signed PDF directly from a row (skips opening the
+  // drawer). Always regenerates from template + form + stored signature
+  // image so the download works even if no base64 was persisted.
+  const onDownloadSignedPdf = async (r) => {
+    try {
+      const res = await buildSignedPdfBlob(r.id);
+      if (!res.ok) {
+        toast.warning("No signed PDF yet", res.error || "Sign the NDA first.");
+        return;
+      }
+      const url = URL.createObjectURL(res.blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = res.filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+      logAuditEvent({
+        action: "Signed PDF downloaded",
+        target: res.filename,
+        recordId: r.id,
+      });
+      toast.success("Signed PDF downloaded", res.filename);
+    } catch (e) {
+      toast.error("Download failed", e?.message || "Please try again.");
+    }
+  };
 
   const onExport = () => {
     if (filtered.length === 0) {
@@ -121,22 +207,66 @@ function RepositoryInner() {
     );
   };
 
-  const onSendForSign = (record) => {
-    setRequestStatus(record.id, "Awaiting Signature");
-    toast.success("Sent for signature", `${record.id} → Awaiting Signature`);
+  const onSendForSign = async (record) => {
+    if (guard(ACTIONS.SEND_FOR_SIGN, toast)) return;
+    // Make sure we have a fully-formed stored record (with form.counterpartyEmail).
+    ensurePersistedForEdit(record);
+    if (record.status !== "Approved") {
+      toast.warning(
+        "Approve first",
+        "Only Approved NDAs can be sent for e-signature."
+      );
+      return;
+    }
+    const res = await sendForSignature(record.id);
+    if (!res.ok) {
+      toast.error("Could not send for signature", res.error);
+      return;
+    }
+    setSigInfo({
+      recordId: record.id,
+      recordTitle: record.title,
+      counterpartyName: res.counterpartyName,
+      email: res.email,
+      url: res.url,
+      reused: res.reused,
+      emailDelivered: res.emailDelivered,
+      emailConfigured: res.emailConfigured,
+      emailError: res.emailError,
+      messageId: res.messageId,
+    });
+    if (res.emailDelivered) {
+      toast.success(
+        res.reused ? "Signing link reused · email sent" : "Email sent to counterparty",
+        `${record.id} → Awaiting Signature · ${res.email}`
+      );
+    } else if (res.emailConfigured === false) {
+      toast.warning(
+        "Link ready · SMTP not configured",
+        `Use 'Send via my mail client' in the dialog to deliver the link to ${res.email}.`
+      );
+    } else {
+      toast.error(
+        "Link ready · email delivery failed",
+        res.emailError || "Use the mail-client fallback in the dialog."
+      );
+    }
     setRefreshKey((k) => k + 1);
   };
   const onMarkSigned = (record) => {
+    if (guard(ACTIONS.SEND_FOR_SIGN, toast)) return;
     setRequestStatus(record.id, "Signed", "Marked as signed (simulated)");
     toast.success("NDA signed", `${record.id} → Signed`);
     setRefreshKey((k) => k + 1);
   };
   const onCancel = (record) => {
-    setRequestStatus(record.id, "Cancelled");
-    toast.error("NDA cancelled", `${record.id} → Cancelled`);
+    if (guard(ACTIONS.REJECT, toast)) return;
+    setRequestStatus(record.id, "Archived");
+    toast.error("NDA archived", `${record.id} → Archived`);
     setRefreshKey((k) => k + 1);
   };
   const onDelete = (record) => {
+    if (guard(ACTIONS.DELETE, toast)) return;
     deleteRequest(record.id);
     logAuditEvent({
       action: "Record deleted",
@@ -148,11 +278,53 @@ function RepositoryInner() {
     setRefreshKey((k) => k + 1);
   };
 
+  const onAddTag = (record) => {
+    if (guard(ACTIONS.ADD_TAG, toast)) return;
+    setTagModal(record);
+    setMenuOpenId(null);
+  };
+  // Make sure the record exists in the store with a fully-hydrated `form`
+  // before we navigate to the intake editor. This covers fallback mock
+  // records (recentRequests / archive) that were never persisted.
+  const ensurePersistedForEdit = (record) => {
+    const stored = getRequests().find((r) => r.id === record.id);
+    const hydratedForm = hydrateFormFromRecord(stored || record);
+    upsertRequest({
+      ...(stored || {}),
+      id: record.id,
+      title: record.title || stored?.title,
+      recordType: record.recordType || stored?.recordType || "Non-Disclosure Agreement (NDA)",
+      type: record.type || stored?.type,
+      risk: record.risk || stored?.risk,
+      status: record.status || stored?.status || "In Review",
+      owner: record.owner || stored?.owner,
+      counterparty: record.counterparty || hydratedForm.counterpartyName,
+      templateId: record.templateId || stored?.templateId || hydratedForm.templateId,
+      form: hydratedForm,
+      answers: stored?.answers || {},
+    });
+  };
+
+  const onEditNda = (record) => {
+    setMenuOpenId(null);
+    if (guard(ACTIONS.EDIT, toast)) return;
+    ensurePersistedForEdit(record);
+    toast.info("Opening editor", `${record.id} — all details prefilled for editing.`);
+    router.push(`/requests/intake?edit=${encodeURIComponent(record.id)}`);
+  };
+  const onRenewNda = (record) => {
+    setMenuOpenId(null);
+    if (guard(ACTIONS.RENEW, toast)) return;
+    ensurePersistedForEdit(record);
+    toast.info("Opening renewal", `${record.id} — review and update term details.`);
+    router.push(`/requests/intake?renew=${encodeURIComponent(record.id)}`);
+  };
+
   return (
     <>
       <Topbar
-        title="NDA Repository"
-        subtitle="Search, filter, inspect, and re-download every NDA in your organization."
+        title="Contract Repository"
+        subtitle="Search, filter, inspect, tag, edit and renew every contract in your organization."
         actions={
           <button onClick={onExport} className="btn-ghost">
             <Download className="w-4 h-4" /> Export CSV
@@ -184,13 +356,11 @@ function RepositoryInner() {
           <select className="input" value={status} onChange={(e) => setStatus(e.target.value)}>
             {[
               "All",
-              "Draft",
               "In Review",
-              "Legal Review",
               "Approved",
               "Awaiting Signature",
               "Signed",
-              "Priority",
+              "Archived",
             ].map((t) => (
               <option key={t}>{t}</option>
             ))}
@@ -226,7 +396,21 @@ function RepositoryInner() {
                   onClick={() => setOpenId(r.id)}
                 >
                   <td className="px-4 py-3 font-mono text-xs text-slate-300">{r.id}</td>
-                  <td className="px-4 py-3 font-medium text-white">{r.title}</td>
+                  <td className="px-4 py-3 font-medium text-white">
+                    <div>{r.title}</div>
+                    {tags[r.id]?.length > 0 && (
+                      <div className="flex flex-wrap gap-1 mt-1">
+                        {tags[r.id].map((t) => (
+                          <span
+                            key={t}
+                            className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/15 text-cyan-200 border border-cyan-400/20"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </td>
                   <td className="px-4 py-3 text-slate-300">{r.type}</td>
                   <td className="px-4 py-3">
                     <RiskBadge level={r.risk} />
@@ -236,16 +420,61 @@ function RepositoryInner() {
                   </td>
                   <td className="px-4 py-3 text-slate-300">{r.owner}</td>
                   <td className="px-4 py-3 text-slate-400">{r.updated}</td>
-                  <td className="px-4 py-3 text-right">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setOpenId(r.id);
-                      }}
-                      className="btn-ghost !py-1 !px-2 text-xs"
-                    >
-                      <Eye className="w-3 h-3" /> View
-                    </button>
+                  <td
+                    className="px-4 py-3 text-right relative"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <div className="flex items-center justify-end gap-1">
+                      <button
+                        onClick={() => setOpenId(r.id)}
+                        className="btn-ghost !py-1 !px-2 text-xs"
+                      >
+                        <Eye className="w-3 h-3" /> View
+                      </button>
+                      {r.status === "Signed" && (
+                        <button
+                          onClick={() => onDownloadSignedPdf(r)}
+                          className="btn-ghost !py-1 !px-2 text-xs text-emerald-300"
+                          title="Download signed PDF with embedded signature"
+                        >
+                          <Download className="w-3 h-3" /> Signed PDF
+                        </button>
+                      )}
+                      <button
+                        onClick={() =>
+                          setMenuOpenId((id) => (id === r.id ? null : r.id))
+                        }
+                        className="btn-ghost !py-1 !px-2 text-xs"
+                        title="More actions"
+                      >
+                        <MoreHorizontal className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                    {menuOpenId === r.id && (
+                      <div
+                        ref={menuRef}
+                        className="absolute right-4 top-full mt-1 w-44 bg-navy-950 border border-white/10 rounded-xl shadow-2xl z-30 overflow-hidden"
+                      >
+                        <button
+                          onClick={() => onAddTag(r)}
+                          className="w-full text-left px-3 py-2 text-sm text-slate-200 hover:bg-white/5 flex items-center gap-2"
+                        >
+                          <Tag className="w-3.5 h-3.5 text-cyanglow" /> Add tag
+                        </button>
+                        <button
+                          onClick={() => onEditNda(r)}
+                          className="w-full text-left px-3 py-2 text-sm text-slate-200 hover:bg-white/5 flex items-center gap-2"
+                        >
+                          <Pencil className="w-3.5 h-3.5 text-violet-300" /> Edit NDA
+                        </button>
+                        <button
+                          onClick={() => onRenewNda(r)}
+                          className="w-full text-left px-3 py-2 text-sm text-slate-200 hover:bg-white/5 flex items-center gap-2"
+                        >
+                          <RefreshCw className="w-3.5 h-3.5 text-emerald-300" /> Renew NDA
+                        </button>
+                      </div>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -264,6 +493,26 @@ function RepositoryInner() {
           onDelete={onDelete}
         />
       )}
+
+      {tagModal && (
+        <AddTagModal
+          record={tagModal}
+          existing={tags[tagModal.id] || []}
+          onClose={() => setTagModal(null)}
+          onSave={(arr) => {
+            persistTags({ ...tags, [tagModal.id]: arr });
+            logAuditEvent({
+              action: "Tags updated",
+              target: arr.join(", ") || "(cleared)",
+              recordId: tagModal.id,
+            });
+            toast.success("Tags saved", `${tagModal.id} — ${arr.length} tag(s)`);
+            setTagModal(null);
+          }}
+        />
+      )}
+
+      <SignatureSentModal info={sigInfo} onClose={() => setSigInfo(null)} />
     </>
   );
 }
@@ -273,6 +522,75 @@ export default function RepositoryPage() {
     <Suspense fallback={<div className="p-8 text-slate-400">Loading repository…</div>}>
       <RepositoryInner />
     </Suspense>
+  );
+}
+
+function AddTagModal({ record, existing, onClose, onSave }) {
+  const [list, setList] = useState(existing);
+  const [val, setVal] = useState("");
+  const add = () => {
+    const v = val.trim();
+    if (!v || list.includes(v)) return;
+    setList([...list, v]);
+    setVal("");
+  };
+  const remove = (t) => setList(list.filter((x) => x !== t));
+  return (
+    <div
+      className="fixed inset-0 z-50 grid place-items-center p-4 bg-black/70 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div
+        className="w-full max-w-md bg-navy-950 border border-white/10 rounded-2xl p-6"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <div className="text-lg font-semibold text-white">Add tag</div>
+            <div className="text-xs text-slate-400 mt-1 font-mono">{record.id}</div>
+          </div>
+          <button onClick={onClose} className="btn-ghost text-xs">
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+        <div className="flex flex-wrap gap-2 mb-3 min-h-[40px] p-2 rounded-lg bg-white/[0.03] border border-white/5">
+          {list.length === 0 && (
+            <span className="text-xs text-slate-500">No tags yet.</span>
+          )}
+          {list.map((t) => (
+            <span
+              key={t}
+              className="text-xs px-2 py-1 rounded bg-cyan-500/15 text-cyan-200 border border-cyan-400/20 flex items-center gap-1.5"
+            >
+              {t}
+              <button onClick={() => remove(t)} className="hover:text-white">
+                <X className="w-3 h-3" />
+              </button>
+            </span>
+          ))}
+        </div>
+        <div className="flex items-center gap-2">
+          <input
+            value={val}
+            onChange={(e) => setVal(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && add()}
+            placeholder="e.g. confidential, urgent, renewal"
+            className="input flex-1"
+          />
+          <button onClick={add} className="btn-ghost">
+            <Tag className="w-3.5 h-3.5" /> Add
+          </button>
+        </div>
+        <div className="flex justify-end gap-2 mt-5">
+          <button onClick={onClose} className="btn-ghost">
+            Cancel
+          </button>
+          <button onClick={() => onSave(list)} className="btn-primary">
+            Save tags
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -296,19 +614,50 @@ function RecordDetailDrawer({
   const handleDownload = async (doc, format) => {
     setBusy(doc.id + format);
     try {
+      // For a counter-signed doc, regenerate the signed PDF on demand so
+      // it always reflects the captured signature + filled placeholders.
+      if (format === "pdf" && doc.signed) {
+        const res = await buildSignedPdfBlob(record.id);
+        if (!res.ok) {
+          toast.error("Signed PDF unavailable", res.error);
+          return;
+        }
+        const ok = await downloadBlob(res.blob, res.filename);
+        if (!ok) throw new Error("Browser blocked the download.");
+        logAuditEvent({
+          action: "Signed PDF downloaded",
+          target: res.filename,
+          recordId: record.id,
+        });
+        toast.success("Signed PDF downloaded", res.filename);
+        return;
+      }
+
       const template = getTemplateById(doc.templateId);
       if (!template) {
         toast.error("Template missing", "Cannot regenerate document.");
         return;
       }
-      const values = buildPlaceholderValues({
-        counterpartyName: doc.counterparty,
-        recordTitle: doc.recordTitle,
-      });
+      // Build placeholder values from the FULL record form (not just title/cp)
+      // so every field — addresses, purpose, signers — substitutes correctly.
+      const form = {
+        ...(record.form || {}),
+        // ensure record-level fallbacks are present even if form is sparse
+        counterpartyName:
+          record.form?.counterpartyName ||
+          doc.counterparty ||
+          record.counterparty,
+        recordTitle: record.form?.recordTitle || doc.recordTitle || record.title,
+      };
+      const values = buildPlaceholderValues(form);
       const meta = {
         id: doc.id,
         recordId: doc.recordId,
         recordTitle: doc.recordTitle,
+        signatureImage: doc.signatureImage || null,
+        signedBy: doc.signedBy || null,
+        signerTitle: doc.signerTitle || null,
+        signedAt: doc.generatedAt,
       };
       const blob =
         format === "docx"
@@ -408,7 +757,7 @@ function RecordDetailDrawer({
               </button>
               <button
                 onClick={() => onCancel(record)}
-                disabled={["Signed", "Cancelled", "Rejected"].includes(
+                disabled={["Signed", "Archived"].includes(
                   record.status
                 )}
                 className="btn-ghost text-xs text-amber-300 disabled:opacity-40 disabled:cursor-not-allowed"
@@ -427,6 +776,60 @@ function RecordDetailDrawer({
               </button>
             </div>
           </GlassCard>
+
+          {/* Final Signed NDA — prominent download for the counter-signed PDF */}
+          {(() => {
+            const signedDoc = docs.find((d) => d.signed);
+            if (!signedDoc) return null;
+            return (
+              <GlassCard className="!p-5 border-emerald-400/30 bg-emerald-500/5">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-300" />
+                      <h4 className="text-sm font-semibold text-white">
+                        Final Signed NDA
+                      </h4>
+                    </div>
+                    <div className="text-[12px] text-slate-300">
+                      Counter-signed by{" "}
+                      <span className="text-white font-medium">
+                        {signedDoc.signedBy || "—"}
+                      </span>
+                      {signedDoc.signerTitle ? `, ${signedDoc.signerTitle}` : ""}
+                    </div>
+                    <div className="text-[11px] text-slate-400 mt-0.5">
+                      {signedDoc.id} · Signed{" "}
+                      {formatTimestamp(signedDoc.generatedAt)}
+                    </div>
+                    {signedDoc.signatureImage && (
+                      <div className="mt-2 inline-block bg-white rounded border border-emerald-400/30 p-1.5">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={signedDoc.signatureImage}
+                          alt="counterparty signature"
+                          className="max-h-12"
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => handleDownload(signedDoc, "pdf")}
+                    disabled={!!busy}
+                    className="inline-flex items-center gap-2 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-100 px-3 py-2 rounded-xl text-xs whitespace-nowrap disabled:opacity-40"
+                    title="Download the signed PDF with the embedded counter-signature"
+                  >
+                    {busy === signedDoc.id + "pdf" ? (
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    ) : (
+                      <Download className="w-3.5 h-3.5" />
+                    )}
+                    Download Signed PDF
+                  </button>
+                </div>
+              </GlassCard>
+            );
+          })()}
 
           {/* Documents section */}
           <div>

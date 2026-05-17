@@ -71,3 +71,26 @@ body::before {
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 999px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
+
+/* Native <select> dropdowns — dark theme everywhere */
+select {
+  color-scheme: dark;
+  background-color: rgba(255,255,255,0.05);
+  color: #e5e7ef;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2rem;
+}
+select option,
+select optgroup {
+  background-color: #0b1226 !important;
+  color: #e5e7ef !important;
+}
+select option:checked,
+select option:hover {
+  background-color: #1e293b !important;
+  color: #ffffff !important;
+}

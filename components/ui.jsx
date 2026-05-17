@@ -71,16 +71,14 @@ export function RiskBadge({ level }) {
 
 export function StatusBadge({ status }) {
   const map = {
-    Draft: "bg-slate-500/15 text-slate-300 border-slate-400/30",
     "In Review": "bg-indigo-500/15 text-indigo-300 border-indigo-400/30",
-    "Legal Review": "bg-violet-500/15 text-violet-300 border-violet-400/30",
     Approved: "bg-emerald-500/15 text-emerald-300 border-emerald-400/30",
-    Signed: "bg-cyan-500/15 text-cyan-300 border-cyan-400/30",
     "Awaiting Signature": "bg-amber-500/15 text-amber-300 border-amber-400/30",
-    Priority: "bg-rose-500/15 text-rose-300 border-rose-400/30",
+    Signed: "bg-cyan-500/15 text-cyan-300 border-cyan-400/30",
+    Archived: "bg-slate-500/15 text-slate-300 border-slate-400/30",
   };
   return (
-    <span className={`px-2.5 py-1 rounded-full text-[11px] font-semibold border ${map[status] || map.Draft}`}>
+    <span className={`px-2.5 py-1 rounded-full text-[11px] font-semibold border ${map[status] || map["In Review"]}`}>
       {status}
     </span>
   );
