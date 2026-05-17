@@ -76,12 +76,9 @@ function RepositoryInner() {
   const menuRef = useRef(null);
 
   const allRecords = useMemo(() => {
-    const stored = getRequests();
-    const storedIds = new Set(stored.map((r) => r.id));
-    const fallback = [...recentRequests, ...archive].filter(
-      (r) => !storedIds.has(r.id)
-    );
-    return [...stored, ...fallback];
+    // Use the store as the single source of truth so that counts match the
+    // dashboard exactly. Legacy mock fallbacks were causing inflated rows.
+    return getRequests();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refreshKey]);
 

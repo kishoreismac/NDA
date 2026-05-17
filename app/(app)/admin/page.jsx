@@ -1,12 +1,28 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Topbar from "@/components/Topbar";
 import { GlassCard } from "@/components/ui";
 import { adminUsers } from "@/lib/mockData";
-import { Building2, Sparkles, Shield, Users, Bell, Plug, Save } from "lucide-react";
+import {
+  Building2,
+  Sparkles,
+  Shield,
+  Users,
+  Bell,
+  Plug,
+  Save,
+  Palette,
+  Moon,
+  Sun,
+} from "lucide-react";
+import {
+  getStoredTheme,
+  setStoredTheme,
+} from "@/components/ThemeManager";
 
 const tabs = [
   { id: "org", label: "Organization", icon: Building2 },
+  { id: "appearance", label: "Appearance", icon: Palette },
   { id: "ai", label: "AI Settings", icon: Sparkles },
   { id: "security", label: "Security & Compliance", icon: Shield },
   { id: "users", label: "Users & Roles", icon: Users },
@@ -53,6 +69,16 @@ export default function AdminPage() {
   const [audit, setAudit] = useState(true);
   const [emailNotif, setEmailNotif] = useState(true);
   const [slackNotif, setSlackNotif] = useState(false);
+  const [theme, setTheme] = useState("dark");
+
+  useEffect(() => {
+    setTheme(getStoredTheme());
+  }, []);
+
+  const pickTheme = (next) => {
+    setTheme(next);
+    setStoredTheme(next);
+  };
 
   return (
     <>
@@ -104,6 +130,78 @@ export default function AdminPage() {
                   <label className="label">Time zone</label>
                   <select className="input"><option>America/Los_Angeles</option><option>America/New_York</option><option>Europe/London</option></select>
                 </div>
+              </div>
+            </>
+          )}
+
+          {tab === "appearance" && (
+            <>
+              <h3 className="font-semibold text-white text-lg flex items-center gap-2">
+                <Palette className="w-4 h-4 text-cyanglow" /> Appearance
+              </h3>
+              <p className="text-xs text-slate-400">
+                Choose how CLM looks. Your selection is saved on this device.
+              </p>
+              <div className="grid sm:grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => pickTheme("dark")}
+                  className={
+                    "text-left rounded-2xl border p-4 transition " +
+                    (theme === "dark"
+                      ? "border-cyan-400/60 bg-cyan-500/10 shadow-glow"
+                      : "border-white/10 bg-white/5 hover:border-white/20")
+                  }
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-white font-semibold">
+                      <Moon className="w-4 h-4 text-indigo-300" /> Dark Theme
+                    </div>
+                    {theme === "dark" && (
+                      <span className="text-[10px] uppercase tracking-wider text-cyan-300 font-bold">
+                        Active
+                      </span>
+                    )}
+                  </div>
+                  <div className="mt-3 h-20 rounded-lg bg-gradient-to-br from-[#070b1a] to-[#1e293b] border border-white/10 grid grid-cols-3 gap-1 p-1.5">
+                    <div className="rounded bg-white/10" />
+                    <div className="rounded bg-white/5" />
+                    <div className="rounded bg-grad-primary" />
+                  </div>
+                  <div className="text-xs text-slate-400 mt-2">
+                    Default deep-navy look with glass surfaces.
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => pickTheme("light")}
+                  className={
+                    "text-left rounded-2xl border p-4 transition " +
+                    (theme === "light"
+                      ? "border-cyan-400/60 bg-cyan-500/10 shadow-glow"
+                      : "border-white/10 bg-white/5 hover:border-white/20")
+                  }
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-white font-semibold">
+                      <Sun className="w-4 h-4 text-amber-300" /> White Theme
+                    </div>
+                    {theme === "light" && (
+                      <span className="text-[10px] uppercase tracking-wider text-cyan-300 font-bold">
+                        Active
+                      </span>
+                    )}
+                  </div>
+                  <div className="mt-3 h-20 rounded-lg bg-gradient-to-br from-[#f4f6fb] to-[#e2e8f0] border border-slate-300 grid grid-cols-3 gap-1 p-1.5">
+                    <div className="rounded bg-white" />
+                    <div className="rounded bg-slate-200" />
+                    <div className="rounded bg-grad-primary" />
+                  </div>
+                  <div className="text-xs text-slate-400 mt-2">
+                    Bright, high-contrast surfaces for daytime work.
+                  </div>
+                </button>
               </div>
             </>
           )}

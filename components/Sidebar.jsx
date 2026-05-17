@@ -14,6 +14,7 @@ import {
   ListChecks,
   Calendar,
   BarChart3,
+  Bot,
 } from "lucide-react";
 
 const nav = [
@@ -23,6 +24,7 @@ const nav = [
   { href: "/tasks", label: "Tasks", icon: ListChecks },
   { href: "/calendar", label: "Calendar", icon: Calendar },
   { href: "/repository", label: "Repository", icon: Database },
+  { href: "/ai-tools", label: "AI Search", icon: Bot },
   { href: "/reports", label: "Reports", icon: BarChart3 },
   { href: "/parties", label: "Parties", icon: Users },
   { href: "/rules", label: "Rules", icon: GitBranch },
