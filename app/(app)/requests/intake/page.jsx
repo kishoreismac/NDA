@@ -54,6 +54,7 @@ import {
   Eye,
   CheckCircle2,
   GitBranch,
+  ShieldAlert,
 } from "lucide-react";
 
 const STEPS = [
@@ -73,7 +74,7 @@ const piiQuestions = riskQuestions.filter((q) =>
   ["pii", "employeeData", "customerData", "largeData", "crossBorder"].includes(q.id)
 );
 
-function Stepper({ current }) {
+function Stepper({ current, onJump }) {
   return (
     <div className="glass p-4 mb-6 overflow-x-auto">
       <ol className="flex items-center gap-1 min-w-max">
@@ -83,8 +84,11 @@ function Stepper({ current }) {
           const active = current === s.id;
           return (
             <li key={s.id} className="flex items-center">
-              <div
-                className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm border transition ${
+              <button
+                type="button"
+                onClick={() => onJump?.(s.id)}
+                title={`Go to ${s.title}`}
+                className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm border transition cursor-pointer hover:border-white/30 hover:text-white ${
                   active
                     ? "bg-grad-soft border-white/15 text-white shadow-glow"
                     : done
@@ -101,7 +105,7 @@ function Stepper({ current }) {
                 </span>
                 <Icon className="w-4 h-4 opacity-80" />
                 <span className="hidden md:inline whitespace-nowrap">{s.title}</span>
-              </div>
+              </button>
               {i < STEPS.length - 1 && (
                 <div className={`w-6 h-px mx-1 ${done ? "bg-emerald-400/40" : "bg-white/10"}`} />
               )}
@@ -159,7 +163,7 @@ function IntakeInner() {
   const params = useSearchParams();
   const router = useRouter();
   const toast = useToast();
-  const { guard, can } = useCurrentRole();
+  const { guard, can, role } = useCurrentRole();
   const editId = params.get("edit");
   const renewId = params.get("renew");
   const existingId = editId || renewId;
@@ -170,6 +174,7 @@ function IntakeInner() {
   const ndaType = ndaTypes.find((t) => t.id === ndaTypeId) || ndaTypes[0];
 
   const [step, setStep] = useState(1);
+  const [templateSubStep, setTemplateSubStep] = useState("select"); // "select" | "preview"
   const [recordId] = useState(
     () => existingId || "NDA-" + (2042 + Math.floor(Math.random() * 50))
   );
@@ -202,6 +207,7 @@ function IntakeInner() {
     purpose: "",
     confidentialInformation: "",
     effectiveDate: new Date().toISOString().slice(0, 10),
+    endDate: "",
     term: "two (2) years",
     survival: "three (3) years",
     // Template
@@ -289,6 +295,35 @@ function IntakeInner() {
   const next = () => setStep((s) => Math.min(7, s + 1));
   const back = () => setStep((s) => Math.max(1, s - 1));
 
+  if (role?.id === "exec") {
+    return (
+      <>
+        <Topbar
+          title="Guided Intake"
+          subtitle="Executive Viewer accounts are read-only."
+        />
+        <GlassCard className="max-w-2xl text-center py-10">
+          <div className="w-12 h-12 mx-auto rounded-2xl bg-amber-500/15 border border-amber-400/30 grid place-items-center mb-4">
+            <ShieldAlert className="w-6 h-6 text-amber-300" />
+          </div>
+          <h3 className="text-lg font-semibold text-white">Access restricted</h3>
+          <p className="text-sm text-slate-300 mt-2">
+            Executive Viewers cannot create or edit NDA requests. Switch to a
+            Business User, Legal Reviewer or Admin account to use the guided
+            intake.
+          </p>
+          <button
+            type="button"
+            onClick={() => router.push("/dashboard")}
+            className="btn-primary mt-5"
+          >
+            Back to Dashboard
+          </button>
+        </GlassCard>
+      </>
+    );
+  }
+
   const onPickCounterparty = (id) => {
     const cp = counterparties.find((c) => c.id === id);
     if (cp)
@@ -370,7 +405,7 @@ function IntakeInner() {
         </div>
       )}
 
-      <Stepper current={step} />
+      <Stepper current={step} onJump={(id) => setStep(id)} />
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="xl:col-span-2 space-y-6">
@@ -461,6 +496,44 @@ function IntakeInner() {
                   />
                 </div>
               </div>
+
+              <div className="mt-6 pt-5 border-t border-white/10">
+                <h4 className="font-semibold text-white text-sm mb-3">Agreement Period</h4>
+                <div className="grid sm:grid-cols-3 gap-4">
+                  <div>
+                    <label className="label">Start Date</label>
+                    <input
+                      type="date"
+                      className="input"
+                      value={form.effectiveDate}
+                      onChange={(e) => setForm({ ...form, effectiveDate: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label className="label">End Date</label>
+                    <input
+                      type="date"
+                      className="input"
+                      value={form.endDate}
+                      min={form.effectiveDate || undefined}
+                      onChange={(e) => setForm({ ...form, endDate: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <label className="label">Term Time</label>
+                    <select
+                      className="input"
+                      value={form.term}
+                      onChange={(e) => setForm({ ...form, term: e.target.value })}
+                    >
+                      <option>one (1) year</option>
+                      <option>two (2) years</option>
+                      <option>three (3) years</option>
+                      <option>five (5) years</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
             </GlassCard>
           )}
 
@@ -517,12 +590,22 @@ function IntakeInner() {
                   />
                 </div>
                 <div>
-                  <label className="label">Effective date</label>
+                  <label className="label">Effective date (Start)</label>
                   <input
                     type="date"
                     className="input"
                     value={form.effectiveDate}
                     onChange={(e) => setForm({ ...form, effectiveDate: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label className="label">End date</label>
+                  <input
+                    type="date"
+                    className="input"
+                    value={form.endDate}
+                    min={form.effectiveDate || undefined}
+                    onChange={(e) => setForm({ ...form, endDate: e.target.value })}
                   />
                 </div>
                 <div>
@@ -680,52 +763,82 @@ function IntakeInner() {
                     />
                   </div>
                 </div>
+
+                {/* Preview toggle (Continue lives in the bottom nav) */}
+                <div className="mt-5 pt-5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+                  <div className="text-xs text-slate-400">
+                    {templateSubStep === "select"
+                      ? "Optionally review the template preview and placeholders before continuing."
+                      : "Preview shown below. Use Continue at the bottom when you're ready."}
+                  </div>
+                  {templateSubStep === "select" ? (
+                    <button
+                      type="button"
+                      onClick={() => setTemplateSubStep("preview")}
+                      className="btn-ghost"
+                    >
+                      <Eye className="w-4 h-4" /> View Preview & Placeholders
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setTemplateSubStep("select")}
+                      className="btn-ghost"
+                    >
+                      Hide Preview
+                    </button>
+                  )}
+                </div>
               </GlassCard>
 
-              <GlassCard className="!p-0 overflow-hidden">
-                <div className="px-5 py-4 border-b border-white/10 flex items-center justify-between">
-                  <div>
-                    <div className="text-sm font-semibold text-white">
-                      Template Preview — {template?.name}
+              {templateSubStep === "preview" && (
+                <>
+                  <GlassCard className="!p-0 overflow-hidden">
+                    <div className="px-5 py-4 border-b border-white/10 flex items-center justify-between">
+                      <div>
+                        <div className="text-sm font-semibold text-white">
+                          Template Preview — {template?.name}
+                        </div>
+                        <div className="text-xs text-slate-400 mt-0.5">
+                          Detected placeholders are highlighted. Switch view to see filled-in values.
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1 text-[11px]">
+                        {[
+                          ["raw", "Raw"],
+                          ["filled", "Filled"],
+                        ].map(([k, label]) => (
+                          <button
+                            key={k}
+                            onClick={() => setPreviewMode(k)}
+                            className={
+                              "px-2.5 py-1 rounded-md border transition " +
+                              (previewMode === k
+                                ? "bg-indigoglow/20 border-indigoglow/40 text-white"
+                                : "bg-white/5 border-white/10 text-slate-300 hover:text-white")
+                            }
+                          >
+                            <Eye className="w-3 h-3 inline mr-1" />
+                            {label}
+                          </button>
+                        ))}
+                      </div>
                     </div>
-                    <div className="text-xs text-slate-400 mt-0.5">
-                      Detected placeholders are highlighted. Switch view to see filled-in values.
+                    <div className="p-5">
+                      <TemplatePreview
+                        template={template}
+                        values={values}
+                        mode={previewMode}
+                      />
                     </div>
-                  </div>
-                  <div className="flex items-center gap-1 text-[11px]">
-                    {[
-                      ["raw", "Raw"],
-                      ["filled", "Filled"],
-                    ].map(([k, label]) => (
-                      <button
-                        key={k}
-                        onClick={() => setPreviewMode(k)}
-                        className={
-                          "px-2.5 py-1 rounded-md border transition " +
-                          (previewMode === k
-                            ? "bg-indigoglow/20 border-indigoglow/40 text-white"
-                            : "bg-white/5 border-white/10 text-slate-300 hover:text-white")
-                        }
-                      >
-                        <Eye className="w-3 h-3 inline mr-1" />
-                        {label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                <div className="p-5">
-                  <TemplatePreview
-                    template={template}
-                    values={values}
-                    mode={previewMode}
+                  </GlassCard>
+
+                  <PlaceholderValidationPanel
+                    summary={summary}
+                    missingRequired={validation.missingRequired}
                   />
-                </div>
-              </GlassCard>
-
-              <PlaceholderValidationPanel
-                summary={summary}
-                missingRequired={validation.missingRequired}
-              />
+                </>
+              )}
             </div>
           )}
 
@@ -912,11 +1025,6 @@ function IntakeInner() {
                 recordTitle={
                   form.recordTitle || `${form.counterpartyName || "New record"}`
                 }
-              />
-
-              <PlaceholderValidationPanel
-                summary={summary}
-                missingRequired={validation.missingRequired}
               />
             </div>
           )}

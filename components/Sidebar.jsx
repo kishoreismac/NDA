@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { getCurrentRole } from "@/lib/roleStore";
 import {
   LayoutDashboard,
   FilePlus2,
@@ -34,6 +36,18 @@ const nav = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const [roleId, setRoleId] = useState("business");
+  useEffect(() => {
+    const sync = () => setRoleId(getCurrentRole().role.id);
+    sync();
+    window.addEventListener("clm:role-changed", sync);
+    return () => window.removeEventListener("clm:role-changed", sync);
+  }, []);
+  // Executive Viewer is read-only — hide write-action entry points.
+  const visibleNav = nav.filter((item) => {
+    if (roleId === "exec" && item.href === "/requests/new") return false;
+    return true;
+  });
   return (
     <aside className="hidden lg:flex flex-col w-64 shrink-0 h-screen sticky top-0 px-4 py-6 border-r border-white/5 bg-navy-950/60 backdrop-blur-xl">
       <Link href="/dashboard" className="flex items-center gap-2.5 px-2 mb-8">
@@ -49,7 +63,7 @@ export default function Sidebar() {
       </Link>
 
       <nav className="flex flex-col gap-1">
-        {nav.map((item) => {
+        {visibleNav.map((item) => {
           const Icon = item.icon;
           const active =
             pathname === item.href ||

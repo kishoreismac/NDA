@@ -31,6 +31,7 @@ import {
   ExternalLink,
   ChevronRight,
 } from "lucide-react";
+import { useCurrentRole } from "@/lib/permissions";
 
 // CTA tiles in reference style
 const CTAS = [
@@ -69,6 +70,7 @@ const STATUS_COLOR = {
 
 export default function DashboardPage() {
   const router = useRouter();
+  const { role } = useCurrentRole();
   const [mounted, setMounted] = useState(false);
   const [period, setPeriod] = useState("Current Year");
   const [drillStatus, setDrillStatus] = useState(null);
@@ -150,9 +152,11 @@ export default function DashboardPage() {
         title="Contract Management Dashboard"
         subtitle="Welcome back, Sara. Here's the status across all your contract types today."
         actions={
-          <Link href="/requests/new" className="btn-primary">
-            <FilePlus2 className="w-4 h-4" /> New Contract Request
-          </Link>
+          role?.id !== "exec" ? (
+            <Link href="/requests/new" className="btn-primary">
+              <FilePlus2 className="w-4 h-4" /> New Contract Request
+            </Link>
+          ) : null
         }
       />
 

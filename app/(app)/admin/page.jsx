@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Topbar from "@/components/Topbar";
 import { GlassCard } from "@/components/ui";
 import { adminUsers } from "@/lib/mockData";
+import { listUsers, addUser, removeUser } from "@/lib/userStore";
 import {
   Building2,
   Sparkles,
@@ -70,6 +71,43 @@ export default function AdminPage() {
   const [emailNotif, setEmailNotif] = useState(true);
   const [slackNotif, setSlackNotif] = useState(false);
   const [theme, setTheme] = useState("dark");
+  const [users, setUsers] = useState([]);
+  const [newUser, setNewUser] = useState({
+    title: "Mr.",
+    firstName: "",
+    lastName: "",
+    role: "Business User",
+    email: "",
+  });
+  const [userError, setUserError] = useState("");
+
+  useEffect(() => {
+    setUsers(listUsers());
+    const refresh = () => setUsers(listUsers());
+    window.addEventListener("clm:users-changed", refresh);
+    return () => window.removeEventListener("clm:users-changed", refresh);
+  }, []);
+
+  const onAddUser = (e) => {
+    e?.preventDefault?.();
+    setUserError("");
+    if (!newUser.firstName.trim() || !newUser.lastName.trim()) {
+      setUserError("First name and last name are required.");
+      return;
+    }
+    if (!/^\S+@\S+\.\S+$/.test(newUser.email)) {
+      setUserError("Please enter a valid email address.");
+      return;
+    }
+    addUser(newUser);
+    setNewUser({
+      title: "Mr.",
+      firstName: "",
+      lastName: "",
+      role: "Business User",
+      email: "",
+    });
+  };
 
   useEffect(() => {
     setTheme(getStoredTheme());
@@ -245,27 +283,120 @@ export default function AdminPage() {
           {tab === "users" && (
             <>
               <h3 className="font-semibold text-white text-lg">Users & Roles</h3>
+
+              {/* Add User form */}
+              <form
+                onSubmit={onAddUser}
+                className="p-4 rounded-xl bg-white/[0.03] border border-white/5 space-y-3"
+              >
+                <div className="text-sm font-medium text-white">Add a new user</div>
+                <div className="grid grid-cols-1 sm:grid-cols-6 gap-3">
+                  <div className="sm:col-span-1">
+                    <label className="label">Title</label>
+                    <select
+                      className="input"
+                      value={newUser.title}
+                      onChange={(e) => setNewUser({ ...newUser, title: e.target.value })}
+                    >
+                      <option>Mr.</option>
+                      <option>Mrs.</option>
+                      <option>Ms.</option>
+                      <option>Miss</option>
+                      <option>Dr.</option>
+                      <option>Prof.</option>
+                    </select>
+                  </div>
+                  <div className="sm:col-span-2">
+                    <label className="label">First name</label>
+                    <input
+                      className="input"
+                      placeholder="e.g. Sarah"
+                      value={newUser.firstName}
+                      onChange={(e) =>
+                        setNewUser({ ...newUser, firstName: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div className="sm:col-span-2">
+                    <label className="label">Last name</label>
+                    <input
+                      className="input"
+                      placeholder="e.g. Johnson"
+                      value={newUser.lastName}
+                      onChange={(e) =>
+                        setNewUser({ ...newUser, lastName: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div className="sm:col-span-1">
+                    <label className="label">Role</label>
+                    <select
+                      className="input"
+                      value={newUser.role}
+                      onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
+                    >
+                      <option>Business User</option>
+                      <option>Legal Reviewer</option>
+                      <option>Senior Counsel</option>
+                      <option>Paralegal</option>
+                      <option>Privacy Officer</option>
+                      <option>Chief Legal Officer</option>
+                      <option>Admin</option>
+                      <option>Executive Viewer</option>
+                    </select>
+                  </div>
+                  <div className="sm:col-span-6">
+                    <label className="label">Email</label>
+                    <input
+                      type="email"
+                      className="input"
+                      placeholder="sarah.johnson@contoso.com"
+                      value={newUser.email}
+                      onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                    />
+                  </div>
+                </div>
+                {userError && (
+                  <div className="text-xs text-rose-300">{userError}</div>
+                )}
+                <div className="flex justify-end">
+                  <button type="submit" className="btn-primary">
+                    + Add User
+                  </button>
+                </div>
+              </form>
+
               <div className="overflow-x-auto -mx-1">
                 <table className="w-full text-sm">
                   <thead><tr className="text-left text-xs uppercase tracking-wider text-slate-400">
-                    <th className="px-2 py-2 font-medium">Name</th>
+                    <th className="px-2 py-2 font-medium">Title</th>
+                    <th className="px-2 py-2 font-medium">First Name</th>
+                    <th className="px-2 py-2 font-medium">Last Name</th>
                     <th className="px-2 py-2 font-medium">Role</th>
                     <th className="px-2 py-2 font-medium">Email</th>
                     <th className="px-2 py-2"></th>
                   </tr></thead>
                   <tbody>
-                    {adminUsers.map((u) => (
-                      <tr key={u.email} className="table-row">
+                    {users.map((u) => (
+                      <tr key={u.id || u.email} className="table-row">
+                        <td className="px-2 py-3 text-slate-300">{u.title || "—"}</td>
                         <td className="px-2 py-3 font-medium text-white flex items-center gap-2">
                           <span className="w-7 h-7 rounded-lg bg-grad-primary grid place-items-center text-[11px] font-bold">
-                            {u.name.split(" ").map((p) => p[0]).join("")}
+                            {(u.firstName?.[0] || "") + (u.lastName?.[0] || "")}
                           </span>
-                          {u.name}
+                          {u.firstName}
                         </td>
+                        <td className="px-2 py-3 text-slate-300">{u.lastName}</td>
                         <td className="px-2 py-3 text-slate-300">{u.role}</td>
                         <td className="px-2 py-3 text-slate-400">{u.email}</td>
                         <td className="px-2 py-3 text-right">
-                          <button className="btn-ghost !py-1 !px-2 text-xs">Edit</button>
+                          <button
+                            type="button"
+                            onClick={() => removeUser(u.id)}
+                            className="btn-ghost !py-1 !px-2 text-xs"
+                          >
+                            Remove
+                          </button>
                         </td>
                       </tr>
                     ))}

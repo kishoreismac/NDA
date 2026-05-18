@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useCurrentRole } from "@/lib/permissions";
 import { logAuditEvent } from "@/lib/auditTrail";
 
 function trustScore(p) {
@@ -27,6 +28,7 @@ function trustScore(p) {
 
 export default function PartiesPage() {
   const router = useRouter();
+  const { role } = useCurrentRole();
   const toast = useToast();
   const [q, setQ] = useState("");
   const [parties, setParties] = useState(counterparties);
@@ -157,7 +159,9 @@ export default function PartiesPage() {
               </button>
               <button
                 onClick={() => onNewNda(p)}
-                className="btn-ghost flex-1 justify-center text-xs"
+                disabled={role?.id === "exec"}
+                className="btn-ghost flex-1 justify-center text-xs disabled:opacity-40 disabled:cursor-not-allowed"
+                title={role?.id === "exec" ? "Executive Viewers have read-only access" : "Start a new NDA with this party"}
               >
                 <FilePlus2 className="w-3 h-3" /> New NDA
               </button>

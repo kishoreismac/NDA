@@ -3,12 +3,42 @@ import Topbar from "@/components/Topbar";
 import { GlassCard } from "@/components/ui";
 import { ndaTypes } from "@/lib/mockData";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Sparkles, Clock } from "lucide-react";
+import { ArrowRight, Sparkles, Clock, ShieldAlert } from "lucide-react";
 import { useState } from "react";
+import { useCurrentRole } from "@/lib/permissions";
 
 export default function NewRequestPage() {
   const router = useRouter();
   const [selected, setSelected] = useState(null);
+  const { role } = useCurrentRole();
+
+  if (role?.id === "exec") {
+    return (
+      <>
+        <Topbar
+          title="New NDA Request"
+          subtitle="Executive Viewer accounts are read-only."
+        />
+        <GlassCard className="max-w-2xl text-center py-10">
+          <div className="w-12 h-12 mx-auto rounded-2xl bg-amber-500/15 border border-amber-400/30 grid place-items-center mb-4">
+            <ShieldAlert className="w-6 h-6 text-amber-300" />
+          </div>
+          <h3 className="text-lg font-semibold text-white">Access restricted</h3>
+          <p className="text-sm text-slate-300 mt-2">
+            Executive Viewers have read-only access. Please switch to a Business
+            User, Legal Reviewer or Admin account to create a new NDA request.
+          </p>
+          <button
+            type="button"
+            onClick={() => router.push("/dashboard")}
+            className="btn-primary mt-5"
+          >
+            Back to Dashboard
+          </button>
+        </GlassCard>
+      </>
+    );
+  }
 
   const proceed = () => {
     if (!selected) return;

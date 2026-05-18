@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   getSignatureRequest,
+  getSignatureRequestAsync,
   markViewed,
   completeSignature,
   declineSignature,
@@ -44,18 +45,28 @@ export default function SignPage({ params }) {
 
   useEffect(() => {
     setMounted(true);
-    const s = getSignatureRequest(token);
-    if (!s) {
-      setError("This signing link is invalid or has expired.");
-      return;
-    }
-    markViewed(token);
-    setSig(s);
-    const r = getRequest(s.recordId);
-    setRec(r);
-    setName(s.counterpartySignerName || "");
-    setTitle("Authorized Signatory");
-    if (s.status === "signed") setDone(true);
+    let cancelled = false;
+    (async () => {
+      const s = await getSignatureRequestAsync(token);
+      if (cancelled) return;
+      if (!s) {
+        setError("This signing link is invalid or has expired.");
+        return;
+      }
+      markViewed(token);
+      setSig(s);
+      // Prefer the sender-side record (full data + history) if it lives in
+      // this browser; otherwise fall back to the snapshot embedded in the
+      // signature row so the recipient still sees full document details.
+      const r = getRequest(s.recordId) || s.recordSnapshot || null;
+      setRec(r);
+      setName(s.counterpartySignerName || "");
+      setTitle("Authorized Signatory");
+      if (s.status === "signed") setDone(true);
+    })();
+    return () => {
+      cancelled = true;
+    };
   }, [token]);
 
   const fmt = (ts) =>
@@ -255,10 +266,10 @@ export default function SignPage({ params }) {
     }
   };
 
-  const onDecline = () => {
-    const res = declineSignature(token, declineReason.trim());
+  const onDecline = async () => {
+    const res = await declineSignature(token, declineReason.trim());
     if (res.ok) {
-      const fresh = getSignatureRequest(token);
+      const fresh = (await getSignatureRequestAsync(token)) || getSignatureRequest(token);
       setSig(fresh);
     }
   };

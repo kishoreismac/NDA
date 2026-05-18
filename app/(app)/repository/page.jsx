@@ -195,6 +195,12 @@ function RepositoryInner() {
               ? new Date(r.updatedAt).toLocaleDateString("en-US")
               : r.updated || "",
         },
+        {
+          key: "timestamp",
+          label: "Time Stamp",
+          accessor: (r) =>
+            r.updatedAt ? new Date(r.updatedAt).toLocaleString("en-US") : "",
+        },
       ],
       rows: filtered,
     });
@@ -382,6 +388,7 @@ function RepositoryInner() {
                 <th className="px-4 py-3 font-medium">Status</th>
                 <th className="px-4 py-3 font-medium">Owner</th>
                 <th className="px-4 py-3 font-medium">Updated</th>
+                <th className="px-4 py-3 font-medium">Time Stamp</th>
                 <th className="px-4 py-3"></th>
               </tr>
             </thead>
@@ -417,6 +424,11 @@ function RepositoryInner() {
                   </td>
                   <td className="px-4 py-3 text-slate-300">{r.owner}</td>
                   <td className="px-4 py-3 text-slate-400">{r.updated}</td>
+                  <td className="px-4 py-3 text-slate-400 whitespace-nowrap" title={
+                    r.updatedAt ? new Date(r.updatedAt).toLocaleString("en-US") : ""
+                  }>
+                    {r.updatedAt ? formatTimestamp(r.updatedAt) : "—"}
+                  </td>
                   <td
                     className="px-4 py-3 text-right relative"
                     onClick={(e) => e.stopPropagation()}
