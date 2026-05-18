@@ -30,7 +30,7 @@ import {
   logAuditEvent,
 } from "@/lib/auditTrail";
 import { getTemplateById } from "@/lib/templates";
-import { buildPlaceholderValues } from "@/lib/placeholders";
+import { buildPlaceholderValues, applyPlaceholders } from "@/lib/placeholders";
 import {
   generateDocx,
   generatePdf,
@@ -102,6 +102,17 @@ function RepositoryInner() {
       const raw = window.localStorage.getItem("clm.tags.v1");
       if (raw) setTags(JSON.parse(raw));
     } catch {}
+  }, []);
+
+  // Refresh when the signature sync (or other writers) update records.
+  useEffect(() => {
+    const bump = () => setRefreshKey((k) => k + 1);
+    window.addEventListener("clm:requests-changed", bump);
+    window.addEventListener("clm:signatures-changed", bump);
+    return () => {
+      window.removeEventListener("clm:requests-changed", bump);
+      window.removeEventListener("clm:signatures-changed", bump);
+    };
   }, []);
 
   const persistTags = (next) => {
@@ -786,6 +797,67 @@ function RecordDetailDrawer({
             </div>
           </GlassCard>
 
+          {/* Document Preview — always available when a template is bound, so
+              users can view the live NDA text and download as DOCX/PDF even
+              before a document has been formally generated. */}
+          <DocumentPreviewCard
+            record={record}
+            busy={busy}
+            onDownload={async (format) => {
+              const template = getTemplateById(record.templateId);
+              if (!template) {
+                toast.error("Template missing", "Cannot generate document.");
+                return;
+              }
+              setBusy("preview" + format);
+              try {
+                const form = {
+                  ...(record.form || {}),
+                  counterpartyName:
+                    record.form?.counterpartyName || record.counterparty,
+                  recordTitle:
+                    record.form?.recordTitle || record.title,
+                };
+                const values = buildPlaceholderValues(form);
+                const meta = {
+                  id: record.id,
+                  recordId: record.id,
+                  recordTitle: record.title,
+                  signatureImage: record.signatureImage || null,
+                  signedBy: record.signedBy || null,
+                  signerTitle: record.signerTitle || null,
+                  signedAt: record.signedAt || null,
+                };
+                const blob =
+                  format === "docx"
+                    ? await generateDocx({ template, values, meta })
+                    : await generatePdf({ template, values, meta });
+                const base = buildFileName({
+                  counterparty: record.counterparty || form.counterpartyName,
+                });
+                const filename = `${base}_${safeName(
+                  template.name || "NDA"
+                )}.${format}`;
+                const ok = await downloadBlob(blob, filename);
+                if (!ok) throw new Error("Browser blocked the download.");
+                logAuditEvent({
+                  action: `Document ${format.toUpperCase()} downloaded`,
+                  target: filename,
+                  recordId: record.id,
+                });
+                toast.success(`${format.toUpperCase()} downloaded`, filename);
+              } catch (err) {
+                console.error(err);
+                toast.error(
+                  `${format.toUpperCase()} download failed`,
+                  err?.message || "Please try again."
+                );
+              } finally {
+                setBusy(null);
+              }
+            }}
+          />
+
           {/* Final Signed NDA — prominent download for the counter-signed PDF */}
           {(() => {
             const signedDoc = docs.find((d) => d.signed);
@@ -938,4 +1010,159 @@ function Meta({ icon: Icon, label, value }) {
 
 function safeName(s = "") {
   return s.replace(/[^A-Za-z0-9]+/g, "_").replace(/^_|_$/g, "");
+}
+
+// Inline document preview — renders the bound template with the record's
+// form values substituted, and exposes DOCX + PDF download buttons. Works
+// for any record that has a templateId, even before any document has been
+// formally "generated" into the docs store.
+function DocumentPreviewCard({ record, busy, onDownload }) {
+  const template = getTemplateById(record.templateId);
+  const values = useMemo(() => {
+    const form = {
+      ...(record.form || {}),
+      counterpartyName:
+        record.form?.counterpartyName || record.counterparty,
+      recordTitle: record.form?.recordTitle || record.title,
+    };
+    return buildPlaceholderValues(form);
+  }, [record]);
+
+  if (!template) {
+    return (
+      <GlassCard className="!p-5">
+        <div className="flex items-center justify-between mb-3">
+          <h4 className="text-sm font-semibold text-white flex items-center gap-2">
+            <FileText className="w-4 h-4 text-cyanglow" /> Document Preview
+          </h4>
+        </div>
+        <div className="text-xs text-slate-400">
+          No template is bound to this record. Open the intake flow to
+          assign a template before previewing or downloading the NDA.
+        </div>
+      </GlassCard>
+    );
+  }
+
+  const blocks = Array.isArray(template.content) ? template.content : [];
+
+  return (
+    <GlassCard className="!p-5">
+      <div className="flex items-center justify-between mb-3 gap-3 flex-wrap">
+        <div>
+          <h4 className="text-sm font-semibold text-white flex items-center gap-2">
+            <FileText className="w-4 h-4 text-cyanglow" /> Document Preview
+          </h4>
+          <div className="text-[11px] text-slate-400 mt-0.5">
+            {template.name}
+            {template.version ? ` · ${template.version}` : ""}
+          </div>
+        </div>
+        <div className="flex gap-2">
+          <button
+            onClick={() => onDownload("docx")}
+            disabled={!!busy}
+            className="btn-ghost text-xs disabled:opacity-40"
+            title="Download as Microsoft Word (.docx)"
+          >
+            {busy === "previewdocx" ? (
+              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+            ) : (
+              <FileType2 className="w-3.5 h-3.5" />
+            )}
+            Download DOCX
+          </button>
+          <button
+            onClick={() => onDownload("pdf")}
+            disabled={!!busy}
+            className="btn-ghost text-xs disabled:opacity-40"
+            title="Download as PDF"
+          >
+            {busy === "previewpdf" ? (
+              <Loader2 className="w-3.5 h-3.5 animate-spin" />
+            ) : (
+              <Download className="w-3.5 h-3.5" />
+            )}
+            Download PDF
+          </button>
+        </div>
+      </div>
+
+      <div className="max-h-[480px] overflow-auto rounded-lg border border-white/10 bg-white text-slate-900 p-6 text-[13px] leading-relaxed">
+        {blocks.length === 0 ? (
+          <div className="text-slate-500 text-xs italic">
+            This template has no preview content.
+          </div>
+        ) : (
+          blocks.map((block, idx) => {
+            const text = applyPlaceholders(block.text || "", values);
+            if (block.type === "title") {
+              return (
+                <h2
+                  key={idx}
+                  className="text-center font-bold text-base uppercase tracking-wide mt-2 mb-3"
+                >
+                  {text}
+                </h2>
+              );
+            }
+            if (block.type === "subtitle") {
+              return (
+                <p
+                  key={idx}
+                  className="text-center text-[12px] text-slate-600 italic mb-4"
+                >
+                  {text}
+                </p>
+              );
+            }
+            if (block.type === "heading") {
+              return (
+                <h3
+                  key={idx}
+                  className="font-semibold text-[13px] mt-4 mb-1.5"
+                >
+                  {text}
+                </h3>
+              );
+            }
+            // paragraph (default)
+            return (
+              <p key={idx} className="mb-2 whitespace-pre-wrap">
+                {text}
+              </p>
+            );
+          })
+        )}
+
+        {/* Signature block (visible if signed) */}
+        {record.signedBy && (
+          <div className="mt-6 pt-4 border-t border-slate-300">
+            <div className="text-[11px] uppercase tracking-wider text-slate-500 mb-2">
+              Counterparty Signature
+            </div>
+            {record.signatureImage && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={record.signatureImage}
+                alt="signature"
+                className="max-h-16 mb-1"
+              />
+            )}
+            <div className="text-[12px] font-semibold">{record.signedBy}</div>
+            {record.signerTitle && (
+              <div className="text-[11px] text-slate-600">
+                {record.signerTitle}
+              </div>
+            )}
+            {record.signedAt && (
+              <div className="text-[11px] text-slate-500 mt-0.5">
+                Signed {formatTimestamp(record.signedAt)}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </GlassCard>
+  );
 }

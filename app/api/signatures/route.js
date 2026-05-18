@@ -8,18 +8,53 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import os from "node:os";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const DATA_DIR = path.join(process.cwd(), ".data");
+// Resolve a writable + persistent data dir.
+// - Azure App Service Linux: /home is a persistent mounted share that is
+//   always writable, even when WEBSITE_RUN_FROM_PACKAGE makes wwwroot
+//   read-only. We use /home/data/ndaflow.
+// - Azure App Service Windows: D:\home is the equivalent persistent share.
+// - Local dev: fall back to ./.data relative to the project.
+// - Last resort: OS temp dir (non-persistent but always writable).
+function resolveDataDir() {
+  const candidates = [];
+  if (process.env.WEBSITE_INSTANCE_ID || process.env.WEBSITE_SITE_NAME) {
+    // Azure App Service
+    const home = process.env.HOME || (process.platform === "win32" ? "D:\\home" : "/home");
+    candidates.push(path.join(home, "data", "ndaflow"));
+  }
+  candidates.push(path.join(process.cwd(), ".data"));
+  candidates.push(path.join(os.tmpdir(), "ndaflow"));
+  for (const dir of candidates) {
+    try {
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      fs.accessSync(dir, fs.constants.W_OK);
+      return dir;
+    } catch {
+      // try next candidate
+    }
+  }
+  // Should never happen, but return temp as last resort
+  return os.tmpdir();
+}
+
+const DATA_DIR = resolveDataDir();
 const FILE = path.join(DATA_DIR, "signatures.json");
+// Log once at module init so we can confirm the path in App Insights / log stream.
+// eslint-disable-next-line no-console
+console.log(`[signatures] store path: ${FILE}`);
 
 function readAll() {
   try {
     if (!fs.existsSync(FILE)) return {};
     return JSON.parse(fs.readFileSync(FILE, "utf8") || "{}");
-  } catch {
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error("[signatures] readAll failed:", e?.message);
     return {};
   }
 }
@@ -28,16 +63,22 @@ function writeAll(obj) {
   try {
     if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
     fs.writeFileSync(FILE, JSON.stringify(obj), "utf8");
-  } catch {}
+    return true;
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error("[signatures] writeAll failed:", e?.message);
+    return false;
+  }
 }
 
 export async function GET(req) {
   const url = new URL(req.url);
   const token = url.searchParams.get("token");
-  if (!token) {
-    return Response.json({ ok: false, error: "Missing token." }, { status: 400 });
-  }
   const all = readAll();
+  if (!token) {
+    // List all signatures (used by sender devices to reconcile status).
+    return Response.json({ ok: true, signatures: Object.values(all) });
+  }
   const sig = all[token];
   if (!sig) {
     return Response.json({ ok: false, error: "Not found" }, { status: 404 });
@@ -55,7 +96,13 @@ export async function POST(req) {
     const all = readAll();
     if (action === "upsert") {
       all[token] = { ...(all[token] || {}), ...body.entry, token };
-      writeAll(all);
+      const ok = writeAll(all);
+      if (!ok) {
+        return Response.json(
+          { ok: false, error: "Failed to persist signature store on server." },
+          { status: 500 }
+        );
+      }
       return Response.json({ ok: true, signature: all[token] });
     }
     if (action === "patch") {
