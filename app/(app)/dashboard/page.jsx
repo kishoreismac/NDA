@@ -107,12 +107,17 @@ export default function DashboardPage() {
       filter: "status=Signed",
     },
     {
-      label: "Renewals (30d)",
-      value: liveRequests.filter((r) => isExpiringSoon(r, 30)).length,
-      filter: "",
-      to: "/repository?filter=renewals",
+      label: "Archived",
+      value: statusCounts["Archived"] || 0,
+      filter: "status=Archived",
     },
   ];
+  const renewalsTile = {
+    label: "Renewals (30d)",
+    value: liveRequests.filter((r) => isExpiringSoon(r, 30)).length,
+    filter: "",
+    to: "/repository?filter=renewals",
+  };
 
   // record type donut with non-zero entries
   const typeEntries = useMemo(() => {
@@ -180,7 +185,7 @@ export default function DashboardPage() {
             ))}
           </div>
         </div>
-        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-3">
+        <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
           {summary.map((s) => (
             <button
               key={s.label}
@@ -198,6 +203,26 @@ export default function DashboardPage() {
               </div>
             </button>
           ))}
+        </div>
+
+        {/* Renewals shown on its own row */}
+        <div className="mt-5 pt-5 border-t border-white/10">
+          <button
+            onClick={() => router.push(renewalsTile.to)}
+            className="group flex items-center gap-4 hover:scale-[1.02] transition"
+          >
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-fuchsia-500 to-pink-500 grid place-items-center text-white font-bold text-2xl shadow-glow ring-2 ring-fuchsia-400/20 group-hover:ring-fuchsia-400/60 transition">
+              {mounted ? renewalsTile.value : "—"}
+            </div>
+            <div>
+              <div className="text-sm font-semibold text-white">
+                {renewalsTile.label}
+              </div>
+              <div className="text-[11px] text-slate-400">
+                NDAs expiring within the next 30 days
+              </div>
+            </div>
+          </button>
         </div>
       </GlassCard>
 

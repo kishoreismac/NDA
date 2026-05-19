@@ -39,6 +39,8 @@ import { useCurrentRole, ACTIONS } from "@/lib/permissions";
 import {
   computeEndDate,
   computeTermFromDates,
+  formatCustomTerm,
+  matchesPreset,
   TERM_OPTIONS,
 } from "@/lib/dateMath";
 import {
@@ -79,15 +81,22 @@ const piiQuestions = riskQuestions.filter((q) =>
   ["pii", "employeeData", "customerData", "largeData", "crossBorder"].includes(q.id)
 );
 
-function Stepper({ current, onJump, invalidSteps }) {
+function Stepper({ current, onJump, invalidSteps, form }) {
   return (
     <div className="glass p-4 mb-6 overflow-x-auto">
       <ol className="flex items-center gap-1 min-w-max">
         {STEPS.map((s, i) => {
           const Icon = s.icon;
-          const done = current > s.id;
+          const past = current > s.id;
           const active = current === s.id;
           const invalid = invalidSteps?.has?.(s.id);
+          // "complete" only when this step has no missing required fields.
+          // Steps without rules are considered complete once user moves past.
+          const hasRules = REQUIRED_BY_STEP[s.id]?.length > 0;
+          const complete = hasRules
+            ? past && missingRequired(form, s.id).length === 0
+            : past;
+          const incomplete = past && !complete; // user advanced past but data missing
           return (
             <li key={s.id} className="flex items-center">
               <button
@@ -95,33 +104,37 @@ function Stepper({ current, onJump, invalidSteps }) {
                 onClick={() => onJump?.(s.id)}
                 title={`Go to ${s.title}`}
                 className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm border transition cursor-pointer hover:border-white/30 hover:text-white ${
-                  invalid
+                  invalid || incomplete
                     ? "bg-rose-500/10 border-rose-400/60 text-rose-200 shadow-[0_0_0_1px_rgba(244,63,94,0.35)]"
                     : active
                     ? "bg-grad-soft border-white/15 text-white shadow-glow"
-                    : done
+                    : complete
                     ? "bg-emerald-500/10 border-emerald-400/30 text-emerald-300"
                     : "bg-white/5 border-white/10 text-slate-400"
                 }`}
               >
                 <span
                   className={`w-6 h-6 rounded-lg grid place-items-center text-[11px] font-bold ${
-                    invalid
+                    invalid || incomplete
                       ? "bg-rose-500/30 text-rose-100"
                       : active
                       ? "bg-grad-primary text-white"
-                      : done
+                      : complete
                       ? "bg-emerald-500/20"
                       : "bg-white/10"
                   }`}
                 >
-                  {done && !invalid ? <Check className="w-3.5 h-3.5" /> : s.id}
+                  {complete && !invalid && !incomplete ? (
+                    <Check className="w-3.5 h-3.5" />
+                  ) : (
+                    s.id
+                  )}
                 </span>
                 <Icon className="w-4 h-4 opacity-80" />
                 <span className="hidden md:inline whitespace-nowrap">{s.title}</span>
               </button>
               {i < STEPS.length - 1 && (
-                <div className={`w-6 h-px mx-1 ${done ? "bg-emerald-400/40" : "bg-white/10"}`} />
+                <div className={`w-6 h-px mx-1 ${complete ? "bg-emerald-400/40" : "bg-white/10"}`} />
               )}
             </li>
           );
@@ -543,7 +556,7 @@ function IntakeInner() {
         </div>
       )}
 
-      <Stepper current={step} onJump={(id) => setStep(id)} invalidSteps={invalidSteps} />
+      <Stepper current={step} onJump={(id) => setStep(id)} invalidSteps={invalidSteps} form={form} />
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="xl:col-span-2 space-y-6">
@@ -671,6 +684,13 @@ function IntakeInner() {
                         <option key={t.label}>{t.label}</option>
                       ))}
                     </select>
+                    {form.effectiveDate && form.endDate &&
+                      !matchesPreset(form.effectiveDate, form.endDate) && (
+                        <div className="text-[11px] text-cyan-300 mt-1">
+                          Custom duration:{" "}
+                          {formatCustomTerm(form.effectiveDate, form.endDate)}
+                        </div>
+                      )}
                   </div>
                 </div>
               </div>
@@ -759,6 +779,13 @@ function IntakeInner() {
                       <option key={t.label}>{t.label}</option>
                     ))}
                   </select>
+                  {form.effectiveDate && form.endDate &&
+                    !matchesPreset(form.effectiveDate, form.endDate) && (
+                      <div className="text-[11px] text-cyan-300 mt-1">
+                        Custom duration:{" "}
+                        {formatCustomTerm(form.effectiveDate, form.endDate)}
+                      </div>
+                    )}
                 </div>
                 <div>
                   <label className="label">Survival period</label>
