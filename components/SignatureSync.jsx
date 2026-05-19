@@ -1,11 +1,13 @@
 "use client";
 
-// Polls the server-side signature store on the sender's device and
-// reconciles local NDA record statuses (Awaiting Signature → Signed).
+// Polls the server-side stores (signatures + requests) on every device
+// and reconciles local state so every user of the web app sees the same
+// repository contents and signature status.
 // Runs on mount, on window focus, and every 30s while the tab is open.
 
 import { useEffect } from "react";
 import { syncSignatureStatuses } from "@/lib/signatureService";
+import { syncRequests } from "@/lib/requestStore";
 
 export default function SignatureSync() {
   useEffect(() => {
@@ -13,15 +15,18 @@ export default function SignatureSync() {
 
     const run = async () => {
       try {
-        const changed = await syncSignatureStatuses();
+        // Pull global requests first so signature reconciliation sees the
+        // latest record set.
+        const reqChanged = await syncRequests();
         if (cancelled) return;
-        if (changed > 0) {
-          // Let any list views refresh themselves.
+        const sigChanged = await syncSignatureStatuses();
+        if (cancelled) return;
+        if (reqChanged > 0 || sigChanged > 0) {
           window.dispatchEvent(new CustomEvent("clm:requests-changed"));
           window.dispatchEvent(new CustomEvent("clm:signatures-changed"));
         }
       } catch {
-        // silent — sync is best-effort
+        // silent — best-effort
       }
     };
 
@@ -38,3 +43,4 @@ export default function SignatureSync() {
 
   return null;
 }
+

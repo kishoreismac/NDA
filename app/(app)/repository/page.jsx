@@ -10,6 +10,7 @@ import {
   Download,
   Filter,
   Eye,
+  EyeOff,
   X,
   FileText,
   FileType2,
@@ -62,7 +63,7 @@ function RepositoryInner() {
   const params = useSearchParams();
   const router = useRouter();
   const toast = useToast();
-  const { guard } = useCurrentRole();
+  const { guard, can } = useCurrentRole();
   const [q, setQ] = useState("");
   const [type, setType] = useState("All");
   const [risk, setRisk] = useState("All");
@@ -460,6 +461,23 @@ function RepositoryInner() {
                           <Download className="w-3 h-3" /> Signed PDF
                         </button>
                       )}
+                      {can(ACTIONS.DELETE) && (
+                        <button
+                          onClick={() => {
+                            if (
+                              confirm(
+                                `Delete ${r.id} — "${r.title}"? This will remove it for all users and cannot be undone.`
+                              )
+                            ) {
+                              onDelete(r);
+                            }
+                          }}
+                          className="btn-ghost !py-1 !px-2 text-xs text-rose-300"
+                          title="Delete document (admin only)"
+                        >
+                          <Trash2 className="w-3 h-3" /> Delete
+                        </button>
+                      )}
                       <button
                         onClick={() =>
                           setMenuOpenId((id) => (id === r.id ? null : r.id))
@@ -797,10 +815,10 @@ function RecordDetailDrawer({
             </div>
           </GlassCard>
 
-          {/* Document Preview — always available when a template is bound, so
-              users can view the live NDA text and download as DOCX/PDF even
-              before a document has been formally generated. */}
-          <DocumentPreviewCard
+          {/* Final NDA Document — full rendered view with embedded signature
+              (when signed) and DOCX/PDF download. Replaces the old separate
+              Preview + Final Signed + Documents list sections. */}
+          <FinalDocumentSection
             record={record}
             busy={busy}
             onDownload={async (format) => {
@@ -809,14 +827,38 @@ function RecordDetailDrawer({
                 toast.error("Template missing", "Cannot generate document.");
                 return;
               }
-              setBusy("preview" + format);
+              setBusy("doc" + format);
               try {
+                // Signed PDF path: always rebuild from the signed-PDF helper
+                // so it carries the embedded counter-signature image.
+                if (format === "pdf" && record.signedAt && record.signedBy) {
+                  const res = await buildSignedPdfBlob(record.id);
+                  if (!res.ok) throw new Error(res.error);
+                  const ok = await downloadBlob(res.blob, res.filename);
+                  if (!ok) throw new Error("Browser blocked the download.");
+                  logAuditEvent({
+                    action: "Signed PDF downloaded",
+                    target: res.filename,
+                    recordId: record.id,
+                  });
+                  toast.success("Signed PDF downloaded", res.filename);
+                  return;
+                }
+
                 const form = {
                   ...(record.form || {}),
                   counterpartyName:
                     record.form?.counterpartyName || record.counterparty,
                   recordTitle:
                     record.form?.recordTitle || record.title,
+                  counterpartySignerName:
+                    record.signedBy ||
+                    record.form?.counterpartySignerName ||
+                    "",
+                  counterpartySignerTitle:
+                    record.signerTitle ||
+                    record.form?.counterpartySignerTitle ||
+                    "",
                 };
                 const values = buildPlaceholderValues(form);
                 const meta = {
@@ -835,9 +877,8 @@ function RecordDetailDrawer({
                 const base = buildFileName({
                   counterparty: record.counterparty || form.counterpartyName,
                 });
-                const filename = `${base}_${safeName(
-                  template.name || "NDA"
-                )}.${format}`;
+                const suffix = record.signedAt ? "SIGNED" : safeName(template.name || "NDA");
+                const filename = `${base}_${suffix}.${format}`;
                 const ok = await downloadBlob(blob, filename);
                 if (!ok) throw new Error("Browser blocked the download.");
                 logAuditEvent({
@@ -857,127 +898,6 @@ function RecordDetailDrawer({
               }
             }}
           />
-
-          {/* Final Signed NDA — prominent download for the counter-signed PDF */}
-          {(() => {
-            const signedDoc = docs.find((d) => d.signed);
-            if (!signedDoc) return null;
-            return (
-              <GlassCard className="!p-5 border-emerald-400/30 bg-emerald-500/5">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-300" />
-                      <h4 className="text-sm font-semibold text-white">
-                        Final Signed NDA
-                      </h4>
-                    </div>
-                    <div className="text-[12px] text-slate-300">
-                      Counter-signed by{" "}
-                      <span className="text-white font-medium">
-                        {signedDoc.signedBy || "—"}
-                      </span>
-                      {signedDoc.signerTitle ? `, ${signedDoc.signerTitle}` : ""}
-                    </div>
-                    <div className="text-[11px] text-slate-400 mt-0.5">
-                      {signedDoc.id} · Signed{" "}
-                      {formatTimestamp(signedDoc.generatedAt)}
-                    </div>
-                    {signedDoc.signatureImage && (
-                      <div className="mt-2 inline-block bg-white rounded border border-emerald-400/30 p-1.5">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={signedDoc.signatureImage}
-                          alt="counterparty signature"
-                          className="max-h-12"
-                        />
-                      </div>
-                    )}
-                  </div>
-                  <button
-                    onClick={() => handleDownload(signedDoc, "pdf")}
-                    disabled={!!busy}
-                    className="inline-flex items-center gap-2 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-100 px-3 py-2 rounded-xl text-xs whitespace-nowrap disabled:opacity-40"
-                    title="Download the signed PDF with the embedded counter-signature"
-                  >
-                    {busy === signedDoc.id + "pdf" ? (
-                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                    ) : (
-                      <Download className="w-3.5 h-3.5" />
-                    )}
-                    Download Signed PDF
-                  </button>
-                </div>
-              </GlassCard>
-            );
-          })()}
-
-          {/* Documents section */}
-          <div>
-            <div className="flex items-center justify-between mb-3">
-              <h4 className="text-sm font-semibold text-white flex items-center gap-2">
-                <FileText className="w-4 h-4 text-cyanglow" /> Documents
-              </h4>
-              <span className="text-[11px] text-slate-400">
-                {docs.length} generated
-              </span>
-            </div>
-            {docs.length === 0 ? (
-              <GlassCard className="!p-5 text-center text-xs text-slate-400">
-                No final NDA documents have been generated for this record yet.
-              </GlassCard>
-            ) : (
-              <div className="space-y-2">
-                {docs.map((d) => (
-                  <GlassCard key={d.id} className="!p-4">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="min-w-0">
-                        <div className="text-sm font-semibold text-white truncate">
-                          {d.templateName}{" "}
-                          <span className="text-slate-400 font-normal">
-                            {d.templateVersion}
-                          </span>
-                        </div>
-                        <div className="text-[11px] text-slate-400 mt-0.5">
-                          {d.id} · {formatTimestamp(d.generatedAt)} · {d.generatedBy}
-                        </div>
-                        <div className="text-[11px] text-slate-500 mt-0.5">
-                          {d.placeholdersFilled}/{d.placeholders} placeholders filled
-                          · Counterparty: {d.counterparty}
-                        </div>
-                      </div>
-                      <div className="flex flex-col gap-1.5">
-                        <button
-                          onClick={() => handleDownload(d, "docx")}
-                          disabled={!!busy}
-                          className="btn-ghost text-xs !py-1 !px-2 disabled:opacity-40"
-                        >
-                          {busy === d.id + "docx" ? (
-                            <Loader2 className="w-3 h-3 animate-spin" />
-                          ) : (
-                            <FileType2 className="w-3 h-3" />
-                          )}
-                          DOCX
-                        </button>
-                        <button
-                          onClick={() => handleDownload(d, "pdf")}
-                          disabled={!!busy}
-                          className="btn-ghost text-xs !py-1 !px-2 disabled:opacity-40"
-                        >
-                          {busy === d.id + "pdf" ? (
-                            <Loader2 className="w-3 h-3 animate-spin" />
-                          ) : (
-                            <Download className="w-3 h-3" />
-                          )}
-                          PDF
-                        </button>
-                      </div>
-                    </div>
-                  </GlassCard>
-                ))}
-              </div>
-            )}
-          </div>
 
           {/* Audit trail for this record */}
           <DocumentAuditTrail
@@ -1008,15 +928,13 @@ function Meta({ icon: Icon, label, value }) {
   );
 }
 
-function safeName(s = "") {
-  return s.replace(/[^A-Za-z0-9]+/g, "_").replace(/^_|_$/g, "");
-}
-
-// Inline document preview — renders the bound template with the record's
-// form values substituted, and exposes DOCX + PDF download buttons. Works
-// for any record that has a templateId, even before any document has been
-// formally "generated" into the docs store.
-function DocumentPreviewCard({ record, busy, onDownload }) {
+// Final NDA Document section — renders the full document inline (with all
+// placeholders substituted and, when signed, the counterparty signature
+// block embedded) and exposes DOCX + PDF downloads. The PDF download
+// reuses the signed-PDF helper when the record has been counter-signed so
+// the downloaded file always contains the embedded signature image.
+function FinalDocumentSection({ record, busy, onDownload }) {
+  const [showPreview, setShowPreview] = useState(false);
   const template = getTemplateById(record.templateId);
   const values = useMemo(() => {
     const form = {
@@ -1024,21 +942,27 @@ function DocumentPreviewCard({ record, busy, onDownload }) {
       counterpartyName:
         record.form?.counterpartyName || record.counterparty,
       recordTitle: record.form?.recordTitle || record.title,
+      counterpartySignerName:
+        record.signedBy || record.form?.counterpartySignerName || "",
+      counterpartySignerTitle:
+        record.signerTitle || record.form?.counterpartySignerTitle || "",
     };
     return buildPlaceholderValues(form);
   }, [record]);
+
+  const isSigned = !!(record.signedAt && record.signedBy);
 
   if (!template) {
     return (
       <GlassCard className="!p-5">
         <div className="flex items-center justify-between mb-3">
           <h4 className="text-sm font-semibold text-white flex items-center gap-2">
-            <FileText className="w-4 h-4 text-cyanglow" /> Document Preview
+            <FileText className="w-4 h-4 text-cyanglow" /> Document
           </h4>
         </div>
         <div className="text-xs text-slate-400">
           No template is bound to this record. Open the intake flow to
-          assign a template before previewing or downloading the NDA.
+          assign a template before generating the NDA.
         </div>
       </GlassCard>
     );
@@ -1047,25 +971,60 @@ function DocumentPreviewCard({ record, busy, onDownload }) {
   const blocks = Array.isArray(template.content) ? template.content : [];
 
   return (
-    <GlassCard className="!p-5">
+    <GlassCard
+      className={
+        "!p-5 " +
+        (isSigned ? "border-emerald-400/30 bg-emerald-500/5" : "")
+      }
+    >
       <div className="flex items-center justify-between mb-3 gap-3 flex-wrap">
-        <div>
-          <h4 className="text-sm font-semibold text-white flex items-center gap-2">
-            <FileText className="w-4 h-4 text-cyanglow" /> Document Preview
-          </h4>
+        <div className="min-w-0">
+          <div className="flex items-center gap-2">
+            {isSigned ? (
+              <CheckCircle2 className="w-4 h-4 text-emerald-300" />
+            ) : (
+              <FileText className="w-4 h-4 text-cyanglow" />
+            )}
+            <h4 className="text-sm font-semibold text-white">
+              {isSigned ? "Final Signed NDA" : "NDA Document"}
+            </h4>
+          </div>
           <div className="text-[11px] text-slate-400 mt-0.5">
             {template.name}
             {template.version ? ` · ${template.version}` : ""}
+            {isSigned ? (
+              <>
+                {" · Counter-signed by "}
+                <span className="text-white font-medium">
+                  {record.signedBy}
+                </span>
+                {record.signerTitle ? `, ${record.signerTitle}` : ""}
+                {" · "}
+                {formatTimestamp(record.signedAt)}
+              </>
+            ) : null}
           </div>
         </div>
         <div className="flex gap-2">
+          <button
+            onClick={() => setShowPreview((v) => !v)}
+            className="btn-ghost text-xs"
+            title={showPreview ? "Hide document preview" : "Preview the full document inline"}
+          >
+            {showPreview ? (
+              <EyeOff className="w-3.5 h-3.5" />
+            ) : (
+              <Eye className="w-3.5 h-3.5" />
+            )}
+            {showPreview ? "Hide Preview" : "Preview"}
+          </button>
           <button
             onClick={() => onDownload("docx")}
             disabled={!!busy}
             className="btn-ghost text-xs disabled:opacity-40"
             title="Download as Microsoft Word (.docx)"
           >
-            {busy === "previewdocx" ? (
+            {busy === "docdocx" ? (
               <Loader2 className="w-3.5 h-3.5 animate-spin" />
             ) : (
               <FileType2 className="w-3.5 h-3.5" />
@@ -1075,23 +1034,32 @@ function DocumentPreviewCard({ record, busy, onDownload }) {
           <button
             onClick={() => onDownload("pdf")}
             disabled={!!busy}
-            className="btn-ghost text-xs disabled:opacity-40"
-            title="Download as PDF"
+            className={
+              "inline-flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs whitespace-nowrap disabled:opacity-40 " +
+              (isSigned
+                ? "bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-100"
+                : "btn-ghost")
+            }
+            title={
+              isSigned
+                ? "Download the signed PDF with the embedded counter-signature"
+                : "Download as PDF"
+            }
           >
-            {busy === "previewpdf" ? (
+            {busy === "docpdf" ? (
               <Loader2 className="w-3.5 h-3.5 animate-spin" />
             ) : (
               <Download className="w-3.5 h-3.5" />
             )}
-            Download PDF
+            {isSigned ? "Download Signed PDF" : "Download PDF"}
           </button>
         </div>
       </div>
 
-      <div className="max-h-[480px] overflow-auto rounded-lg border border-white/10 bg-white text-slate-900 p-6 text-[13px] leading-relaxed">
+      <div className={"max-h-[640px] overflow-auto rounded-lg border border-white/10 bg-white text-slate-900 p-6 text-[13px] leading-relaxed shadow-inner " + (showPreview ? "" : "hidden")}>
         {blocks.length === 0 ? (
           <div className="text-slate-500 text-xs italic">
-            This template has no preview content.
+            This template has no content.
           </div>
         ) : (
           blocks.map((block, idx) => {
@@ -1126,7 +1094,6 @@ function DocumentPreviewCard({ record, busy, onDownload }) {
                 </h3>
               );
             }
-            // paragraph (default)
             return (
               <p key={idx} className="mb-2 whitespace-pre-wrap">
                 {text}
@@ -1135,34 +1102,58 @@ function DocumentPreviewCard({ record, busy, onDownload }) {
           })
         )}
 
-        {/* Signature block (visible if signed) */}
-        {record.signedBy && (
-          <div className="mt-6 pt-4 border-t border-slate-300">
-            <div className="text-[11px] uppercase tracking-wider text-slate-500 mb-2">
-              Counterparty Signature
+        {/* Signature block — shown only when counter-signed */}
+        {isSigned && (
+          <div className="mt-8 pt-5 border-t-2 border-slate-300">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-2">
+                  Counterparty Signature
+                </div>
+                {record.signatureImage && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={record.signatureImage}
+                    alt="counterparty signature"
+                    className="max-h-16 mb-1"
+                  />
+                )}
+                <div className="border-b border-slate-400 mb-1" />
+                <div className="text-[12px] font-semibold">
+                  {record.signedBy}
+                </div>
+                {record.signerTitle && (
+                  <div className="text-[11px] text-slate-600">
+                    {record.signerTitle}
+                  </div>
+                )}
+                <div className="text-[11px] text-slate-500 mt-0.5">
+                  Date: {formatTimestamp(record.signedAt)}
+                </div>
+              </div>
+              <div>
+                <div className="text-[10px] uppercase tracking-wider text-slate-500 mb-2">
+                  Company Signature
+                </div>
+                <div className="h-16" />
+                <div className="border-b border-slate-400 mb-1" />
+                <div className="text-[12px] font-semibold">
+                  {record.form?.companySignerName || "—"}
+                </div>
+                {record.form?.companySignerTitle && (
+                  <div className="text-[11px] text-slate-600">
+                    {record.form.companySignerTitle}
+                  </div>
+                )}
+              </div>
             </div>
-            {record.signatureImage && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={record.signatureImage}
-                alt="signature"
-                className="max-h-16 mb-1"
-              />
-            )}
-            <div className="text-[12px] font-semibold">{record.signedBy}</div>
-            {record.signerTitle && (
-              <div className="text-[11px] text-slate-600">
-                {record.signerTitle}
-              </div>
-            )}
-            {record.signedAt && (
-              <div className="text-[11px] text-slate-500 mt-0.5">
-                Signed {formatTimestamp(record.signedAt)}
-              </div>
-            )}
           </div>
         )}
       </div>
     </GlassCard>
   );
+}
+
+function safeName(s = "") {
+  return s.replace(/[^A-Za-z0-9]+/g, "_").replace(/^_|_$/g, "");
 }
