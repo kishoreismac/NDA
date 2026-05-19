@@ -37,6 +37,11 @@ import {
 import { AUTO_ASSIGNMENT_RULES } from "@/lib/autoAssignmentRules";
 import { useCurrentRole, ACTIONS } from "@/lib/permissions";
 import {
+  computeEndDate,
+  computeTermFromDates,
+  TERM_OPTIONS,
+} from "@/lib/dateMath";
+import {
   Check,
   ChevronLeft,
   ChevronRight,
@@ -74,7 +79,7 @@ const piiQuestions = riskQuestions.filter((q) =>
   ["pii", "employeeData", "customerData", "largeData", "crossBorder"].includes(q.id)
 );
 
-function Stepper({ current, onJump }) {
+function Stepper({ current, onJump, invalidSteps }) {
   return (
     <div className="glass p-4 mb-6 overflow-x-auto">
       <ol className="flex items-center gap-1 min-w-max">
@@ -82,6 +87,7 @@ function Stepper({ current, onJump }) {
           const Icon = s.icon;
           const done = current > s.id;
           const active = current === s.id;
+          const invalid = invalidSteps?.has?.(s.id);
           return (
             <li key={s.id} className="flex items-center">
               <button
@@ -89,7 +95,9 @@ function Stepper({ current, onJump }) {
                 onClick={() => onJump?.(s.id)}
                 title={`Go to ${s.title}`}
                 className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm border transition cursor-pointer hover:border-white/30 hover:text-white ${
-                  active
+                  invalid
+                    ? "bg-rose-500/10 border-rose-400/60 text-rose-200 shadow-[0_0_0_1px_rgba(244,63,94,0.35)]"
+                    : active
                     ? "bg-grad-soft border-white/15 text-white shadow-glow"
                     : done
                     ? "bg-emerald-500/10 border-emerald-400/30 text-emerald-300"
@@ -98,10 +106,16 @@ function Stepper({ current, onJump }) {
               >
                 <span
                   className={`w-6 h-6 rounded-lg grid place-items-center text-[11px] font-bold ${
-                    active ? "bg-grad-primary text-white" : done ? "bg-emerald-500/20" : "bg-white/10"
+                    invalid
+                      ? "bg-rose-500/30 text-rose-100"
+                      : active
+                      ? "bg-grad-primary text-white"
+                      : done
+                      ? "bg-emerald-500/20"
+                      : "bg-white/10"
                   }`}
                 >
-                  {done ? <Check className="w-3.5 h-3.5" /> : s.id}
+                  {done && !invalid ? <Check className="w-3.5 h-3.5" /> : s.id}
                 </span>
                 <Icon className="w-4 h-4 opacity-80" />
                 <span className="hidden md:inline whitespace-nowrap">{s.title}</span>
@@ -115,6 +129,47 @@ function Stepper({ current, onJump }) {
       </ol>
     </div>
   );
+}
+
+// Label with a red asterisk to mark a required field.
+function RequiredLabel({ children }) {
+  return (
+    <label className="label">
+      {children} <span className="text-rose-400">*</span>
+    </label>
+  );
+}
+
+// Required fields per intake step. Used by next() to validate before
+// advancing and to highlight the relevant Stepper tab in red.
+const REQUIRED_BY_STEP = {
+  1: [
+    { key: "counterpartyName", label: "Legal name" },
+    { key: "counterpartyAddress", label: "Registered address" },
+    { key: "counterpartyEmail", label: "Contact email" },
+    { key: "counterpartySignerName", label: "Authorized signer name" },
+    { key: "effectiveDate", label: "Start Date" },
+  ],
+  2: [
+    { key: "recordTitle", label: "Engagement / project title" },
+    { key: "purpose", label: "Purpose of disclosure" },
+    { key: "companyName", label: "Company name" },
+    { key: "companyAddress", label: "Company address" },
+    { key: "companySignerName", label: "Authorized signer (Company)" },
+  ],
+  3: [
+    { key: "templateId", label: "NDA Template" },
+    { key: "governingLaw", label: "Governing law" },
+    { key: "jurisdiction", label: "Jurisdiction" },
+  ],
+};
+
+function missingRequired(form, stepId) {
+  const reqs = REQUIRED_BY_STEP[stepId] || [];
+  return reqs.filter((r) => {
+    const v = form?.[r.key];
+    return v == null || String(v).trim() === "";
+  });
 }
 
 function Toggle({ checked, onChange }) {
@@ -224,6 +279,10 @@ function IntakeInner() {
   const [answers, setAnswers] = useState({});
   const [previewMode, setPreviewMode] = useState("raw"); // raw | filled
   const [hasLoggedSelection, setHasLoggedSelection] = useState(false);
+  // Set of step IDs that failed validation on Continue (rendered red).
+  const [invalidSteps, setInvalidSteps] = useState(() => new Set());
+  // Field keys (per step) currently missing — used to highlight inputs.
+  const [missingFields, setMissingFields] = useState(() => new Set());
 
   // Load existing record into form when in edit/renew mode
   useEffect(() => {
@@ -292,8 +351,87 @@ function IntakeInner() {
     setHasLoggedSelection(true);
   }, [template, hasLoggedSelection, recordId]);
 
-  const next = () => setStep((s) => Math.min(7, s + 1));
+  const next = () => {
+    const missing = missingRequired(form, step);
+    if (missing.length > 0) {
+      setInvalidSteps((prev) => {
+        const n = new Set(prev);
+        n.add(step);
+        return n;
+      });
+      setMissingFields(new Set(missing.map((m) => m.key)));
+      toast.warning(
+        "Missing required fields",
+        missing.map((m) => m.label).join(", ")
+      );
+      return;
+    }
+    // clear invalid marker for this step on success
+    setInvalidSteps((prev) => {
+      if (!prev.has(step)) return prev;
+      const n = new Set(prev);
+      n.delete(step);
+      return n;
+    });
+    setMissingFields(new Set());
+    setStep((s) => Math.min(7, s + 1));
+  };
   const back = () => setStep((s) => Math.max(1, s - 1));
+
+  // Update a single form field and, if it was previously flagged as missing,
+  // clear the marker (and the step's invalid badge if no longer missing).
+  const updateField = (key, value) => {
+    setForm((prev) => ({ ...prev, [key]: value }));
+    if (missingFields.has(key) && String(value ?? "").trim() !== "") {
+      setMissingFields((prev) => {
+        const n = new Set(prev);
+        n.delete(key);
+        return n;
+      });
+    }
+  };
+
+  // Bidirectional date sync helpers used by Step 1 / Step 2 inputs.
+  const handleStartChange = (val) => {
+    setForm((prev) => {
+      const next = { ...prev, effectiveDate: val };
+      // If we have a term, recompute end from new start.
+      if (val && prev.term) {
+        const newEnd = computeEndDate(val, prev.term);
+        if (newEnd) next.endDate = newEnd;
+      }
+      return next;
+    });
+    if (missingFields.has("effectiveDate") && val) {
+      setMissingFields((prev) => {
+        const n = new Set(prev);
+        n.delete("effectiveDate");
+        return n;
+      });
+    }
+  };
+
+  const handleEndChange = (val) => {
+    setForm((prev) => {
+      const next = { ...prev, endDate: val };
+      if (val && prev.effectiveDate) {
+        const newTerm = computeTermFromDates(prev.effectiveDate, val);
+        if (newTerm) next.term = newTerm;
+      }
+      return next;
+    });
+  };
+
+  const handleTermChange = (val) => {
+    setForm((prev) => {
+      const next = { ...prev, term: val };
+      if (prev.effectiveDate && val) {
+        const newEnd = computeEndDate(prev.effectiveDate, val);
+        if (newEnd) next.endDate = newEnd;
+      }
+      return next;
+    });
+  };
 
   if (role?.id === "exec") {
     return (
@@ -405,7 +543,7 @@ function IntakeInner() {
         </div>
       )}
 
-      <Stepper current={step} onJump={(id) => setStep(id)} />
+      <Stepper current={step} onJump={(id) => setStep(id)} invalidSteps={invalidSteps} />
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="xl:col-span-2 space-y-6">
@@ -430,12 +568,12 @@ function IntakeInner() {
                   </select>
                 </div>
                 <div>
-                  <label className="label">Legal name</label>
+                  <RequiredLabel>Legal name</RequiredLabel>
                   <input
-                    className="input"
+                    className={`input ${missingFields.has("counterpartyName") ? "border-rose-400/70" : ""}`}
                     placeholder="Acme Robotics Inc."
                     value={form.counterpartyName}
-                    onChange={(e) => setForm({ ...form, counterpartyName: e.target.value })}
+                    onChange={(e) => updateField("counterpartyName", e.target.value)}
                   />
                 </div>
                 <div>
@@ -447,12 +585,12 @@ function IntakeInner() {
                   />
                 </div>
                 <div className="sm:col-span-2">
-                  <label className="label">Registered address</label>
+                  <RequiredLabel>Registered address</RequiredLabel>
                   <input
-                    className="input"
+                    className={`input ${missingFields.has("counterpartyAddress") ? "border-rose-400/70" : ""}`}
                     placeholder="500 Industrial Way, San Jose, CA 95110, USA"
                     value={form.counterpartyAddress}
-                    onChange={(e) => setForm({ ...form, counterpartyAddress: e.target.value })}
+                    onChange={(e) => updateField("counterpartyAddress", e.target.value)}
                   />
                 </div>
                 <div>
@@ -465,22 +603,22 @@ function IntakeInner() {
                   />
                 </div>
                 <div>
-                  <label className="label">Contact email</label>
+                  <RequiredLabel>Contact email</RequiredLabel>
                   <input
-                    className="input"
+                    className={`input ${missingFields.has("counterpartyEmail") ? "border-rose-400/70" : ""}`}
                     placeholder="jane.doe@acme.com"
                     value={form.counterpartyEmail}
-                    onChange={(e) => setForm({ ...form, counterpartyEmail: e.target.value })}
+                    onChange={(e) => updateField("counterpartyEmail", e.target.value)}
                   />
                 </div>
                 <div>
-                  <label className="label">Authorized signer name</label>
+                  <RequiredLabel>Authorized signer name</RequiredLabel>
                   <input
-                    className="input"
+                    className={`input ${missingFields.has("counterpartySignerName") ? "border-rose-400/70" : ""}`}
                     placeholder="Jane Doe"
                     value={form.counterpartySignerName}
                     onChange={(e) =>
-                      setForm({ ...form, counterpartySignerName: e.target.value })
+                      updateField("counterpartySignerName", e.target.value)
                     }
                   />
                 </div>
@@ -499,14 +637,17 @@ function IntakeInner() {
 
               <div className="mt-6 pt-5 border-t border-white/10">
                 <h4 className="font-semibold text-white text-sm mb-3">Agreement Period</h4>
+                <p className="text-[11px] text-slate-500 mb-3">
+                  Change any two of Start / End / Term and the third updates automatically.
+                </p>
                 <div className="grid sm:grid-cols-3 gap-4">
                   <div>
-                    <label className="label">Start Date</label>
+                    <RequiredLabel>Start Date</RequiredLabel>
                     <input
                       type="date"
-                      className="input"
+                      className={`input ${missingFields.has("effectiveDate") ? "border-rose-400/70" : ""}`}
                       value={form.effectiveDate}
-                      onChange={(e) => setForm({ ...form, effectiveDate: e.target.value })}
+                      onChange={(e) => handleStartChange(e.target.value)}
                     />
                   </div>
                   <div>
@@ -516,7 +657,7 @@ function IntakeInner() {
                       className="input"
                       value={form.endDate}
                       min={form.effectiveDate || undefined}
-                      onChange={(e) => setForm({ ...form, endDate: e.target.value })}
+                      onChange={(e) => handleEndChange(e.target.value)}
                     />
                   </div>
                   <div>
@@ -524,12 +665,11 @@ function IntakeInner() {
                     <select
                       className="input"
                       value={form.term}
-                      onChange={(e) => setForm({ ...form, term: e.target.value })}
+                      onChange={(e) => handleTermChange(e.target.value)}
                     >
-                      <option>one (1) year</option>
-                      <option>two (2) years</option>
-                      <option>three (3) years</option>
-                      <option>five (5) years</option>
+                      {TERM_OPTIONS.map((t) => (
+                        <option key={t.label}>{t.label}</option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -543,12 +683,12 @@ function IntakeInner() {
               <h3 className="font-semibold text-white text-lg mb-4">Record Details</h3>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="sm:col-span-2">
-                  <label className="label">Engagement / project title</label>
+                  <RequiredLabel>Engagement / project title</RequiredLabel>
                   <input
-                    className="input"
+                    className={`input ${missingFields.has("recordTitle") ? "border-rose-400/70" : ""}`}
                     placeholder="Joint R&D — autonomous platform"
                     value={form.recordTitle}
-                    onChange={(e) => setForm({ ...form, recordTitle: e.target.value })}
+                    onChange={(e) => updateField("recordTitle", e.target.value)}
                   />
                 </div>
                 <div>
@@ -568,13 +708,13 @@ function IntakeInner() {
                   />
                 </div>
                 <div className="sm:col-span-2">
-                  <label className="label">Purpose of disclosure</label>
+                  <RequiredLabel>Purpose of disclosure</RequiredLabel>
                   <textarea
                     rows={3}
-                    className="input"
+                    className={`input ${missingFields.has("purpose") ? "border-rose-400/70" : ""}`}
                     placeholder="Briefly describe what will be shared and why..."
                     value={form.purpose}
-                    onChange={(e) => setForm({ ...form, purpose: e.target.value })}
+                    onChange={(e) => updateField("purpose", e.target.value)}
                   />
                 </div>
                 <div className="sm:col-span-2">
@@ -595,7 +735,7 @@ function IntakeInner() {
                     type="date"
                     className="input"
                     value={form.effectiveDate}
-                    onChange={(e) => setForm({ ...form, effectiveDate: e.target.value })}
+                    onChange={(e) => handleStartChange(e.target.value)}
                   />
                 </div>
                 <div>
@@ -605,7 +745,7 @@ function IntakeInner() {
                     className="input"
                     value={form.endDate}
                     min={form.effectiveDate || undefined}
-                    onChange={(e) => setForm({ ...form, endDate: e.target.value })}
+                    onChange={(e) => handleEndChange(e.target.value)}
                   />
                 </div>
                 <div>
@@ -613,12 +753,11 @@ function IntakeInner() {
                   <select
                     className="input"
                     value={form.term}
-                    onChange={(e) => setForm({ ...form, term: e.target.value })}
+                    onChange={(e) => handleTermChange(e.target.value)}
                   >
-                    <option>one (1) year</option>
-                    <option>two (2) years</option>
-                    <option>three (3) years</option>
-                    <option>five (5) years</option>
+                    {TERM_OPTIONS.map((t) => (
+                      <option key={t.label}>{t.label}</option>
+                    ))}
                   </select>
                 </div>
                 <div>
@@ -640,28 +779,28 @@ function IntakeInner() {
                 <h4 className="font-semibold text-white text-sm mb-3">Company / Disclosing Party</h4>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="label">Company name</label>
+                    <RequiredLabel>Company name</RequiredLabel>
                     <input
-                      className="input"
+                      className={`input ${missingFields.has("companyName") ? "border-rose-400/70" : ""}`}
                       value={form.companyName}
-                      onChange={(e) => setForm({ ...form, companyName: e.target.value })}
+                      onChange={(e) => updateField("companyName", e.target.value)}
                     />
                   </div>
                   <div>
-                    <label className="label">Company address</label>
+                    <RequiredLabel>Company address</RequiredLabel>
                     <input
-                      className="input"
+                      className={`input ${missingFields.has("companyAddress") ? "border-rose-400/70" : ""}`}
                       value={form.companyAddress}
-                      onChange={(e) => setForm({ ...form, companyAddress: e.target.value })}
+                      onChange={(e) => updateField("companyAddress", e.target.value)}
                     />
                   </div>
                   <div>
-                    <label className="label">Authorized signer (Company)</label>
+                    <RequiredLabel>Authorized signer (Company)</RequiredLabel>
                     <input
-                      className="input"
+                      className={`input ${missingFields.has("companySignerName") ? "border-rose-400/70" : ""}`}
                       value={form.companySignerName}
                       onChange={(e) =>
-                        setForm({ ...form, companySignerName: e.target.value })
+                        updateField("companySignerName", e.target.value)
                       }
                     />
                   </div>
@@ -732,9 +871,9 @@ function IntakeInner() {
 
                 <div className="grid sm:grid-cols-2 gap-4 mt-5 pt-5 border-t border-white/10">
                   <div>
-                    <label className="label">Governing law</label>
+                    <RequiredLabel>Governing law</RequiredLabel>
                     <select
-                      className="input"
+                      className={`input ${missingFields.has("governingLaw") ? "border-rose-400/70" : ""}`}
                       value={form.governingLaw}
                       onChange={(e) =>
                         setForm({
@@ -753,12 +892,12 @@ function IntakeInner() {
                     </select>
                   </div>
                   <div>
-                    <label className="label">Jurisdiction</label>
+                    <RequiredLabel>Jurisdiction</RequiredLabel>
                     <input
-                      className="input"
+                      className={`input ${missingFields.has("jurisdiction") ? "border-rose-400/70" : ""}`}
                       value={form.jurisdiction}
                       onChange={(e) =>
-                        setForm({ ...form, jurisdiction: e.target.value })
+                        updateField("jurisdiction", e.target.value)
                       }
                     />
                   </div>

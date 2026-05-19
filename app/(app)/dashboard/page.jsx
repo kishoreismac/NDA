@@ -7,40 +7,32 @@ import { GlassCard, SectionTitle, StatusBadge, RiskBadge } from "@/components/ui
 import {
   getRequests,
   getStatusCounts,
-  getTaskCounts,
   getRecordTypeCounts,
   getRequestsByStatus,
   getRequestsByRecordType,
+  formatExpirationDate,
+  isExpiringSoon,
+  isExpired,
   RECORD_TYPES,
   STATUSES,
 } from "@/lib/requestStore";
+import { useCurrentRole } from "@/lib/permissions";
 import {
   FilePlus2,
   Database,
-  ListChecks,
-  Calendar,
-  Search,
   BarChart3,
   RefreshCw,
-  CheckCircle2,
-  FileSignature,
-  AlertTriangle,
-  MessagesSquare,
-  Clock,
   X,
   ExternalLink,
   ChevronRight,
+  Bot,
 } from "lucide-react";
-import { useCurrentRole } from "@/lib/permissions";
 
-// CTA tiles in reference style
+// CTA tiles — "Request a New Contract" routes to a full-page picker.
 const CTAS = [
-  { href: "/requests/new", label: "Request a Contract", icon: FilePlus2, gradient: "from-violet-500 to-fuchsia-500" },
-  { href: "/templates", label: "Create from Template", icon: FileSignature, gradient: "from-cyan-500 to-blue-500" },
+  { href: "/requests/new-contract", label: "Request a New Contract", icon: FilePlus2, gradient: "from-violet-500 to-fuchsia-500" },
   { href: "/repository", label: "Repository", icon: Database, gradient: "from-emerald-500 to-teal-500" },
-  { href: "/repository?focus=search", label: "Search Contracts", icon: Search, gradient: "from-amber-500 to-orange-500" },
-  { href: "/tasks", label: "Tasks", icon: ListChecks, gradient: "from-rose-500 to-pink-500" },
-  { href: "/calendar", label: "Calendar", icon: Calendar, gradient: "from-indigo-500 to-violet-500" },
+  { href: "/ai-tools", label: "AI Search", icon: Bot, gradient: "from-cyan-500 to-blue-500" },
   { href: "/reports", label: "Reports", icon: BarChart3, gradient: "from-sky-500 to-cyan-500" },
   { href: "/repository?filter=renewals", label: "Renewals", icon: RefreshCw, gradient: "from-fuchsia-500 to-pink-500" },
 ];
@@ -81,10 +73,6 @@ export default function DashboardPage() {
   const liveRequests = useMemo(() => (mounted ? getRequests() : []), [mounted]);
   const statusCounts = useMemo(() => (mounted ? getStatusCounts() : {}), [mounted]);
   const recordTypeCounts = useMemo(() => (mounted ? getRecordTypeCounts() : {}), [mounted]);
-  const taskCounts = useMemo(
-    () => (mounted ? getTaskCounts() : { total: 0, open: 0, overdue: 0, completed: 0 }),
-    [mounted]
-  );
 
   const totalRecords = liveRequests.length;
   const activeCount =
@@ -119,21 +107,10 @@ export default function DashboardPage() {
       filter: "status=Signed",
     },
     {
-      label: "Priority Requests",
-      value: liveRequests.filter((r) => r.risk === "High").length,
-      filter: "risk=High",
-    },
-    {
-      label: "Today Tasks",
-      value: taskCounts.overdue,
+      label: "Renewals (30d)",
+      value: liveRequests.filter((r) => isExpiringSoon(r, 30)).length,
       filter: "",
-      to: "/tasks?filter=today",
-    },
-    {
-      label: "Week Tasks",
-      value: taskCounts.open,
-      filter: "",
-      to: "/tasks?filter=week",
+      to: "/repository?filter=renewals",
     },
   ];
 
@@ -153,7 +130,7 @@ export default function DashboardPage() {
         subtitle="Welcome back, Sara. Here's the status across all your contract types today."
         actions={
           role?.id !== "exec" ? (
-            <Link href="/requests/new" className="btn-primary">
+            <Link href="/requests/new-contract" className="btn-primary">
               <FilePlus2 className="w-4 h-4" /> New Contract Request
             </Link>
           ) : null
@@ -163,7 +140,7 @@ export default function DashboardPage() {
       {/* Call to Action */}
       <div className="mb-6">
         <div className="text-sm font-semibold text-white mb-3">Call to Action</div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           {CTAS.map((c) => {
             const Icon = c.icon;
             return (
@@ -203,7 +180,7 @@ export default function DashboardPage() {
             ))}
           </div>
         </div>
-        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-3">
           {summary.map((s) => (
             <button
               key={s.label}
@@ -347,6 +324,7 @@ export default function DashboardPage() {
                 <th className="px-2 py-2 font-medium">Risk</th>
                 <th className="px-2 py-2 font-medium">Status</th>
                 <th className="px-2 py-2 font-medium">Owner</th>
+                <th className="px-2 py-2 font-medium">Expires</th>
               </tr>
             </thead>
             <tbody>
@@ -370,6 +348,9 @@ export default function DashboardPage() {
                     <StatusBadge status={r.status} />
                   </td>
                   <td className="px-2 py-3 text-slate-300">{r.owner}</td>
+                  <td className="px-2 py-3 text-xs">
+                    <ExpiresCell record={r} />
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -403,6 +384,34 @@ export default function DashboardPage() {
     </>
   );
 }
+
+function ExpiresCell({ record }) {
+  const label = formatExpirationDate(record);
+  if (label === "—") return <span className="text-slate-500">—</span>;
+  const expired = isExpired(record);
+  const soon = isExpiringSoon(record, 30);
+  const cls = expired
+    ? "text-rose-300"
+    : soon
+    ? "text-amber-300"
+    : "text-slate-300";
+  return (
+    <span className={cls + " whitespace-nowrap"}>
+      {label}
+      {expired && (
+        <span className="ml-1 px-1.5 py-0.5 rounded bg-rose-500/15 border border-rose-400/30 text-[10px] uppercase">
+          Expired
+        </span>
+      )}
+      {!expired && soon && (
+        <span className="ml-1 px-1.5 py-0.5 rounded bg-amber-500/15 border border-amber-400/30 text-[10px] uppercase">
+          Soon
+        </span>
+      )}
+    </span>
+  );
+}
+
 
 function Donut({ entries, total, colors }) {
   const size = 168;

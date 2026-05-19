@@ -21,15 +21,13 @@ import {
 
 const nav = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/requests/new", label: "New Contract Request", icon: FilePlus2 },
   { href: "/legal-queue", label: "Legal Review Queue", icon: Scale },
-  { href: "/tasks", label: "Tasks", icon: ListChecks },
   { href: "/calendar", label: "Calendar", icon: Calendar },
   { href: "/repository", label: "Repository", icon: Database },
   { href: "/ai-tools", label: "AI Search", icon: Bot },
   { href: "/reports", label: "Reports", icon: BarChart3 },
-  { href: "/parties", label: "Parties", icon: Users },
-  { href: "/rules", label: "Rules", icon: GitBranch },
+  { href: "/parties", label: "Parties", icon: Users, adminOnly: true },
+  { href: "/rules", label: "Rules", icon: GitBranch, adminOnly: true },
   { href: "/templates", label: "Templates", icon: FileText },
   { href: "/admin", label: "Admin Settings", icon: Settings },
 ];
@@ -44,8 +42,9 @@ export default function Sidebar() {
     return () => window.removeEventListener("clm:role-changed", sync);
   }, []);
   // Executive Viewer is read-only — hide write-action entry points.
+  // Parties and Rules are visible to admin only.
   const visibleNav = nav.filter((item) => {
-    if (roleId === "exec" && item.href === "/requests/new") return false;
+    if (item.adminOnly && roleId !== "admin") return false;
     return true;
   });
   return (

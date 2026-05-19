@@ -44,6 +44,9 @@ import {
   deleteRequest,
   upsertRequest,
   hydrateFormFromRecord,
+  formatExpirationDate,
+  isExpiringSoon,
+  isExpired,
 } from "@/lib/requestStore";
 import { exportToCsv } from "@/lib/csvExport";
 import { useCurrentRole, ACTIONS } from "@/lib/permissions";
@@ -138,10 +141,12 @@ function RepositoryInner() {
     "Awaiting Signature",
   ];
   const isActiveFilter = params.get("status") === "Active";
+  const isRenewalsFilter = params.get("filter") === "renewals";
 
   const filtered = useMemo(() => {
     return allRecords.filter((r) => {
       if (isActiveFilter && !ACTIVE_STATUSES.includes(r.status)) return false;
+      if (isRenewalsFilter && !isExpiringSoon(r, 30) && !isExpired(r)) return false;
       if (type !== "All" && r.type !== type) return false;
       if (risk !== "All" && r.risk !== risk) return false;
       if (status !== "All" && r.status !== status) return false;
@@ -152,7 +157,7 @@ function RepositoryInner() {
       }
       return true;
     });
-  }, [allRecords, q, type, risk, status, isActiveFilter]);
+  }, [allRecords, q, type, risk, status, isActiveFilter, isRenewalsFilter]);
 
   const openRecord = allRecords.find((r) => r.id === openId);
 
@@ -381,10 +386,22 @@ function RepositoryInner() {
             ))}
           </select>
         </div>
-        <div className="text-xs text-slate-400 mt-3 flex items-center gap-2">
+        <div className="text-xs text-slate-400 mt-3 flex items-center gap-2 flex-wrap">
           <Filter className="w-3 h-3" /> Showing{" "}
           <span className="text-white font-semibold">{filtered.length}</span> of{" "}
           {allRecords.length} records
+          {isRenewalsFilter && (
+            <span className="ml-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-fuchsia-500/15 border border-fuchsia-400/30 text-fuchsia-100 text-[10px] uppercase tracking-wider">
+              <RefreshCw className="w-3 h-3" /> Renewals · expiring in 30 days or already expired
+              <button
+                type="button"
+                onClick={() => router.push("/repository")}
+                className="ml-2 underline hover:text-white"
+              >
+                Clear
+              </button>
+            </span>
+          )}
         </div>
       </GlassCard>
 
@@ -399,6 +416,7 @@ function RepositoryInner() {
                 <th className="px-4 py-3 font-medium">Risk</th>
                 <th className="px-4 py-3 font-medium">Status</th>
                 <th className="px-4 py-3 font-medium">Owner</th>
+                <th className="px-4 py-3 font-medium">Expires</th>
                 <th className="px-4 py-3 font-medium">Updated</th>
                 <th className="px-4 py-3 font-medium">Time Stamp</th>
                 <th className="px-4 py-3"></th>
@@ -435,6 +453,35 @@ function RepositoryInner() {
                     <StatusBadge status={r.status} />
                   </td>
                   <td className="px-4 py-3 text-slate-300">{r.owner}</td>
+                  <td className="px-4 py-3 text-xs whitespace-nowrap">
+                    {(() => {
+                      const label = formatExpirationDate(r);
+                      if (label === "—")
+                        return <span className="text-slate-500">—</span>;
+                      const expired = isExpired(r);
+                      const soon = isExpiringSoon(r, 30);
+                      const cls = expired
+                        ? "text-rose-300"
+                        : soon
+                        ? "text-amber-300"
+                        : "text-slate-300";
+                      return (
+                        <span className={cls}>
+                          {label}
+                          {expired && (
+                            <span className="ml-1 px-1.5 py-0.5 rounded bg-rose-500/15 border border-rose-400/30 text-[10px] uppercase">
+                              Expired
+                            </span>
+                          )}
+                          {!expired && soon && (
+                            <span className="ml-1 px-1.5 py-0.5 rounded bg-amber-500/15 border border-amber-400/30 text-[10px] uppercase">
+                              Soon
+                            </span>
+                          )}
+                        </span>
+                      );
+                    })()}
+                  </td>
                   <td className="px-4 py-3 text-slate-400">{r.updated}</td>
                   <td className="px-4 py-3 text-slate-400 whitespace-nowrap" title={
                     r.updatedAt ? new Date(r.updatedAt).toLocaleString("en-US") : ""

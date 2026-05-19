@@ -11,18 +11,29 @@ import {
   buildSignedPdfBlob,
 } from "@/lib/signatureService";
 import { getRequest } from "@/lib/requestStore";
+import { getTemplateById } from "@/lib/templates";
+import { buildPlaceholderValues, applyPlaceholders } from "@/lib/placeholders";
+import {
+  generateDocx,
+  generatePdf,
+  downloadBlob,
+  buildFileName,
+} from "@/lib/documentGenerator";
 import SignaturePad from "@/components/SignaturePad";
 import {
   CheckCircle2,
   XCircle,
   Shield,
   FileText,
+  FileType2,
   Mail,
   Calendar,
   PenTool,
   AlertTriangle,
   Loader2,
   Download,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 
 export default function SignPage({ params }) {
@@ -41,6 +52,10 @@ export default function SignPage({ params }) {
   const [done, setDone] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [downloading, setDownloading] = useState(false);
+  const [downloadingDoc, setDownloadingDoc] = useState(null); // "pdf" | "docx" | null
+  const [showPreview, setShowPreview] = useState(false);
+  const [hasPreviewed, setHasPreviewed] = useState(false);
+  const [hasDownloaded, setHasDownloaded] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -93,6 +108,53 @@ export default function SignPage({ params }) {
       ["Governing Law", f.governingLaw || f.jurisdiction || "—"],
     ];
   }, [rec]);
+
+  // Build the rendered template blocks + filename for inline preview
+  // and DOCX/PDF downloads.
+  const docContext = useMemo(() => {
+    if (!rec) return null;
+    const template = getTemplateById(rec.templateId);
+    if (!template) return null;
+    const form = {
+      ...(rec.form || {}),
+      counterpartyName: rec.form?.counterpartyName || rec.counterparty,
+      recordTitle: rec.form?.recordTitle || rec.title,
+    };
+    const values = buildPlaceholderValues(form);
+    return { template, values, form };
+  }, [rec]);
+
+  const onDownloadDoc = async (kind) => {
+    if (!docContext) {
+      setError("Document is not ready for download yet.");
+      return;
+    }
+    setError("");
+    setDownloadingDoc(kind);
+    try {
+      const meta = {
+        recordId: rec.id || sig.recordId,
+        recordTitle: rec.title || sig.recordTitle,
+      };
+      const blob =
+        kind === "docx"
+          ? await generateDocx({ template: docContext.template, values: docContext.values, meta })
+          : await generatePdf({ template: docContext.template, values: docContext.values, meta });
+      const base = buildFileName({
+        counterparty:
+          docContext.form.counterpartyName ||
+          rec.counterparty ||
+          sig.recordTitle ||
+          "NDA",
+      });
+      await downloadBlob(blob, `${base}.${kind}`);
+      setHasDownloaded(true);
+    } catch (e) {
+      setError(e?.message || "Download failed.");
+    } finally {
+      setDownloadingDoc(null);
+    }
+  };
 
   if (!mounted) return null;
 
@@ -301,9 +363,63 @@ export default function SignPage({ params }) {
 
         {/* Document preview */}
         <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-6">
-          <div className="flex items-center gap-2 text-sm text-slate-300 mb-4">
-            <FileText className="w-4 h-4" />
-            <span className="font-semibold text-white">Document Summary</span>
+          <div className="flex items-center justify-between gap-3 flex-wrap mb-4">
+            <div className="flex items-center gap-2 text-sm text-slate-300">
+              <FileText className="w-4 h-4" />
+              <span className="font-semibold text-white">Review the Full NDA Document</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setShowPreview((v) => {
+                    const next = !v;
+                    if (next) setHasPreviewed(true);
+                    return next;
+                  });
+                }}
+                disabled={!docContext}
+                className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-slate-100 px-3 py-1.5 rounded-xl text-xs disabled:opacity-40"
+                title={docContext ? "Show or hide the full document inline" : "Document not available"}
+              >
+                {showPreview ? (
+                  <EyeOff className="w-3.5 h-3.5" />
+                ) : (
+                  <Eye className="w-3.5 h-3.5" />
+                )}
+                {showPreview ? "Hide Preview" : "Preview Document"}
+              </button>
+              <button
+                type="button"
+                onClick={() => onDownloadDoc("docx")}
+                disabled={!docContext || !!downloadingDoc}
+                className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-slate-100 px-3 py-1.5 rounded-xl text-xs disabled:opacity-40"
+              >
+                {downloadingDoc === "docx" ? (
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                ) : (
+                  <FileType2 className="w-3.5 h-3.5" />
+                )}
+                Download DOCX
+              </button>
+              <button
+                type="button"
+                onClick={() => onDownloadDoc("pdf")}
+                disabled={!docContext || !!downloadingDoc}
+                className="inline-flex items-center gap-2 bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/40 text-cyan-100 px-3 py-1.5 rounded-xl text-xs disabled:opacity-40"
+              >
+                {downloadingDoc === "pdf" ? (
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                ) : (
+                  <Download className="w-3.5 h-3.5" />
+                )}
+                Download PDF
+              </button>
+            </div>
+          </div>
+
+          <div className="text-[11px] uppercase tracking-wider text-slate-400 mb-2">
+            Document Summary
           </div>
           <dl className="grid sm:grid-cols-2 gap-x-6 gap-y-3 text-sm">
             {previewLines.map(([k, v]) => (
@@ -321,6 +437,110 @@ export default function SignPage({ params }) {
               {rec.form.confidentialInformation}
             </div>
           )}
+
+          {showPreview && docContext && (
+            <div className="mt-5 max-h-[640px] overflow-auto rounded-lg border border-white/10 bg-white text-slate-900 p-6 text-[13px] leading-relaxed shadow-inner">
+              {(Array.isArray(docContext.template.content)
+                ? docContext.template.content
+                : []
+              ).map((block, idx) => {
+                const text = applyPlaceholders(block.text || "", docContext.values);
+                if (block.type === "title") {
+                  return (
+                    <h2
+                      key={idx}
+                      className="text-center font-bold text-base uppercase tracking-wide mt-2 mb-3"
+                    >
+                      {text}
+                    </h2>
+                  );
+                }
+                if (block.type === "subtitle") {
+                  return (
+                    <p
+                      key={idx}
+                      className="text-center text-[12px] text-slate-600 italic mb-4"
+                    >
+                      {text}
+                    </p>
+                  );
+                }
+                if (block.type === "heading") {
+                  return (
+                    <h3
+                      key={idx}
+                      className="font-semibold text-[13px] mt-4 mb-1.5"
+                    >
+                      {text}
+                    </h3>
+                  );
+                }
+                if (block.type === "signatureBlock") {
+                  return (
+                    <div
+                      key={idx}
+                      className="mt-6 grid sm:grid-cols-2 gap-6 border-t border-slate-200 pt-4"
+                    >
+                      {(block.parties || []).map((p, i) => (
+                        <div key={i}>
+                          <div className="text-[11px] text-slate-500 uppercase">
+                            {applyPlaceholders(p.party || "", docContext.values)}
+                          </div>
+                          <div className="mt-6 border-t border-slate-400 pt-1 text-xs">
+                            {applyPlaceholders(p.name || "", docContext.values)}
+                          </div>
+                          <div className="text-[11px] text-slate-500">
+                            {applyPlaceholders(p.title || "", docContext.values)}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  );
+                }
+                if (block.type === "spacer") {
+                  return <div key={idx} className="h-3" />;
+                }
+                return (
+                  <p key={idx} className="mb-2 whitespace-pre-wrap">
+                    {text}
+                  </p>
+                );
+              })}
+            </div>
+          )}
+
+          <div className="mt-4 flex flex-wrap items-center gap-3 text-xs">
+            <span
+              className={
+                "inline-flex items-center gap-1.5 px-2 py-1 rounded-full border " +
+                (hasPreviewed
+                  ? "bg-emerald-500/15 border-emerald-400/40 text-emerald-100"
+                  : "bg-white/5 border-white/10 text-slate-300")
+              }
+            >
+              {hasPreviewed ? (
+                <CheckCircle2 className="w-3.5 h-3.5" />
+              ) : (
+                <Eye className="w-3.5 h-3.5" />
+              )}
+              {hasPreviewed ? "Document previewed" : "Preview the document"}
+            </span>
+            <span
+              className={
+                "inline-flex items-center gap-1.5 px-2 py-1 rounded-full border " +
+                (hasDownloaded
+                  ? "bg-emerald-500/15 border-emerald-400/40 text-emerald-100"
+                  : "bg-white/5 border-white/10 text-slate-300")
+              }
+            >
+              {hasDownloaded ? (
+                <CheckCircle2 className="w-3.5 h-3.5" />
+              ) : (
+                <Download className="w-3.5 h-3.5" />
+              )}
+              {hasDownloaded ? "Copy downloaded" : "Download a copy for your records"}
+            </span>
+          </div>
         </div>
 
         {/* Signature panel */}
