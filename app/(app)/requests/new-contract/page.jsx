@@ -1,10 +1,11 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Topbar from "@/components/Topbar";
 import { GlassCard } from "@/components/ui";
 import { TEMPLATE_LIBRARY } from "@/lib/templates";
+import { getCustomTemplates, refreshCustomTemplates } from "@/lib/customTemplates";
 import { useCurrentRole } from "@/lib/permissions";
 import {
   FileSignature,
@@ -20,6 +21,12 @@ export default function RequestNewContractPage() {
   const router = useRouter();
   const { role } = useCurrentRole();
   const [selectedId, setSelectedId] = useState("");
+  const [customs, setCustoms] = useState([]);
+
+  useEffect(() => {
+    setCustoms(getCustomTemplates());
+    refreshCustomTemplates().then((list) => setCustoms(list));
+  }, []);
 
   if (role?.id === "exec") {
     return (
@@ -54,8 +61,11 @@ export default function RequestNewContractPage() {
     .filter(Boolean);
 
   const others = useMemo(
-    () => TEMPLATE_LIBRARY.filter((t) => !QUICK_TEMPLATE_IDS.includes(t.id)),
-    []
+    () => [
+      ...TEMPLATE_LIBRARY.filter((t) => !QUICK_TEMPLATE_IDS.includes(t.id)),
+      ...customs,
+    ],
+    [customs]
   );
 
   const pick = (templateId) => {

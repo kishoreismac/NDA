@@ -44,6 +44,10 @@ import {
   TERM_OPTIONS,
 } from "@/lib/dateMath";
 import {
+  getCustomTemplates,
+  refreshCustomTemplates,
+} from "@/lib/customTemplates";
+import {
   Check,
   ChevronLeft,
   ChevronRight,
@@ -296,6 +300,16 @@ function IntakeInner() {
   const [invalidSteps, setInvalidSteps] = useState(() => new Set());
   // Field keys (per step) currently missing — used to highlight inputs.
   const [missingFields, setMissingFields] = useState(() => new Set());
+  // Custom (admin-created) templates, merged into the Step 3 library grid.
+  const [customTemplates, setCustomTemplates] = useState([]);
+  useEffect(() => {
+    setCustomTemplates(getCustomTemplates());
+    refreshCustomTemplates().then((list) => setCustomTemplates(list));
+  }, []);
+  const fullLibrary = useMemo(
+    () => [...TEMPLATE_LIBRARY, ...customTemplates],
+    [customTemplates]
+  );
 
   // Load existing record into form when in edit/renew mode
   useEffect(() => {
@@ -408,8 +422,12 @@ function IntakeInner() {
   const handleStartChange = (val) => {
     setForm((prev) => {
       const next = { ...prev, effectiveDate: val };
-      // If we have a term, recompute end from new start.
-      if (val && prev.term) {
+      if (val && prev.endDate) {
+        // Recompute term from start + existing end (exact if non-preset).
+        next.term = matchesPreset(val, prev.endDate)
+          ? computeTermFromDates(val, prev.endDate) || prev.term
+          : formatCustomTerm(val, prev.endDate) || prev.term;
+      } else if (val && prev.term) {
         const newEnd = computeEndDate(val, prev.term);
         if (newEnd) next.endDate = newEnd;
       }
@@ -428,8 +446,9 @@ function IntakeInner() {
     setForm((prev) => {
       const next = { ...prev, endDate: val };
       if (val && prev.effectiveDate) {
-        const newTerm = computeTermFromDates(prev.effectiveDate, val);
-        if (newTerm) next.term = newTerm;
+        next.term = matchesPreset(prev.effectiveDate, val)
+          ? computeTermFromDates(prev.effectiveDate, val) || prev.term
+          : formatCustomTerm(prev.effectiveDate, val) || prev.term;
       }
       return next;
     });
@@ -445,6 +464,13 @@ function IntakeInner() {
       return next;
     });
   };
+
+  // True when the current form has dates that don't map to a preset; the
+  // Term Time control then shows the exact custom duration as read-only.
+  const isCustomTerm =
+    !!form.effectiveDate &&
+    !!form.endDate &&
+    !matchesPreset(form.effectiveDate, form.endDate);
 
   if (role?.id === "exec") {
     return (
@@ -675,22 +701,25 @@ function IntakeInner() {
                   </div>
                   <div>
                     <label className="label">Term Time</label>
-                    <select
-                      className="input"
-                      value={form.term}
-                      onChange={(e) => handleTermChange(e.target.value)}
-                    >
-                      {TERM_OPTIONS.map((t) => (
-                        <option key={t.label}>{t.label}</option>
-                      ))}
-                    </select>
-                    {form.effectiveDate && form.endDate &&
-                      !matchesPreset(form.effectiveDate, form.endDate) && (
-                        <div className="text-[11px] text-cyan-300 mt-1">
-                          Custom duration:{" "}
-                          {formatCustomTerm(form.effectiveDate, form.endDate)}
-                        </div>
-                      )}
+                    {isCustomTerm ? (
+                      <input
+                        type="text"
+                        readOnly
+                        className="input bg-white/[0.02] text-cyan-200 font-medium"
+                        value={form.term}
+                        title="Computed from Start and End dates"
+                      />
+                    ) : (
+                      <select
+                        className="input"
+                        value={form.term}
+                        onChange={(e) => handleTermChange(e.target.value)}
+                      >
+                        {TERM_OPTIONS.map((t) => (
+                          <option key={t.label}>{t.label}</option>
+                        ))}
+                      </select>
+                    )}
                   </div>
                 </div>
               </div>
@@ -770,22 +799,25 @@ function IntakeInner() {
                 </div>
                 <div>
                   <label className="label">Term</label>
-                  <select
-                    className="input"
-                    value={form.term}
-                    onChange={(e) => handleTermChange(e.target.value)}
-                  >
-                    {TERM_OPTIONS.map((t) => (
-                      <option key={t.label}>{t.label}</option>
-                    ))}
-                  </select>
-                  {form.effectiveDate && form.endDate &&
-                    !matchesPreset(form.effectiveDate, form.endDate) && (
-                      <div className="text-[11px] text-cyan-300 mt-1">
-                        Custom duration:{" "}
-                        {formatCustomTerm(form.effectiveDate, form.endDate)}
-                      </div>
-                    )}
+                  {isCustomTerm ? (
+                    <input
+                      type="text"
+                      readOnly
+                      className="input bg-white/[0.02] text-cyan-200 font-medium"
+                      value={form.term}
+                      title="Computed from Effective date and End date"
+                    />
+                  ) : (
+                    <select
+                      className="input"
+                      value={form.term}
+                      onChange={(e) => handleTermChange(e.target.value)}
+                    >
+                      {TERM_OPTIONS.map((t) => (
+                        <option key={t.label}>{t.label}</option>
+                      ))}
+                    </select>
+                  )}
                 </div>
                 <div>
                   <label className="label">Survival period</label>
@@ -864,11 +896,11 @@ function IntakeInner() {
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-semibold text-white text-lg">Select NDA Template</h3>
                   <span className="text-xs text-slate-400">
-                    {TEMPLATE_LIBRARY.length} approved templates
+                    {fullLibrary.length} approved templates
                   </span>
                 </div>
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {TEMPLATE_LIBRARY.map((t) => {
+                  {fullLibrary.map((t) => {
                     const selected = form.templateId === t.id;
                     return (
                       <button

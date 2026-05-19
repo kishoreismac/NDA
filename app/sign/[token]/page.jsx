@@ -265,12 +265,6 @@ export default function SignPage({ params }) {
               <p className="mt-2 text-xs text-rose-300">{error}</p>
             )}
           </div>
-          <button
-            onClick={() => router.push("/dashboard")}
-            className="mt-8 inline-flex items-center gap-2 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-100 px-4 py-2 rounded-xl text-sm"
-          >
-            Return to CLM Dashboard
-          </button>
         </div>
       </div>
     );
