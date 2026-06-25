@@ -1,0 +1,679 @@
+2026-05-19T09:21:08.7088314Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-05-19T09:21:11.3984667Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-05-19T09:21:11.4085120Z Container start method called.
+2026-05-19T09:21:11.4203365Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:21:11.4278710Z Establishing network.
+2026-05-19T09:21:11.4285953Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:21:11.7930388Z Container is starting.
+2026-05-19T09:21:11.7939048Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:21:11.7946892Z Establishing user namespace if not established already.
+2026-05-19T09:21:11.8142261Z Establishing network if not established already.
+2026-05-19T09:21:11.8147451Z Mounting volumes.
+2026-05-19T09:21:11.8454338Z Nested mountpoint 
+2026-05-19T09:21:11.9845069Z Nested mountpoint volatile/logs
+2026-05-19T09:21:12.0451356Z Nested mountpoint 
+2026-05-19T09:21:12.1460191Z Nested mountpoint 
+2026-05-19T09:21:12.1772483Z Nested mountpoint 
+2026-05-19T09:21:12.4798840Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:21:12.4852171Z Creating container.
+2026-05-19T09:21:12.4866017Z Creating pipes for streaming container io.
+2026-05-19T09:21:12.4878660Z Creating stdout named pipe at /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stdout_ce5c630d9c394904904d3a22c7f67017.
+2026-05-19T09:21:12.4961060Z Successfully created stdout named pipe at: /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stdout_ce5c630d9c394904904d3a22c7f67017.
+2026-05-19T09:21:12.4977265Z Opening named pipe /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stdout_ce5c630d9c394904904d3a22c7f67017 for reading in non-blocking mode.
+2026-05-19T09:21:12.5053671Z Successfully opened named pipe: /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stdout_ce5c630d9c394904904d3a22c7f67017.
+2026-05-19T09:21:12.5063589Z Successfully removed non-blocking flag from /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stdout_ce5c630d9c394904904d3a22c7f67017.
+2026-05-19T09:21:12.5166023Z Creating stderr named pipe at /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stderr_e9e03f78783846cd913054129de091ea.
+2026-05-19T09:21:12.5177846Z Successfully created stderr named pipe at: /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stderr_e9e03f78783846cd913054129de091ea.
+2026-05-19T09:21:12.5261163Z Opening named pipe /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stderr_e9e03f78783846cd913054129de091ea for reading in non-blocking mode.
+2026-05-19T09:21:12.5271440Z Successfully opened named pipe: /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stderr_e9e03f78783846cd913054129de091ea.
+2026-05-19T09:21:12.5278735Z Successfully removed non-blocking flag from /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stderr_e9e03f78783846cd913054129de091ea.
+2026-05-19T09:21:12.5377917Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:21:14.1278652Z Starting container: 3c57a6bc65c1_clm-ndaflow-v2-2605191449.
+2026-05-19T09:21:14.4867152Z Starting watchers and probes.
+2026-05-19T09:21:14.6788517Z Starting metrics collection.
+2026-05-19T09:21:14.7092578Z Container is running.
+2026-05-19T09:21:14.7098378Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:21:15.5137948Z Container start method finished after 4104 ms.
+2026-05-19T09:21:15.5341951Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:21:15.5953239Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:21:55.0601544Z Site startup probe succeeded after 39.2330556 seconds.
+2026-05-19T09:21:55.5708724Z State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 39.2330556 seconds., DetailsLevel: INFO
+2026-05-19T09:21:56.5153067Z Site started.
+2026-05-19T09:21:56.5159602Z State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 05/19/2026 09:21:56 (UTC), DetailsLevel: INFO
+2026-05-19T09:21:56.9777220Z Site is running with patch version NODE 22.22.2
+2026-05-19T09:22:42.4575584Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-05-19T09:22:44.5740266Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-05-19T09:22:44.5741638Z Container start method called.
+2026-05-19T09:22:44.5742211Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:22:44.5742999Z Establishing network.
+2026-05-19T09:22:44.5743924Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:22:46.4146249Z Image appsvc/node:22-lts_20260504.4.tuxprod is pulled from registry 10.1.0.6:13209
+2026-05-19T09:22:46.4560595Z Container is starting.
+2026-05-19T09:22:46.4647818Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:22:46.4652796Z Establishing user namespace if not established already.
+2026-05-19T09:22:46.5045468Z Establishing network if not established already.
+2026-05-19T09:22:46.5051068Z Mounting volumes.
+2026-05-19T09:22:46.5054833Z Nested mountpoint 
+2026-05-19T09:22:46.5748210Z Nested mountpoint volatile/logs
+2026-05-19T09:22:46.6872453Z Nested mountpoint 
+2026-05-19T09:22:46.7453976Z Nested mountpoint 
+2026-05-19T09:22:46.8582099Z Nested mountpoint 
+2026-05-19T09:22:48.0728938Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:22:48.0730404Z Creating container.
+2026-05-19T09:22:48.0731378Z Creating pipes for streaming container io.
+2026-05-19T09:22:48.0732182Z Creating stdout named pipe at /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stdout_9650c41c1f48471fb61a9c996a7efb84.
+2026-05-19T09:22:48.0816381Z Successfully created stdout named pipe at: /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stdout_9650c41c1f48471fb61a9c996a7efb84.
+2026-05-19T09:22:48.0820131Z Opening named pipe /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stdout_9650c41c1f48471fb61a9c996a7efb84 for reading in non-blocking mode.
+2026-05-19T09:22:48.0823182Z Successfully opened named pipe: /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stdout_9650c41c1f48471fb61a9c996a7efb84.
+2026-05-19T09:22:48.0838237Z Successfully removed non-blocking flag from /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stdout_9650c41c1f48471fb61a9c996a7efb84.
+2026-05-19T09:22:48.0843175Z Creating stderr named pipe at /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stderr_3708a85fb1bb4c368272469ea5737ada.
+2026-05-19T09:22:48.1132491Z Successfully created stderr named pipe at: /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stderr_3708a85fb1bb4c368272469ea5737ada.
+2026-05-19T09:22:48.1135022Z Opening named pipe /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stderr_3708a85fb1bb4c368272469ea5737ada for reading in non-blocking mode.
+2026-05-19T09:22:48.1139410Z Successfully opened named pipe: /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stderr_3708a85fb1bb4c368272469ea5737ada.
+2026-05-19T09:22:48.1235478Z Successfully removed non-blocking flag from /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stderr_3708a85fb1bb4c368272469ea5737ada.
+2026-05-19T09:22:48.1445466Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:22:49.5510078Z Starting container: a8f766364da8_clm-ndaflow-v2-2605191449.
+2026-05-19T09:22:49.8106592Z Starting watchers and probes.
+2026-05-19T09:22:49.8116003Z Starting metrics collection.
+2026-05-19T09:22:49.8120394Z Container is running.
+2026-05-19T09:22:49.8121485Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:22:50.3140104Z Container start method finished after 5700 ms.
+2026-05-19T09:22:50.3241166Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:22:50.3242195Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:23:03.0085474Z Site startup probe failed after 12.6229615 seconds.
+2026-05-19T09:23:03.8437035Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: ERR
+2026-05-19T09:23:03.9427677Z Failed to start site. Revert by stopping site.
+2026-05-19T09:23:03.9946575Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: ERR
+2026-05-19T09:23:04.1538738Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: ERR
+2026-05-19T09:23:04.1945494Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:23:04.5265057Z Stop and delete container. Retry count = 0
+2026-05-19T09:23:04.5277460Z Stopping container: a8f766364da8_clm-ndaflow-v2-2605191449.
+2026-05-19T09:23:09.7528069Z Deleting container: a8f766364da8_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T09:23:10.6651063Z Container spec TerminationMessagePolicy  path 
+2026-05-19T09:23:10.7181759Z Container is terminated. Total time elapsed: 6492 ms.
+2026-05-19T09:23:10.7362886Z Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T09:23:10.7473198Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:23:10.7976684Z Site: clm-ndaflow-v2-2605191449 stopped.
+2026-05-19T09:23:33.9283567Z State: Stopping, Action: StoppingSite, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 05/19/2026 09:21:56 (UTC), DetailsLevel: INFO
+2026-05-19T09:23:33.9780031Z State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 05/19/2026 09:21:56 (UTC), DetailsLevel: INFO
+2026-05-19T09:23:33.9792778Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:23:34.0793564Z Stop and delete container. Retry count = 0
+2026-05-19T09:23:34.0994337Z Stopping container: 3c57a6bc65c1_clm-ndaflow-v2-2605191449.
+2026-05-19T09:23:39.5131040Z Deleting container: 3c57a6bc65c1_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T09:23:39.7550448Z Container spec TerminationMessagePolicy  path 
+2026-05-19T09:23:39.7552043Z Container is terminated. Total time elapsed: 5775 ms.
+2026-05-19T09:23:39.7554123Z Site: clm-ndaflow-v2-2605191449 stopped.
+2026-05-19T09:24:00.6789967Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:23:12 (UTC), DetailsLevel: ERR
+2026-05-19T09:24:02.5032311Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:23:12 (UTC), DetailsLevel: ERR
+2026-05-19T09:24:02.5033495Z Container start method called.
+2026-05-19T09:24:02.5034055Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:24:02.5034821Z Establishing network.
+2026-05-19T09:24:02.5035774Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:24:02.8799279Z Container is starting.
+2026-05-19T09:24:02.8800614Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:24:02.8801740Z Establishing user namespace if not established already.
+2026-05-19T09:24:02.8802951Z Establishing network if not established already.
+2026-05-19T09:24:02.8804475Z Mounting volumes.
+2026-05-19T09:24:02.8807113Z Nested mountpoint 
+2026-05-19T09:24:02.9192608Z Nested mountpoint volatile/logs
+2026-05-19T09:24:02.9316114Z Nested mountpoint 
+2026-05-19T09:24:02.9323187Z Nested mountpoint 
+2026-05-19T09:24:02.9415589Z Nested mountpoint 
+2026-05-19T09:24:05.3359308Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:24:05.3360515Z Creating container.
+2026-05-19T09:24:05.3361348Z Creating pipes for streaming container io.
+2026-05-19T09:24:05.3362320Z Creating stdout named pipe at /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stdout_52724582268149e5b5b9b15eea64ae58.
+2026-05-19T09:24:05.4046693Z Successfully created stdout named pipe at: /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stdout_52724582268149e5b5b9b15eea64ae58.
+2026-05-19T09:24:05.4147511Z Opening named pipe /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stdout_52724582268149e5b5b9b15eea64ae58 for reading in non-blocking mode.
+2026-05-19T09:24:05.4150930Z Successfully opened named pipe: /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stdout_52724582268149e5b5b9b15eea64ae58.
+2026-05-19T09:24:05.4160519Z Successfully removed non-blocking flag from /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stdout_52724582268149e5b5b9b15eea64ae58.
+2026-05-19T09:24:05.4163772Z Creating stderr named pipe at /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stderr_694584ef42214bdfb9280a0d497ca528.
+2026-05-19T09:24:05.4250620Z Successfully created stderr named pipe at: /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stderr_694584ef42214bdfb9280a0d497ca528.
+2026-05-19T09:24:05.4256042Z Opening named pipe /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stderr_694584ef42214bdfb9280a0d497ca528 for reading in non-blocking mode.
+2026-05-19T09:24:05.4258154Z Successfully opened named pipe: /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stderr_694584ef42214bdfb9280a0d497ca528.
+2026-05-19T09:24:05.4259295Z Successfully removed non-blocking flag from /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stderr_694584ef42214bdfb9280a0d497ca528.
+2026-05-19T09:24:05.5037546Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:24:08.6594778Z Starting container: 7b919432b1b7_clm-ndaflow-v2-2605191449.
+2026-05-19T09:24:09.3423031Z Starting watchers and probes.
+2026-05-19T09:24:09.3550824Z Starting metrics collection.
+2026-05-19T09:24:09.6840975Z Container is running.
+2026-05-19T09:24:09.6847365Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:24:10.8005019Z Container start method finished after 8296 ms.
+2026-05-19T09:24:10.8396045Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:24:10.8404557Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:25:13.5935505Z Container has finished running with exit code: 1.
+2026-05-19T09:25:13.5942103Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:25:13.5954134Z Stop and delete container. Retry count = 0
+2026-05-19T09:25:13.5955178Z Stopping container: 7b919432b1b7_clm-ndaflow-v2-2605191449.
+2026-05-19T09:25:13.7945196Z Deleting container: 7b919432b1b7_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T09:25:14.2087415Z Container spec TerminationMessagePolicy  path 
+2026-05-19T09:25:14.2365144Z Container is terminated. Total time elapsed: 632 ms.
+2026-05-19T09:25:14.2368111Z Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T09:25:14.2467075Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:25:14.2581439Z Site startup probe failed after 63.407238 seconds.
+2026-05-19T09:25:14.7387971Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:25:14.7665267Z Failed to start site. Revert by stopping site.
+2026-05-19T09:25:14.7668859Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:25:14.7675866Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:25:14.7676116Z Site: clm-ndaflow-v2-2605191449 stopped.
+2026-05-19T09:25:14.7876653Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:25:15.2297393Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:25:16.0240422Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:25:16 (UTC), DetailsLevel: ERR
+2026-05-19T09:25:16.8876199Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:25:16 (UTC), DetailsLevel: ERR
+2026-05-19T09:28:15.8653281Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:25:16 (UTC), DetailsLevel: ERR
+2026-05-19T09:28:17.5059743Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:25:16 (UTC), DetailsLevel: ERR
+2026-05-19T09:28:17.5158252Z Container start method called.
+2026-05-19T09:28:17.5160045Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:28:17.5536160Z Establishing network.
+2026-05-19T09:28:17.5540243Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:28:17.7672614Z Container is starting.
+2026-05-19T09:28:17.7748298Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:28:17.7851259Z Establishing user namespace if not established already.
+2026-05-19T09:28:17.7852720Z Establishing network if not established already.
+2026-05-19T09:28:17.7853842Z Mounting volumes.
+2026-05-19T09:28:17.7857097Z Nested mountpoint 
+2026-05-19T09:28:17.8573925Z Nested mountpoint volatile/logs
+2026-05-19T09:28:17.9052083Z Nested mountpoint 
+2026-05-19T09:28:17.9268126Z Nested mountpoint 
+2026-05-19T09:28:17.9374256Z Nested mountpoint 
+2026-05-19T09:28:18.3089740Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:28:18.3095763Z Creating container.
+2026-05-19T09:28:18.3097145Z Creating pipes for streaming container io.
+2026-05-19T09:28:18.3098361Z Creating stdout named pipe at /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stdout_afd31cd29fa9431caca3f349cf5944c6.
+2026-05-19T09:28:18.3100783Z Successfully created stdout named pipe at: /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stdout_afd31cd29fa9431caca3f349cf5944c6.
+2026-05-19T09:28:18.3485064Z Opening named pipe /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stdout_afd31cd29fa9431caca3f349cf5944c6 for reading in non-blocking mode.
+2026-05-19T09:28:18.3488187Z Successfully opened named pipe: /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stdout_afd31cd29fa9431caca3f349cf5944c6.
+2026-05-19T09:28:18.3489087Z Successfully removed non-blocking flag from /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stdout_afd31cd29fa9431caca3f349cf5944c6.
+2026-05-19T09:28:18.3490676Z Creating stderr named pipe at /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stderr_f410d713afaa403cb798c283310c6bde.
+2026-05-19T09:28:18.3492168Z Successfully created stderr named pipe at: /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stderr_f410d713afaa403cb798c283310c6bde.
+2026-05-19T09:28:18.3492891Z Opening named pipe /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stderr_f410d713afaa403cb798c283310c6bde for reading in non-blocking mode.
+2026-05-19T09:28:18.3493818Z Successfully opened named pipe: /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stderr_f410d713afaa403cb798c283310c6bde.
+2026-05-19T09:28:18.3494542Z Successfully removed non-blocking flag from /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stderr_f410d713afaa403cb798c283310c6bde.
+2026-05-19T09:28:18.3495775Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:28:18.9660358Z Starting container: 83a8b0ceb16f_clm-ndaflow-v2-2605191449.
+2026-05-19T09:28:19.0894160Z Starting watchers and probes.
+2026-05-19T09:28:19.0907129Z Starting metrics collection.
+2026-05-19T09:28:19.0991974Z Container is running.
+2026-05-19T09:28:19.0996393Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:28:19.3106430Z Container start method finished after 1794 ms.
+2026-05-19T09:28:19.3404743Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:28:19.3405532Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:28:50.4574671Z Container has finished running with exit code: 1.
+2026-05-19T09:28:50.4576079Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:28:50.4675861Z Stop and delete container. Retry count = 0
+2026-05-19T09:28:50.4677089Z Stopping container: 83a8b0ceb16f_clm-ndaflow-v2-2605191449.
+2026-05-19T09:28:50.5389721Z Deleting container: 83a8b0ceb16f_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T09:28:50.7803434Z Container spec TerminationMessagePolicy  path 
+2026-05-19T09:28:50.7811397Z Container is terminated. Total time elapsed: 322 ms.
+2026-05-19T09:28:50.7903457Z Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T09:28:50.7909838Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:28:50.7996408Z Site startup probe failed after 31.4586539 seconds.
+2026-05-19T09:28:50.9694789Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:28:51.0100389Z Failed to start site. Revert by stopping site.
+2026-05-19T09:28:51.0205955Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:28:51.0211523Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:28:51.0211764Z Site: clm-ndaflow-v2-2605191449 stopped.
+2026-05-19T09:28:51.0306644Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:28:51.3602669Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:28:51.6457930Z Site: clm-ndaflow-v2-2605191449 will be blocked for 1 minutes till 05/19/2026 09:29:51
+2026-05-19T09:28:51.6459270Z State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: clm-ndaflow-v2-2605191449 will be blocked for 1 minutes till 05/19/2026 09:29:51, DetailsLevel: WARN
+2026-05-19T09:28:51.6461912Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:28:51 (UTC), DetailsLevel: WARN
+2026-05-19T09:28:52.2039342Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:28:51 (UTC), DetailsLevel: WARN
+2026-05-19T09:29:51.6502102Z Site: clm-ndaflow-v2-2605191449 is unblocked.
+2026-05-19T09:33:16.1360200Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:28:51 (UTC), DetailsLevel: WARN
+2026-05-19T09:33:18.1870963Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:28:51 (UTC), DetailsLevel: WARN
+2026-05-19T09:33:18.1970328Z Container start method called.
+2026-05-19T09:33:18.1972602Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:33:18.1975105Z Establishing network.
+2026-05-19T09:33:18.2063465Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:33:18.8320512Z Container is starting.
+2026-05-19T09:33:18.8321607Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:33:18.8322732Z Establishing user namespace if not established already.
+2026-05-19T09:33:18.8323807Z Establishing network if not established already.
+2026-05-19T09:33:18.8522051Z Mounting volumes.
+2026-05-19T09:33:18.8598354Z Nested mountpoint 
+2026-05-19T09:33:18.9509083Z Nested mountpoint volatile/logs
+2026-05-19T09:33:18.9914181Z Nested mountpoint 
+2026-05-19T09:33:18.9922049Z Nested mountpoint 
+2026-05-19T09:33:19.1319820Z Nested mountpoint 
+2026-05-19T09:33:19.8662491Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:33:19.8663805Z Creating container.
+2026-05-19T09:33:19.8664572Z Creating pipes for streaming container io.
+2026-05-19T09:33:19.9063967Z Creating stdout named pipe at /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stdout_cd98d0704e794986a26f44ffbd8e35dc.
+2026-05-19T09:33:19.9249568Z Successfully created stdout named pipe at: /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stdout_cd98d0704e794986a26f44ffbd8e35dc.
+2026-05-19T09:33:19.9256141Z Opening named pipe /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stdout_cd98d0704e794986a26f44ffbd8e35dc for reading in non-blocking mode.
+2026-05-19T09:33:19.9259412Z Successfully opened named pipe: /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stdout_cd98d0704e794986a26f44ffbd8e35dc.
+2026-05-19T09:33:19.9260290Z Successfully removed non-blocking flag from /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stdout_cd98d0704e794986a26f44ffbd8e35dc.
+2026-05-19T09:33:19.9261461Z Creating stderr named pipe at /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stderr_fa83b3598656440aa235f0f521b580d5.
+2026-05-19T09:33:19.9263024Z Successfully created stderr named pipe at: /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stderr_fa83b3598656440aa235f0f521b580d5.
+2026-05-19T09:33:19.9263720Z Opening named pipe /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stderr_fa83b3598656440aa235f0f521b580d5 for reading in non-blocking mode.
+2026-05-19T09:33:19.9264613Z Successfully opened named pipe: /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stderr_fa83b3598656440aa235f0f521b580d5.
+2026-05-19T09:33:19.9452706Z Successfully removed non-blocking flag from /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stderr_fa83b3598656440aa235f0f521b580d5.
+2026-05-19T09:33:19.9467881Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:33:21.4042393Z Starting container: a6f7d57d5528_clm-ndaflow-v2-2605191449.
+2026-05-19T09:33:21.5856354Z Starting watchers and probes.
+2026-05-19T09:33:21.6130675Z Starting metrics collection.
+2026-05-19T09:33:21.6455796Z Container is running.
+2026-05-19T09:33:21.6459773Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:33:22.0761463Z Container start method finished after 3878 ms.
+2026-05-19T09:33:22.0768388Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:33:22.1068159Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:33:54.7236630Z Container has finished running with exit code: 1.
+2026-05-19T09:33:54.7321744Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:33:54.7337379Z Stop and delete container. Retry count = 0
+2026-05-19T09:33:54.7338442Z Stopping container: a6f7d57d5528_clm-ndaflow-v2-2605191449.
+2026-05-19T09:33:54.9342596Z Deleting container: a6f7d57d5528_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T09:33:55.3476403Z Container spec TerminationMessagePolicy  path 
+2026-05-19T09:33:55.3564086Z Container is terminated. Total time elapsed: 615 ms.
+2026-05-19T09:33:55.3567825Z Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T09:33:55.3572274Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:33:55.3664628Z Site startup probe failed after 33.2587142 seconds.
+2026-05-19T09:33:55.6390255Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:33:55.7091299Z Failed to start site. Revert by stopping site.
+2026-05-19T09:33:55.7168798Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:33:55.7284492Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:33:55.7285458Z Site: clm-ndaflow-v2-2605191449 stopped.
+2026-05-19T09:33:55.7485139Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:33:56.2415330Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:33:56.8638049Z Site: clm-ndaflow-v2-2605191449 will be blocked for 1 minutes till 05/19/2026 09:34:56
+2026-05-19T09:33:56.8643053Z State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: clm-ndaflow-v2-2605191449 will be blocked for 1 minutes till 05/19/2026 09:34:56, DetailsLevel: WARN
+2026-05-19T09:33:56.8734031Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:33:56 (UTC), DetailsLevel: WARN
+2026-05-19T09:33:57.5079995Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:33:56 (UTC), DetailsLevel: WARN
+2026-05-19T09:34:56.8453321Z Site: clm-ndaflow-v2-2605191449 is unblocked.
+2026-05-19T09:36:26.4131494Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:33:56 (UTC), DetailsLevel: WARN
+2026-05-19T09:36:28.6843995Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:33:56 (UTC), DetailsLevel: WARN
+2026-05-19T09:36:28.6845175Z Container start method called.
+2026-05-19T09:36:28.6845663Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:36:28.6846453Z Establishing network.
+2026-05-19T09:36:28.6847330Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:36:28.9952749Z Container is starting.
+2026-05-19T09:36:28.9954086Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:36:28.9955307Z Establishing user namespace if not established already.
+2026-05-19T09:36:28.9956403Z Establishing network if not established already.
+2026-05-19T09:36:28.9957724Z Mounting volumes.
+2026-05-19T09:36:29.0041614Z Nested mountpoint 
+2026-05-19T09:36:29.0464216Z Nested mountpoint volatile/logs
+2026-05-19T09:36:29.0963831Z Nested mountpoint 
+2026-05-19T09:36:29.1277905Z Nested mountpoint 
+2026-05-19T09:36:29.1878288Z Nested mountpoint 
+2026-05-19T09:36:29.6002827Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:36:29.6008688Z Creating container.
+2026-05-19T09:36:29.6015956Z Creating pipes for streaming container io.
+2026-05-19T09:36:29.6020934Z Creating stdout named pipe at /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stdout_76ae5533f999452e9398eb944815f545.
+2026-05-19T09:36:29.6023940Z Successfully created stdout named pipe at: /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stdout_76ae5533f999452e9398eb944815f545.
+2026-05-19T09:36:29.6100129Z Opening named pipe /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stdout_76ae5533f999452e9398eb944815f545 for reading in non-blocking mode.
+2026-05-19T09:36:29.6102407Z Successfully opened named pipe: /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stdout_76ae5533f999452e9398eb944815f545.
+2026-05-19T09:36:29.6103540Z Successfully removed non-blocking flag from /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stdout_76ae5533f999452e9398eb944815f545.
+2026-05-19T09:36:29.6196721Z Creating stderr named pipe at /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stderr_fa7cc9aa5f2146e8bc2fd92b2ddbb4b3.
+2026-05-19T09:36:29.6202358Z Successfully created stderr named pipe at: /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stderr_fa7cc9aa5f2146e8bc2fd92b2ddbb4b3.
+2026-05-19T09:36:29.6204032Z Opening named pipe /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stderr_fa7cc9aa5f2146e8bc2fd92b2ddbb4b3 for reading in non-blocking mode.
+2026-05-19T09:36:29.6205449Z Successfully opened named pipe: /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stderr_fa7cc9aa5f2146e8bc2fd92b2ddbb4b3.
+2026-05-19T09:36:29.6206519Z Successfully removed non-blocking flag from /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stderr_fa7cc9aa5f2146e8bc2fd92b2ddbb4b3.
+2026-05-19T09:36:29.6210587Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:36:31.1934212Z Starting container: 4fa854637631_clm-ndaflow-v2-2605191449.
+2026-05-19T09:36:31.5381594Z Starting watchers and probes.
+2026-05-19T09:36:31.5484253Z Starting metrics collection.
+2026-05-19T09:36:31.5494345Z Container is running.
+2026-05-19T09:36:31.5673744Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:36:31.9210124Z Container start method finished after 3236 ms.
+2026-05-19T09:36:31.9288827Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:36:31.9289966Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:37:00.6060181Z Container has finished running with exit code: 1.
+2026-05-19T09:37:00.6235277Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:37:00.7055288Z Stop and delete container. Retry count = 0
+2026-05-19T09:37:00.7063108Z Stopping container: 4fa854637631_clm-ndaflow-v2-2605191449.
+2026-05-19T09:37:00.8969837Z Deleting container: 4fa854637631_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T09:37:01.3188791Z Container spec TerminationMessagePolicy  path 
+2026-05-19T09:37:01.3197351Z Container is terminated. Total time elapsed: 695 ms.
+2026-05-19T09:37:01.3202906Z Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T09:37:01.3207880Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:37:01.3389780Z Site startup probe failed after 29.4070535 seconds.
+2026-05-19T09:37:02.1187607Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:37:02.1354547Z Failed to start site. Revert by stopping site.
+2026-05-19T09:37:02.1382495Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:37:02.1387702Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:37:02.1387897Z Site: clm-ndaflow-v2-2605191449 stopped.
+2026-05-19T09:37:02.1421237Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:37:03.0257809Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:37:03.7301268Z Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 09:39:03
+2026-05-19T09:37:03.7304577Z State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 09:39:03, DetailsLevel: WARN
+2026-05-19T09:37:03.7484743Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:37:03 (UTC), DetailsLevel: WARN
+2026-05-19T09:37:04.4333181Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:37:03 (UTC), DetailsLevel: WARN
+2026-05-19T09:37:10.5878060Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:39:03, DetailsLevel: WARN
+2026-05-19T09:37:10.5878742Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:37:19.7331684Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:39:03, DetailsLevel: WARN
+2026-05-19T09:37:19.7332211Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:37:26.5870071Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:39:03, DetailsLevel: WARN
+2026-05-19T09:37:26.5870532Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:39:03.7322310Z Site: clm-ndaflow-v2-2605191449 is unblocked.
+2026-05-19T09:42:27.5431277Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:39:03, DetailsLevel: WARN
+2026-05-19T09:42:29.5357954Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:39:03, DetailsLevel: WARN
+2026-05-19T09:42:29.5464185Z Container start method called.
+2026-05-19T09:42:29.5557628Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:42:29.5560223Z Establishing network.
+2026-05-19T09:42:29.5567564Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:42:30.2592356Z Container is starting.
+2026-05-19T09:42:30.2596588Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:42:30.2598268Z Establishing user namespace if not established already.
+2026-05-19T09:42:30.2599682Z Establishing network if not established already.
+2026-05-19T09:42:30.2601935Z Mounting volumes.
+2026-05-19T09:42:30.2693467Z Nested mountpoint 
+2026-05-19T09:42:30.3309173Z Nested mountpoint volatile/logs
+2026-05-19T09:42:30.3703234Z Nested mountpoint 
+2026-05-19T09:42:30.3900762Z Nested mountpoint 
+2026-05-19T09:42:30.3915217Z Nested mountpoint 
+2026-05-19T09:42:31.1241370Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:42:31.1243790Z Creating container.
+2026-05-19T09:42:31.1245172Z Creating pipes for streaming container io.
+2026-05-19T09:42:31.1246336Z Creating stdout named pipe at /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stdout_a9148e773e5c49ccb38c047fe509f310.
+2026-05-19T09:42:31.1855622Z Successfully created stdout named pipe at: /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stdout_a9148e773e5c49ccb38c047fe509f310.
+2026-05-19T09:42:31.1858944Z Opening named pipe /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stdout_a9148e773e5c49ccb38c047fe509f310 for reading in non-blocking mode.
+2026-05-19T09:42:31.2141817Z Successfully opened named pipe: /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stdout_a9148e773e5c49ccb38c047fe509f310.
+2026-05-19T09:42:31.2154672Z Successfully removed non-blocking flag from /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stdout_a9148e773e5c49ccb38c047fe509f310.
+2026-05-19T09:42:31.2157278Z Creating stderr named pipe at /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stderr_5c5fa61a347f491e9e285b0aa5817435.
+2026-05-19T09:42:31.2247384Z Successfully created stderr named pipe at: /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stderr_5c5fa61a347f491e9e285b0aa5817435.
+2026-05-19T09:42:31.2249276Z Opening named pipe /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stderr_5c5fa61a347f491e9e285b0aa5817435 for reading in non-blocking mode.
+2026-05-19T09:42:31.2251017Z Successfully opened named pipe: /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stderr_5c5fa61a347f491e9e285b0aa5817435.
+2026-05-19T09:42:31.2252349Z Successfully removed non-blocking flag from /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stderr_5c5fa61a347f491e9e285b0aa5817435.
+2026-05-19T09:42:31.2256215Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:42:32.0474899Z Starting container: 09909af833a1_clm-ndaflow-v2-2605191449.
+2026-05-19T09:42:32.1496718Z Starting watchers and probes.
+2026-05-19T09:42:32.1784354Z Starting metrics collection.
+2026-05-19T09:42:32.1794643Z Container is running.
+2026-05-19T09:42:32.1795961Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:42:32.4092638Z Container start method finished after 2843 ms.
+2026-05-19T09:42:32.4098524Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:42:32.4103967Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:43:00.7788203Z Container has finished running with exit code: 1.
+2026-05-19T09:43:00.7799832Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:43:00.7909117Z Stop and delete container. Retry count = 0
+2026-05-19T09:43:00.7911938Z Stopping container: 09909af833a1_clm-ndaflow-v2-2605191449.
+2026-05-19T09:43:00.8807731Z Deleting container: 09909af833a1_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T09:43:01.1207354Z Container spec TerminationMessagePolicy  path 
+2026-05-19T09:43:01.1308690Z Container is terminated. Total time elapsed: 348 ms.
+2026-05-19T09:43:01.1317499Z Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T09:43:01.1347407Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:43:01.1553038Z Site startup probe failed after 28.6947143 seconds.
+2026-05-19T09:43:01.4630105Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:43:01.5652560Z Failed to start site. Revert by stopping site.
+2026-05-19T09:43:01.5755580Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:43:01.6051107Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:43:01.6051593Z Site: clm-ndaflow-v2-2605191449 stopped.
+2026-05-19T09:43:01.6164435Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:43:02.1464030Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:43:02.7606632Z Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 09:45:02
+2026-05-19T09:43:02.7623286Z State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 09:45:02, DetailsLevel: WARN
+2026-05-19T09:43:02.7818633Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:43:02 (UTC), DetailsLevel: WARN
+2026-05-19T09:43:03.5492532Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:43:02 (UTC), DetailsLevel: WARN
+2026-05-19T09:45:02.7604336Z Site: clm-ndaflow-v2-2605191449 is unblocked.
+2026-05-19T10:17:30.2629338Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:43:02 (UTC), DetailsLevel: WARN
+2026-05-19T10:17:33.4407386Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:43:02 (UTC), DetailsLevel: WARN
+2026-05-19T10:17:33.5014143Z Container start method called.
+2026-05-19T10:17:33.5027316Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T10:17:33.5607023Z Establishing network.
+2026-05-19T10:17:33.5809926Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T10:17:34.3847135Z Container is starting.
+2026-05-19T10:17:34.3853179Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T10:17:34.3862973Z Establishing user namespace if not established already.
+2026-05-19T10:17:34.3869242Z Establishing network if not established already.
+2026-05-19T10:17:34.4046309Z Mounting volumes.
+2026-05-19T10:17:34.4154718Z Nested mountpoint 
+2026-05-19T10:17:34.4773992Z Nested mountpoint volatile/logs
+2026-05-19T10:17:34.5174593Z Nested mountpoint 
+2026-05-19T10:17:34.6775404Z Nested mountpoint 
+2026-05-19T10:17:34.6782325Z Nested mountpoint 
+2026-05-19T10:17:35.3303518Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T10:17:35.3498860Z Creating container.
+2026-05-19T10:17:35.3509276Z Creating pipes for streaming container io.
+2026-05-19T10:17:35.3514111Z Creating stdout named pipe at /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stdout_cd083ac94af544f0af363ddd9e837d85.
+2026-05-19T10:17:35.3702041Z Successfully created stdout named pipe at: /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stdout_cd083ac94af544f0af363ddd9e837d85.
+2026-05-19T10:17:35.3785105Z Opening named pipe /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stdout_cd083ac94af544f0af363ddd9e837d85 for reading in non-blocking mode.
+2026-05-19T10:17:35.3798339Z Successfully opened named pipe: /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stdout_cd083ac94af544f0af363ddd9e837d85.
+2026-05-19T10:17:35.3806419Z Successfully removed non-blocking flag from /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stdout_cd083ac94af544f0af363ddd9e837d85.
+2026-05-19T10:17:35.3815462Z Creating stderr named pipe at /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stderr_fdef47d452914079bd2a50fa58040e27.
+2026-05-19T10:17:35.3902662Z Successfully created stderr named pipe at: /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stderr_fdef47d452914079bd2a50fa58040e27.
+2026-05-19T10:17:35.3908574Z Opening named pipe /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stderr_fdef47d452914079bd2a50fa58040e27 for reading in non-blocking mode.
+2026-05-19T10:17:35.3912776Z Successfully opened named pipe: /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stderr_fdef47d452914079bd2a50fa58040e27.
+2026-05-19T10:17:35.3989724Z Successfully removed non-blocking flag from /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stderr_fdef47d452914079bd2a50fa58040e27.
+2026-05-19T10:17:35.4000835Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T10:17:36.8014808Z Starting container: 9fa5ae19aecc_clm-ndaflow-v2-2605191449.
+2026-05-19T10:17:36.9840548Z Starting watchers and probes.
+2026-05-19T10:17:37.0121821Z Starting metrics collection.
+2026-05-19T10:17:37.0133464Z Container is running.
+2026-05-19T10:17:37.0135468Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T10:17:37.5060468Z Container start method finished after 4004 ms.
+2026-05-19T10:17:37.5062274Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T10:17:37.5062618Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T10:18:08.6481397Z Container has finished running with exit code: 1.
+2026-05-19T10:18:08.6556664Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T10:18:08.6576518Z Stop and delete container. Retry count = 0
+2026-05-19T10:18:08.6578740Z Stopping container: 9fa5ae19aecc_clm-ndaflow-v2-2605191449.
+2026-05-19T10:18:08.7585879Z Deleting container: 9fa5ae19aecc_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T10:18:09.0679831Z Container spec TerminationMessagePolicy  path 
+2026-05-19T10:18:09.0694782Z Container is terminated. Total time elapsed: 412 ms.
+2026-05-19T10:18:09.0696333Z Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T10:18:09.0786659Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:18:09.1345237Z Site startup probe failed after 31.3888842 seconds.
+2026-05-19T10:18:09.3130357Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:18:09.3518654Z Failed to start site. Revert by stopping site.
+2026-05-19T10:18:09.3951983Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:18:09.4028263Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:18:09.4032547Z Site: clm-ndaflow-v2-2605191449 stopped.
+2026-05-19T10:18:09.4234661Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:18:09.8849437Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:18:10.4296558Z Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 10:20:10
+2026-05-19T10:18:10.4475503Z State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 10:20:10, DetailsLevel: WARN
+2026-05-19T10:18:10.4691830Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 10:18:10 (UTC), DetailsLevel: WARN
+2026-05-19T10:18:11.1334447Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 10:18:10 (UTC), DetailsLevel: WARN
+2026-05-19T10:20:10.4332532Z Site: clm-ndaflow-v2-2605191449 is unblocked.
+2026-05-19T10:47:03.9261848Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 10:18:10 (UTC), DetailsLevel: WARN
+2026-05-19T10:47:05.9168344Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 10:18:10 (UTC), DetailsLevel: WARN
+2026-05-19T10:47:05.9171993Z Container start method called.
+2026-05-19T10:47:05.9181289Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T10:47:05.9183000Z Establishing network.
+2026-05-19T10:47:05.9279093Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T10:47:06.4112041Z Container is starting.
+2026-05-19T10:47:06.4118236Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T10:47:06.4125740Z Establishing user namespace if not established already.
+2026-05-19T10:47:06.4193073Z Establishing network if not established already.
+2026-05-19T10:47:06.4197026Z Mounting volumes.
+2026-05-19T10:47:06.4218706Z Nested mountpoint 
+2026-05-19T10:47:06.4620999Z Nested mountpoint volatile/logs
+2026-05-19T10:47:06.6020238Z Nested mountpoint 
+2026-05-19T10:47:06.6717276Z Nested mountpoint 
+2026-05-19T10:47:06.7420719Z Nested mountpoint 
+2026-05-19T10:47:07.4349901Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T10:47:07.4352044Z Creating container.
+2026-05-19T10:47:07.4353389Z Creating pipes for streaming container io.
+2026-05-19T10:47:07.4354489Z Creating stdout named pipe at /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stdout_417f8dbea55d4040b992c526bd5630ea.
+2026-05-19T10:47:07.4856120Z Successfully created stdout named pipe at: /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stdout_417f8dbea55d4040b992c526bd5630ea.
+2026-05-19T10:47:07.4862252Z Opening named pipe /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stdout_417f8dbea55d4040b992c526bd5630ea for reading in non-blocking mode.
+2026-05-19T10:47:07.5945627Z Successfully opened named pipe: /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stdout_417f8dbea55d4040b992c526bd5630ea.
+2026-05-19T10:47:07.5953458Z Successfully removed non-blocking flag from /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stdout_417f8dbea55d4040b992c526bd5630ea.
+2026-05-19T10:47:07.6056797Z Creating stderr named pipe at /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stderr_e199ffa0081647e79c34d2ee51b668e6.
+2026-05-19T10:47:07.6061229Z Successfully created stderr named pipe at: /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stderr_e199ffa0081647e79c34d2ee51b668e6.
+2026-05-19T10:47:07.6064054Z Opening named pipe /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stderr_e199ffa0081647e79c34d2ee51b668e6 for reading in non-blocking mode.
+2026-05-19T10:47:07.6065792Z Successfully opened named pipe: /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stderr_e199ffa0081647e79c34d2ee51b668e6.
+2026-05-19T10:47:07.6066965Z Successfully removed non-blocking flag from /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stderr_e199ffa0081647e79c34d2ee51b668e6.
+2026-05-19T10:47:07.6856323Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T10:47:09.0447771Z Starting container: 31e256022f6e_clm-ndaflow-v2-2605191449.
+2026-05-19T10:47:09.2831067Z Starting watchers and probes.
+2026-05-19T10:47:09.2954580Z Starting metrics collection.
+2026-05-19T10:47:09.3052597Z Container is running.
+2026-05-19T10:47:09.3054689Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T10:47:09.6268899Z Container start method finished after 3709 ms.
+2026-05-19T10:47:09.7757623Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T10:47:09.7758552Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T10:47:59.4928252Z Container has finished running with exit code: 1.
+2026-05-19T10:47:59.4942776Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T10:47:59.5026634Z Stop and delete container. Retry count = 0
+2026-05-19T10:47:59.5027852Z Stopping container: 31e256022f6e_clm-ndaflow-v2-2605191449.
+2026-05-19T10:47:59.6152754Z Deleting container: 31e256022f6e_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T10:48:00.0295230Z Container spec TerminationMessagePolicy  path 
+2026-05-19T10:48:00.0384393Z Container is terminated. Total time elapsed: 542 ms.
+2026-05-19T10:48:00.0386809Z Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T10:48:00.0753023Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:48:00.1388963Z Site startup probe failed after 50.3217512 seconds.
+2026-05-19T10:48:00.3620929Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:48:00.4125953Z Failed to start site. Revert by stopping site.
+2026-05-19T10:48:00.4233381Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:48:00.4326153Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:48:00.4326467Z Site: clm-ndaflow-v2-2605191449 stopped.
+2026-05-19T10:48:00.4536688Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:48:01.0266310Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:48:01.4780768Z Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 10:50:01
+2026-05-19T10:48:01.4791416Z State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 10:50:01, DetailsLevel: WARN
+2026-05-19T10:48:01.4969925Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 10:48:01 (UTC), DetailsLevel: WARN
+2026-05-19T10:48:02.2304256Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 10:48:01 (UTC), DetailsLevel: WARN
+2026-05-19T10:48:12.2597102Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:50:01, DetailsLevel: WARN
+2026-05-19T10:48:12.2597833Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:48:20.9476938Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:50:01, DetailsLevel: WARN
+2026-05-19T10:48:20.9477604Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:48:26.2853566Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:50:01, DetailsLevel: WARN
+2026-05-19T10:48:26.2853948Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:48:31.4132029Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:50:01, DetailsLevel: WARN
+2026-05-19T10:48:31.4132918Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:48:36.8684292Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:50:01, DetailsLevel: WARN
+2026-05-19T10:48:36.8684623Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:48:42.1197771Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:50:01, DetailsLevel: WARN
+2026-05-19T10:48:42.1199689Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:48:46.5767059Z Site: clm-ndaflow-v2-2605191449 is unblocked.
+2026-05-19T10:49:17.4452883Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:50:01, DetailsLevel: WARN
+2026-05-19T10:49:20.3022516Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:50:01, DetailsLevel: WARN
+2026-05-19T10:49:20.3027872Z Container start method called.
+2026-05-19T10:49:20.3105727Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T10:49:20.3131900Z Establishing network.
+2026-05-19T10:49:20.3205585Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T10:49:20.5438077Z Container is starting.
+2026-05-19T10:49:20.5444263Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T10:49:20.5524969Z Establishing user namespace if not established already.
+2026-05-19T10:49:20.5529947Z Establishing network if not established already.
+2026-05-19T10:49:20.5534001Z Mounting volumes.
+2026-05-19T10:49:20.5545987Z Nested mountpoint 
+2026-05-19T10:49:20.5736561Z Nested mountpoint volatile/logs
+2026-05-19T10:49:20.5947267Z Nested mountpoint 
+2026-05-19T10:49:20.6037221Z Nested mountpoint 
+2026-05-19T10:49:20.6752870Z Nested mountpoint 
+2026-05-19T10:49:21.3159868Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T10:49:21.3160998Z Creating container.
+2026-05-19T10:49:21.3161790Z Creating pipes for streaming container io.
+2026-05-19T10:49:21.3162515Z Creating stdout named pipe at /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stdout_5a88ef7ae94e458fa27b70bbd3cfec10.
+2026-05-19T10:49:21.3272093Z Successfully created stdout named pipe at: /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stdout_5a88ef7ae94e458fa27b70bbd3cfec10.
+2026-05-19T10:49:21.3279388Z Opening named pipe /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stdout_5a88ef7ae94e458fa27b70bbd3cfec10 for reading in non-blocking mode.
+2026-05-19T10:49:21.3283382Z Successfully opened named pipe: /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stdout_5a88ef7ae94e458fa27b70bbd3cfec10.
+2026-05-19T10:49:21.3286053Z Successfully removed non-blocking flag from /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stdout_5a88ef7ae94e458fa27b70bbd3cfec10.
+2026-05-19T10:49:21.3364341Z Creating stderr named pipe at /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stderr_d880cdd9ad9743eb8dd6df7a57ca9919.
+2026-05-19T10:49:21.3368384Z Successfully created stderr named pipe at: /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stderr_d880cdd9ad9743eb8dd6df7a57ca9919.
+2026-05-19T10:49:21.3369569Z Opening named pipe /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stderr_d880cdd9ad9743eb8dd6df7a57ca9919 for reading in non-blocking mode.
+2026-05-19T10:49:21.3372207Z Successfully opened named pipe: /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stderr_d880cdd9ad9743eb8dd6df7a57ca9919.
+2026-05-19T10:49:21.3374974Z Successfully removed non-blocking flag from /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stderr_d880cdd9ad9743eb8dd6df7a57ca9919.
+2026-05-19T10:49:21.3377863Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T10:49:21.8343675Z Starting container: 2d4eed092e67_clm-ndaflow-v2-2605191449.
+2026-05-19T10:49:21.9554437Z Starting watchers and probes.
+2026-05-19T10:49:21.9653878Z Starting metrics collection.
+2026-05-19T10:49:21.9659382Z Container is running.
+2026-05-19T10:49:21.9660695Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T10:49:22.3172038Z Container start method finished after 2014 ms.
+2026-05-19T10:49:22.3455835Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T10:49:22.3459472Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T10:49:50.7441466Z Container has finished running with exit code: 1.
+2026-05-19T10:49:50.7526609Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T10:49:50.7540953Z Stop and delete container. Retry count = 0
+2026-05-19T10:49:50.7541933Z Stopping container: 2d4eed092e67_clm-ndaflow-v2-2605191449.
+2026-05-19T10:49:50.9355332Z Deleting container: 2d4eed092e67_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T10:49:51.3266757Z Container spec TerminationMessagePolicy  path 
+2026-05-19T10:49:51.3268880Z Container is terminated. Total time elapsed: 573 ms.
+2026-05-19T10:49:51.3269811Z Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T10:49:51.3270878Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:49:51.3455624Z Site startup probe failed after 28.9989898 seconds.
+2026-05-19T10:49:51.7676706Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:49:51.7687626Z Failed to start site. Revert by stopping site.
+2026-05-19T10:49:51.7698974Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:49:51.7702240Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:49:51.7702388Z Site: clm-ndaflow-v2-2605191449 stopped.
+2026-05-19T10:49:51.8389354Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:49:52.1910006Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:49:52.7839157Z Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 10:51:52
+2026-05-19T10:49:52.7844118Z State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:49:52.7850962Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 10:49:52 (UTC), DetailsLevel: WARN
+2026-05-19T10:49:53.3092493Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 10:49:52 (UTC), DetailsLevel: WARN
+2026-05-19T10:49:57.6479373Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:49:57.6480341Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:50:02.8074796Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:50:02.8075108Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:50:07.9743963Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:50:07.9746734Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:50:18.0660203Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:50:18.0660767Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:50:28.2249244Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:50:28.2250544Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:50:38.4030227Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:50:38.4031833Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:50:48.5237234Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:50:48.5237759Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:50:58.6961467Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:50:58.6962470Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:51:08.8446450Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:51:08.8447013Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:51:19.0399568Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:51:19.0401636Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:51:29.1779814Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:51:29.1783323Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:51:39.3089336Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:51:39.3089871Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:51:49.3843063Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:51:49.3843361Z Start site prohibitted because the site is being blocked.
+2026-05-19T10:51:52.7894987Z Site: clm-ndaflow-v2-2605191449 is unblocked.
+2026-05-19T10:51:59.5152122Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:52:01.1215309Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:52:01.1220896Z Container start method called.
+2026-05-19T10:52:01.1239325Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T10:52:01.1241450Z Establishing network.
+2026-05-19T10:52:01.1243004Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T10:52:01.3652297Z Container is starting.
+2026-05-19T10:52:01.3653150Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T10:52:01.3654155Z Establishing user namespace if not established already.
+2026-05-19T10:52:01.3654976Z Establishing network if not established already.
+2026-05-19T10:52:01.3655861Z Mounting volumes.
+2026-05-19T10:52:01.3846124Z Nested mountpoint 
+2026-05-19T10:52:01.4042979Z Nested mountpoint volatile/logs
+2026-05-19T10:52:01.4253131Z Nested mountpoint 
+2026-05-19T10:52:01.4454834Z Nested mountpoint 
+2026-05-19T10:52:01.4553160Z Nested mountpoint 
+2026-05-19T10:52:02.2880673Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T10:52:02.2884534Z Creating container.
+2026-05-19T10:52:02.2972565Z Creating pipes for streaming container io.
+2026-05-19T10:52:02.2977949Z Creating stdout named pipe at /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stdout_474d92baaf344106ae99d9255a39d9a4.
+2026-05-19T10:52:02.2981596Z Successfully created stdout named pipe at: /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stdout_474d92baaf344106ae99d9255a39d9a4.
+2026-05-19T10:52:02.2982899Z Opening named pipe /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stdout_474d92baaf344106ae99d9255a39d9a4 for reading in non-blocking mode.
+2026-05-19T10:52:02.3069202Z Successfully opened named pipe: /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stdout_474d92baaf344106ae99d9255a39d9a4.
+2026-05-19T10:52:02.3072786Z Successfully removed non-blocking flag from /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stdout_474d92baaf344106ae99d9255a39d9a4.
+2026-05-19T10:52:02.3263559Z Creating stderr named pipe at /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stderr_698bced4acd0462983f2a98030a7cf9d.
+2026-05-19T10:52:02.3269493Z Successfully created stderr named pipe at: /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stderr_698bced4acd0462983f2a98030a7cf9d.
+2026-05-19T10:52:02.3270642Z Opening named pipe /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stderr_698bced4acd0462983f2a98030a7cf9d for reading in non-blocking mode.
+2026-05-19T10:52:02.3271835Z Successfully opened named pipe: /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stderr_698bced4acd0462983f2a98030a7cf9d.
+2026-05-19T10:52:02.3272965Z Successfully removed non-blocking flag from /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stderr_698bced4acd0462983f2a98030a7cf9d.
+2026-05-19T10:52:02.3274536Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T10:52:04.1743848Z Starting container: 0d248bab7bc2_clm-ndaflow-v2-2605191449.
+2026-05-19T10:52:04.3839546Z Starting watchers and probes.
+2026-05-19T10:52:04.3847258Z Starting metrics collection.
+2026-05-19T10:52:04.3850721Z Container is running.
+2026-05-19T10:52:04.3851937Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T10:52:04.8474205Z Container start method finished after 3625 ms.
+2026-05-19T10:52:04.8495465Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T10:52:04.8496130Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T10:52:50.3326672Z Container has finished running with exit code: 1.
+2026-05-19T10:52:50.3330653Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T10:52:50.3927851Z Stop and delete container. Retry count = 0
+2026-05-19T10:52:50.3929311Z Stopping container: 0d248bab7bc2_clm-ndaflow-v2-2605191449.
+2026-05-19T10:52:50.4731860Z Deleting container: 0d248bab7bc2_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T10:52:50.7147615Z Container spec TerminationMessagePolicy  path 
+2026-05-19T10:52:50.7346154Z Container is terminated. Total time elapsed: 400 ms.
+2026-05-19T10:52:50.7351530Z Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T10:52:50.7435875Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:52:50.7549719Z Site startup probe failed after 45.8665921 seconds.
+2026-05-19T10:52:51.0948671Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:52:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:52:51.1266575Z Failed to start site. Revert by stopping site.
+2026-05-19T10:52:51.1272513Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:52:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:52:51.1474086Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:52:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:52:51.1474639Z Site: clm-ndaflow-v2-2605191449 stopped.

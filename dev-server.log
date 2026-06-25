@@ -1,0 +1,111 @@
+
+> ndaflow-ai@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.5
+  - Local:        http://localhost:3000
+  - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 3.3s
+ ○ Compiling / ...
+ ✓ Compiled / in 4.7s (457 modules)
+ GET / 307 in 5041ms
+ ○ Compiling /login ...
+ ✓ Compiled /login in 4.1s (527 modules)
+ GET /login 200 in 4325ms
+ GET / 307 in 66ms
+ GET /login 200 in 56ms
+ GET /login 200 in 286ms
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 7.3s (987 modules)
+ ✓ Compiled /api/requests in 356ms (506 modules)
+[requests] store path: C:\Contract management\NDA\.data\requests.json
+ GET /api/requests 200 in 710ms
+ GET /api/requests 200 in 726ms
+ ✓ Compiled /api/signatures in 286ms (508 modules)
+[signatures] store path: C:\Contract management\NDA\.data\signatures.json
+ GET /api/signatures 200 in 389ms
+[requests] store path: C:\Contract management\NDA\.data\requests.json
+ GET /api/requests 200 in 59ms
+ GET /api/signatures 200 in 30ms
+ GET /api/requests 200 in 65ms
+ GET /api/signatures 200 in 62ms
+ GET /api/requests 200 in 56ms
+ GET /api/signatures 200 in 23ms
+ GET /api/requests 200 in 31ms
+ GET /api/signatures 200 in 25ms
+ GET /api/requests 200 in 34ms
+ GET /api/signatures 200 in 15ms
+ GET /api/requests 200 in 50ms
+ GET /api/signatures 200 in 17ms
+ GET /api/requests 200 in 48ms
+ GET /api/signatures 200 in 28ms
+ GET /api/requests 200 in 30ms
+ GET /api/signatures 200 in 20ms
+ GET /api/requests 200 in 55ms
+ GET /api/signatures 200 in 25ms
+ GET /api/requests 200 in 14ms
+ GET /api/signatures 200 in 12ms
+ GET /api/requests 200 in 53ms
+ GET /api/signatures 200 in 38ms
+ GET /api/requests 200 in 49ms
+ GET /api/signatures 200 in 21ms
+ GET /api/requests 200 in 33ms
+ GET /api/signatures 200 in 29ms
+ GET /api/requests 200 in 64ms
+ GET /api/signatures 200 in 47ms
+ GET /api/requests 200 in 31ms
+ GET /api/signatures 200 in 25ms
+ GET /api/requests 200 in 45ms
+ GET /api/signatures 200 in 31ms
+ GET /api/requests 200 in 43ms
+ GET /api/signatures 200 in 28ms
+ GET /api/requests 200 in 54ms
+ GET /api/signatures 200 in 56ms
+ GET /api/requests 200 in 24ms
+ GET /api/signatures 200 in 27ms
+ GET /api/requests 200 in 37ms
+ GET /api/signatures 200 in 26ms
+ GET /api/requests 200 in 39ms
+ GET /api/signatures 200 in 35ms
+ GET /api/requests 200 in 45ms
+ GET /api/signatures 200 in 36ms
+ GET /api/requests 200 in 30ms
+ GET /api/signatures 200 in 20ms
+ GET /api/requests 200 in 16ms
+ GET /api/signatures 200 in 15ms
+ GET /api/requests 200 in 30ms
+ GET /api/signatures 200 in 22ms
+ GET /api/requests 200 in 25ms
+ GET /api/signatures 200 in 18ms
+ GET /api/requests 200 in 24ms
+ GET /api/signatures 200 in 27ms
+ GET /api/requests 200 in 32ms
+ GET /api/signatures 200 in 20ms
+ GET /api/requests 200 in 48ms
+ GET /api/signatures 200 in 16ms
+ GET /api/requests 200 in 14ms
+ GET /api/signatures 200 in 13ms
+ GET /api/requests 200 in 18ms
+ GET /api/signatures 200 in 12ms
+ GET /api/requests 200 in 18ms
+ GET /api/signatures 200 in 12ms
+ GET /api/requests 200 in 15ms
+ GET /api/signatures 200 in 13ms
+ GET /api/requests 200 in 25ms
+ GET /api/signatures 200 in 16ms
+ GET /api/requests 200 in 34ms
+ GET /api/signatures 200 in 19ms
+ GET /api/requests 200 in 18ms
+ GET /api/signatures 200 in 17ms
+ GET /api/requests 200 in 25ms
+ GET /api/signatures 200 in 18ms
+ GET /api/requests 200 in 43ms
+ GET /api/signatures 200 in 16ms
+ GET /api/requests 200 in 132ms
+ GET /api/requests 200 in 120ms
+ GET /api/signatures 200 in 47ms
+ GET /api/signatures 200 in 46ms
+ GET /login 200 in 893ms
+ GET /login 200 in 439ms

@@ -1,0 +1,85 @@
+2026-05-19T09:21:08.7088314+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-05-19T09:21:11.3984667+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-05-19T09:21:11.4085120+00:00 ContainerStatus: Container start method called.
+2026-05-19T09:21:11.4203365+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:21:11.4278710+00:00 ContainerStatus: Establishing network.
+2026-05-19T09:21:11.4285953+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:21:11.7930388+00:00 ContainerStatus: Container is starting.
+2026-05-19T09:21:11.7939048+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:21:11.7946892+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-05-19T09:21:11.8142261+00:00 ContainerStatus: Establishing network if not established already.
+2026-05-19T09:21:11.8147451+00:00 ContainerStatus: Mounting volumes.
+2026-05-19T09:21:11.8454338+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:21:11.9845069+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-05-19T09:21:12.0451356+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:21:12.1460191+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:21:12.1772483+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:21:12.4798840+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:21:12.4852171+00:00 ContainerStatus: Creating container.
+2026-05-19T09:21:12.4866017+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-05-19T09:21:12.4878660+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stdout_ce5c630d9c394904904d3a22c7f67017.
+2026-05-19T09:21:12.4961060+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stdout_ce5c630d9c394904904d3a22c7f67017.
+2026-05-19T09:21:12.4977265+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stdout_ce5c630d9c394904904d3a22c7f67017 for reading in non-blocking mode.
+2026-05-19T09:21:12.5053671+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stdout_ce5c630d9c394904904d3a22c7f67017.
+2026-05-19T09:21:12.5063589+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stdout_ce5c630d9c394904904d3a22c7f67017.
+2026-05-19T09:21:12.5166023+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stderr_e9e03f78783846cd913054129de091ea.
+2026-05-19T09:21:12.5177846+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stderr_e9e03f78783846cd913054129de091ea.
+2026-05-19T09:21:12.5261163+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stderr_e9e03f78783846cd913054129de091ea for reading in non-blocking mode.
+2026-05-19T09:21:12.5271440+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stderr_e9e03f78783846cd913054129de091ea.
+2026-05-19T09:21:12.5278735+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/3c57a6bc65c1_clm-ndaflow-v2-2605191449/stderr_e9e03f78783846cd913054129de091ea.
+2026-05-19T09:21:12.5377917+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:21:14.1278652+00:00 ContainerStatus: Starting container: 3c57a6bc65c1_clm-ndaflow-v2-2605191449.
+2026-05-19T09:21:14.4867152+00:00 ContainerStatus: Starting watchers and probes.
+2026-05-19T09:21:14.6788517+00:00 ContainerStatus: Starting metrics collection.
+2026-05-19T09:21:14.7092578+00:00 ContainerStatus: Container is running.
+2026-05-19T09:21:14.7098378+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:21:15.0630037+00:00 ContainerStream:    _____                               
+2026-05-19T09:21:15.1206273+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-05-19T09:21:15.1206951+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-05-19T09:21:15.1207001+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-05-19T09:21:15.1207041+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-05-19T09:21:15.1207081+00:00 ContainerStream:         \/      \/                  \/ 
+2026-05-19T09:21:15.1207135+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-05-19T09:21:15.1207188+00:00 ContainerStream: 
+2026-05-19T09:21:15.1207254+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-05-19T09:21:15.1207295+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-05-19T09:21:15.1207336+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-05-19T09:21:15.1207374+00:00 ContainerStream: Instance Name    : lw0sdlwk000DCM
+2026-05-19T09:21:15.1207622+00:00 ContainerStream: Instance Id      : 978831a12b989a546f04a417ac73afab2417e3847711476ee09674c03af7af1b
+2026-05-19T09:21:15.1207669+00:00 ContainerStream: 
+2026-05-19T09:21:15.1207710+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-05-19T09:21:15.5137948+00:00 ContainerStatus: Container start method finished after 4104 ms.
+2026-05-19T09:21:15.5341951+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:21:15.5953239+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:21:24.2842975+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-05-19T09:21:24.3254459+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-05-19T09:21:24.4137938+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-05-19T09:21:50.1933612+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-05-19T09:21:50.1934402+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-05-19T09:21:50.4666789+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-05-19T09:21:50.5480846+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-05-19T09:21:50.5766854+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-05-19T09:21:50.5767352+00:00 ContainerStream: done.
+2026-05-19T09:21:50.6364055+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-05-19T09:21:50.9497963+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-05-19T09:21:51.2715357+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-05-19T09:21:51.2716390+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-05-19T09:21:51.2716443+00:00 ContainerStream: Build Operation ID: 3c06637e-3966-4ac6-ab5a-2e7b18a76e91
+2026-05-19T09:21:51.8123614+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-05-19T09:21:51.8322129+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-05-19T09:21:51.9534594+00:00 ContainerStream: Running #!/bin/sh
+2026-05-19T09:21:51.9535374+00:00 ContainerStream: 
+2026-05-19T09:21:51.9535477+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-05-19T09:21:51.9535611+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-05-19T09:21:51.9535733+00:00 ContainerStream: 
+2026-05-19T09:21:51.9535785+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-05-19T09:21:51.9535825+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-05-19T09:21:51.9535859+00:00 ContainerStream: 		export PORT=8080
+2026-05-19T09:21:51.9535890+00:00 ContainerStream: fi
+2026-05-19T09:21:51.9535920+00:00 ContainerStream: 
+2026-05-19T09:21:51.9535979+00:00 ContainerStream: node /opt/startup/default-static-site.js
+2026-05-19T09:21:55.0601544+00:00 ContainerStatus: Site startup probe succeeded after 39.2330556 seconds.
+2026-05-19T09:21:55.5708724+00:00 ContainerStatus: State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 39.2330556 seconds., DetailsLevel: INFO
+2026-05-19T09:21:56.5153067+00:00 ContainerStatus: Site started.
+2026-05-19T09:21:56.5159602+00:00 ContainerStatus: State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 05/19/2026 09:21:56 (UTC), DetailsLevel: INFO
+2026-05-19T09:21:56.9777220+00:00 ContainerStatus: Site is running with patch version NODE 22.22.2

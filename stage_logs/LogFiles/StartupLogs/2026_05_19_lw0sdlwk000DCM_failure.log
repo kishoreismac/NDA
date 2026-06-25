@@ -1,0 +1,1241 @@
+2026-05-19T09:22:42.4575584+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-05-19T09:22:44.5740266+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-05-19T09:22:44.5741638+00:00 ContainerStatus: Container start method called.
+2026-05-19T09:22:44.5742211+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:22:44.5742999+00:00 ContainerStatus: Establishing network.
+2026-05-19T09:22:44.5743924+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:22:46.4146249+00:00 ContainerStatus: Image appsvc/node:22-lts_20260504.4.tuxprod is pulled from registry 10.1.0.6:13209
+2026-05-19T09:22:46.4560595+00:00 ContainerStatus: Container is starting.
+2026-05-19T09:22:46.4647818+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:22:46.4652796+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-05-19T09:22:46.5045468+00:00 ContainerStatus: Establishing network if not established already.
+2026-05-19T09:22:46.5051068+00:00 ContainerStatus: Mounting volumes.
+2026-05-19T09:22:46.5054833+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:22:46.5748210+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-05-19T09:22:46.6872453+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:22:46.7453976+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:22:46.8582099+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:22:48.0728938+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:22:48.0730404+00:00 ContainerStatus: Creating container.
+2026-05-19T09:22:48.0731378+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-05-19T09:22:48.0732182+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stdout_9650c41c1f48471fb61a9c996a7efb84.
+2026-05-19T09:22:48.0816381+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stdout_9650c41c1f48471fb61a9c996a7efb84.
+2026-05-19T09:22:48.0820131+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stdout_9650c41c1f48471fb61a9c996a7efb84 for reading in non-blocking mode.
+2026-05-19T09:22:48.0823182+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stdout_9650c41c1f48471fb61a9c996a7efb84.
+2026-05-19T09:22:48.0838237+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stdout_9650c41c1f48471fb61a9c996a7efb84.
+2026-05-19T09:22:48.0843175+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stderr_3708a85fb1bb4c368272469ea5737ada.
+2026-05-19T09:22:48.1132491+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stderr_3708a85fb1bb4c368272469ea5737ada.
+2026-05-19T09:22:48.1135022+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stderr_3708a85fb1bb4c368272469ea5737ada for reading in non-blocking mode.
+2026-05-19T09:22:48.1139410+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stderr_3708a85fb1bb4c368272469ea5737ada.
+2026-05-19T09:22:48.1235478+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/a8f766364da8_clm-ndaflow-v2-2605191449/stderr_3708a85fb1bb4c368272469ea5737ada.
+2026-05-19T09:22:48.1445466+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:22:49.5510078+00:00 ContainerStatus: Starting container: a8f766364da8_clm-ndaflow-v2-2605191449.
+2026-05-19T09:22:49.8106592+00:00 ContainerStatus: Starting watchers and probes.
+2026-05-19T09:22:49.8116003+00:00 ContainerStatus: Starting metrics collection.
+2026-05-19T09:22:49.8120394+00:00 ContainerStatus: Container is running.
+2026-05-19T09:22:49.8121485+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:22:50.3140104+00:00 ContainerStatus: Container start method finished after 5700 ms.
+2026-05-19T09:22:50.3241166+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:22:50.3242195+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:22:50.5135218+00:00 ContainerStream:    _____                               
+2026-05-19T09:22:50.5340899+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-05-19T09:22:50.5341317+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-05-19T09:22:50.5341619+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-05-19T09:22:50.5341670+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-05-19T09:22:50.5343194+00:00 ContainerStream:         \/      \/                  \/ 
+2026-05-19T09:22:50.5343280+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-05-19T09:22:50.5343308+00:00 ContainerStream: 
+2026-05-19T09:22:50.5343355+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-05-19T09:22:50.5343397+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-05-19T09:22:50.5343432+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-05-19T09:22:50.5343468+00:00 ContainerStream: Instance Name    : lw0sdlwk000DCM
+2026-05-19T09:22:50.5343616+00:00 ContainerStream: Instance Id      : 978831a12b989a546f04a417ac73afab2417e3847711476ee09674c03af7af1b
+2026-05-19T09:22:50.5343645+00:00 ContainerStream: 
+2026-05-19T09:22:50.5343681+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-05-19T09:23:03.0085474+00:00 ContainerStatus: Site startup probe failed after 12.6229615 seconds.
+2026-05-19T09:23:03.8437035+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: ERR
+2026-05-19T09:23:03.9427677+00:00 ContainerStatus: Failed to start site. Revert by stopping site.
+2026-05-19T09:23:03.9946575+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: ERR
+2026-05-19T09:23:04.1538738+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: ERR
+2026-05-19T09:23:04.1945494+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:23:04.5265057+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-05-19T09:23:04.5277460+00:00 ContainerStatus: Stopping container: a8f766364da8_clm-ndaflow-v2-2605191449.
+2026-05-19T09:23:09.7528069+00:00 ContainerStatus: Deleting container: a8f766364da8_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T09:23:10.6651063+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-05-19T09:23:10.7181759+00:00 ContainerStatus: Container is terminated. Total time elapsed: 6492 ms.
+2026-05-19T09:23:10.7362886+00:00 ContainerStatus: Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T09:23:10.7473198+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:23:10.7976684+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 stopped.
+========== New Cold Start Attempt (2026-05-19T09:23:33.9780031+00:00) ==========
+2026-05-19T09:23:33.9780031+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 05/19/2026 09:21:56 (UTC), DetailsLevel: INFO
+2026-05-19T09:23:33.9792778+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:23:34.0793564+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-05-19T09:23:34.0994337+00:00 ContainerStatus: Stopping container: 3c57a6bc65c1_clm-ndaflow-v2-2605191449.
+2026-05-19T09:23:39.5131040+00:00 ContainerStatus: Deleting container: 3c57a6bc65c1_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T09:23:39.7550448+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-05-19T09:23:39.7552043+00:00 ContainerStatus: Container is terminated. Total time elapsed: 5775 ms.
+2026-05-19T09:23:39.7554123+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 stopped.
+2026-05-19T09:24:00.6789967+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:23:12 (UTC), DetailsLevel: ERR
+2026-05-19T09:24:02.5032311+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:23:12 (UTC), DetailsLevel: ERR
+2026-05-19T09:24:02.5033495+00:00 ContainerStatus: Container start method called.
+2026-05-19T09:24:02.5034055+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:24:02.5034821+00:00 ContainerStatus: Establishing network.
+2026-05-19T09:24:02.5035774+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:24:02.8799279+00:00 ContainerStatus: Container is starting.
+2026-05-19T09:24:02.8800614+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:24:02.8801740+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-05-19T09:24:02.8802951+00:00 ContainerStatus: Establishing network if not established already.
+2026-05-19T09:24:02.8804475+00:00 ContainerStatus: Mounting volumes.
+2026-05-19T09:24:02.8807113+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:24:02.9192608+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-05-19T09:24:02.9316114+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:24:02.9323187+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:24:02.9415589+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:24:05.3359308+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:24:05.3360515+00:00 ContainerStatus: Creating container.
+2026-05-19T09:24:05.3361348+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-05-19T09:24:05.3362320+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stdout_52724582268149e5b5b9b15eea64ae58.
+2026-05-19T09:24:05.4046693+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stdout_52724582268149e5b5b9b15eea64ae58.
+2026-05-19T09:24:05.4147511+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stdout_52724582268149e5b5b9b15eea64ae58 for reading in non-blocking mode.
+2026-05-19T09:24:05.4150930+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stdout_52724582268149e5b5b9b15eea64ae58.
+2026-05-19T09:24:05.4160519+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stdout_52724582268149e5b5b9b15eea64ae58.
+2026-05-19T09:24:05.4163772+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stderr_694584ef42214bdfb9280a0d497ca528.
+2026-05-19T09:24:05.4250620+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stderr_694584ef42214bdfb9280a0d497ca528.
+2026-05-19T09:24:05.4256042+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stderr_694584ef42214bdfb9280a0d497ca528 for reading in non-blocking mode.
+2026-05-19T09:24:05.4258154+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stderr_694584ef42214bdfb9280a0d497ca528.
+2026-05-19T09:24:05.4259295+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/7b919432b1b7_clm-ndaflow-v2-2605191449/stderr_694584ef42214bdfb9280a0d497ca528.
+2026-05-19T09:24:05.5037546+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:24:08.6594778+00:00 ContainerStatus: Starting container: 7b919432b1b7_clm-ndaflow-v2-2605191449.
+2026-05-19T09:24:09.3423031+00:00 ContainerStatus: Starting watchers and probes.
+2026-05-19T09:24:09.3550824+00:00 ContainerStatus: Starting metrics collection.
+2026-05-19T09:24:09.4246373+00:00 ContainerStream:    _____                               
+2026-05-19T09:24:09.4830294+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-05-19T09:24:09.4830562+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-05-19T09:24:09.4830591+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-05-19T09:24:09.4830614+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-05-19T09:24:09.4830664+00:00 ContainerStream:         \/      \/                  \/ 
+2026-05-19T09:24:09.4830690+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-05-19T09:24:09.4830770+00:00 ContainerStream: 
+2026-05-19T09:24:09.4830806+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-05-19T09:24:09.4830833+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-05-19T09:24:09.4830855+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-05-19T09:24:09.4830877+00:00 ContainerStream: Instance Name    : lw0sdlwk000DCM
+2026-05-19T09:24:09.4830991+00:00 ContainerStream: Instance Id      : 978831a12b989a546f04a417ac73afab2417e3847711476ee09674c03af7af1b
+2026-05-19T09:24:09.4831031+00:00 ContainerStream: 
+2026-05-19T09:24:09.4831053+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-05-19T09:24:09.6840975+00:00 ContainerStatus: Container is running.
+2026-05-19T09:24:09.6847365+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:24:10.8005019+00:00 ContainerStatus: Container start method finished after 8296 ms.
+2026-05-19T09:24:10.8396045+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:24:10.8404557+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:24:21.9962690+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-05-19T09:24:21.9990699+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-05-19T09:24:22.0872398+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-05-19T09:25:09.3905614+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-05-19T09:25:09.3917026+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-05-19T09:25:10.1855726+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-05-19T09:25:10.2669355+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-05-19T09:25:10.2867694+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-05-19T09:25:10.2868206+00:00 ContainerStream: done.
+2026-05-19T09:25:10.3460218+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-05-19T09:25:10.8486101+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-05-19T09:25:11.2300354+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-05-19T09:25:11.2307912+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-05-19T09:25:11.2312830+00:00 ContainerStream: Build Operation ID: a1e70a82-2606-4559-ac57-ad4819cae5cd
+2026-05-19T09:25:12.3457069+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-05-19T09:25:12.4063749+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-05-19T09:25:12.5280678+00:00 ContainerStream: Running #!/bin/sh
+2026-05-19T09:25:12.5281149+00:00 ContainerStream: 
+2026-05-19T09:25:12.5281186+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-05-19T09:25:12.5281229+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-05-19T09:25:12.5281248+00:00 ContainerStream: 
+2026-05-19T09:25:12.5281269+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-05-19T09:25:12.5281368+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-05-19T09:25:12.5281391+00:00 ContainerStream: 		export PORT=8080
+2026-05-19T09:25:12.5281409+00:00 ContainerStream: fi
+2026-05-19T09:25:12.5281427+00:00 ContainerStream: 
+2026-05-19T09:25:12.5281448+00:00 ContainerStream: PATH="$PATH:/home/site/wwwroot" node server.js
+2026-05-19T09:25:13.4147570+00:00 ContainerStream: node:internal/modules/cjs/loader:1386
+2026-05-19T09:25:13.4337804+00:00 ContainerStream:   throw err;
+2026-05-19T09:25:13.4337874+00:00 ContainerStream:   ^
+2026-05-19T09:25:13.4337980+00:00 ContainerStream: 
+2026-05-19T09:25:13.4338008+00:00 ContainerStream: Error: Cannot find module '/home/site/wwwroot/server.js'
+2026-05-19T09:25:13.4338034+00:00 ContainerStream:     at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+2026-05-19T09:25:13.4338058+00:00 ContainerStream:     at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+2026-05-19T09:25:13.4338083+00:00 ContainerStream:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+2026-05-19T09:25:13.4338106+00:00 ContainerStream:     at Function._load (node:internal/modules/cjs/loader:1192:37)
+2026-05-19T09:25:13.4338150+00:00 ContainerStream:     at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+2026-05-19T09:25:13.4338175+00:00 ContainerStream:     at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+2026-05-19T09:25:13.4338200+00:00 ContainerStream:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+2026-05-19T09:25:13.4338223+00:00 ContainerStream:     at node:internal/main/run_main_module:36:49 {
+2026-05-19T09:25:13.4338246+00:00 ContainerStream:   code: 'MODULE_NOT_FOUND',
+2026-05-19T09:25:13.4338268+00:00 ContainerStream:   requireStack: []
+2026-05-19T09:25:13.4338292+00:00 ContainerStream: }
+2026-05-19T09:25:13.4338821+00:00 ContainerStream: 
+2026-05-19T09:25:13.4338872+00:00 ContainerStream: Node.js v22.22.2
+2026-05-19T09:25:13.5935505+00:00 ContainerStatus: Container has finished running with exit code: 1.
+2026-05-19T09:25:13.5942103+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:25:13.5954134+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-05-19T09:25:13.5955178+00:00 ContainerStatus: Stopping container: 7b919432b1b7_clm-ndaflow-v2-2605191449.
+2026-05-19T09:25:13.7945196+00:00 ContainerStatus: Deleting container: 7b919432b1b7_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T09:25:14.2087415+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-05-19T09:25:14.2365144+00:00 ContainerStatus: Container is terminated. Total time elapsed: 632 ms.
+2026-05-19T09:25:14.2368111+00:00 ContainerStatus: Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T09:25:14.2467075+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:23:03, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:25:14.2581439+00:00 ContainerStatus: Site startup probe failed after 63.407238 seconds.
+2026-05-19T09:25:14.7387971+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:25:14.7665267+00:00 ContainerStatus: Failed to start site. Revert by stopping site.
+2026-05-19T09:25:14.7668859+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:25:14.7675866+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:25:14.7676116+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 stopped.
+========== New Cold Start Attempt (2026-05-19T09:25:14.7876653+00:00) ==========
+2026-05-19T09:25:14.7876653+00:00 ContainerStatus: State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:25:15.2297393+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:25:16.0240422+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:25:16 (UTC), DetailsLevel: ERR
+2026-05-19T09:25:16.8876199+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:25:16 (UTC), DetailsLevel: ERR
+2026-05-19T09:28:15.8653281+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:25:16 (UTC), DetailsLevel: ERR
+2026-05-19T09:28:17.5059743+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:25:16 (UTC), DetailsLevel: ERR
+2026-05-19T09:28:17.5158252+00:00 ContainerStatus: Container start method called.
+2026-05-19T09:28:17.5160045+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:28:17.5536160+00:00 ContainerStatus: Establishing network.
+2026-05-19T09:28:17.5540243+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:28:17.7672614+00:00 ContainerStatus: Container is starting.
+2026-05-19T09:28:17.7748298+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:28:17.7851259+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-05-19T09:28:17.7852720+00:00 ContainerStatus: Establishing network if not established already.
+2026-05-19T09:28:17.7853842+00:00 ContainerStatus: Mounting volumes.
+2026-05-19T09:28:17.7857097+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:28:17.8573925+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-05-19T09:28:17.9052083+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:28:17.9268126+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:28:17.9374256+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:28:18.3089740+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:28:18.3095763+00:00 ContainerStatus: Creating container.
+2026-05-19T09:28:18.3097145+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-05-19T09:28:18.3098361+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stdout_afd31cd29fa9431caca3f349cf5944c6.
+2026-05-19T09:28:18.3100783+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stdout_afd31cd29fa9431caca3f349cf5944c6.
+2026-05-19T09:28:18.3485064+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stdout_afd31cd29fa9431caca3f349cf5944c6 for reading in non-blocking mode.
+2026-05-19T09:28:18.3488187+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stdout_afd31cd29fa9431caca3f349cf5944c6.
+2026-05-19T09:28:18.3489087+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stdout_afd31cd29fa9431caca3f349cf5944c6.
+2026-05-19T09:28:18.3490676+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stderr_f410d713afaa403cb798c283310c6bde.
+2026-05-19T09:28:18.3492168+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stderr_f410d713afaa403cb798c283310c6bde.
+2026-05-19T09:28:18.3492891+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stderr_f410d713afaa403cb798c283310c6bde for reading in non-blocking mode.
+2026-05-19T09:28:18.3493818+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stderr_f410d713afaa403cb798c283310c6bde.
+2026-05-19T09:28:18.3494542+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/83a8b0ceb16f_clm-ndaflow-v2-2605191449/stderr_f410d713afaa403cb798c283310c6bde.
+2026-05-19T09:28:18.3495775+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:28:18.9660358+00:00 ContainerStatus: Starting container: 83a8b0ceb16f_clm-ndaflow-v2-2605191449.
+2026-05-19T09:28:19.0894160+00:00 ContainerStatus: Starting watchers and probes.
+2026-05-19T09:28:19.0907129+00:00 ContainerStatus: Starting metrics collection.
+2026-05-19T09:28:19.0991974+00:00 ContainerStatus: Container is running.
+2026-05-19T09:28:19.0996393+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:28:19.1894947+00:00 ContainerStream:    _____                               
+2026-05-19T09:28:19.1895380+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-05-19T09:28:19.1895404+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-05-19T09:28:19.1895427+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-05-19T09:28:19.1895442+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-05-19T09:28:19.1895458+00:00 ContainerStream:         \/      \/                  \/ 
+2026-05-19T09:28:19.1895472+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-05-19T09:28:19.1895487+00:00 ContainerStream: 
+2026-05-19T09:28:19.1895506+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-05-19T09:28:19.1895528+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-05-19T09:28:19.1895631+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-05-19T09:28:19.1895647+00:00 ContainerStream: Instance Name    : lw0sdlwk000DCM
+2026-05-19T09:28:19.1895665+00:00 ContainerStream: Instance Id      : 978831a12b989a546f04a417ac73afab2417e3847711476ee09674c03af7af1b
+2026-05-19T09:28:19.1895678+00:00 ContainerStream: 
+2026-05-19T09:28:19.1895694+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-05-19T09:28:19.3106430+00:00 ContainerStatus: Container start method finished after 1794 ms.
+2026-05-19T09:28:19.3404743+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:28:19.3405532+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:28:24.3839044+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-05-19T09:28:24.4057136+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-05-19T09:28:24.4448126+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-05-19T09:28:46.0453037+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-05-19T09:28:46.0648434+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-05-19T09:28:47.1912348+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-05-19T09:28:47.3024164+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-05-19T09:28:47.3220611+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-05-19T09:28:47.4006486+00:00 ContainerStream: done.
+2026-05-19T09:28:47.5322432+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-05-19T09:28:48.8481864+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-05-19T09:28:48.9802186+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-05-19T09:28:48.9806262+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-05-19T09:28:48.9808704+00:00 ContainerStream: Build Operation ID: 0cb46853-5c00-4a71-a24c-a056724d5856
+2026-05-19T09:28:49.5029458+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-05-19T09:28:49.5322043+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-05-19T09:28:49.6036359+00:00 ContainerStream: Running #!/bin/sh
+2026-05-19T09:28:49.6036968+00:00 ContainerStream: 
+2026-05-19T09:28:49.6036994+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-05-19T09:28:49.6037010+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-05-19T09:28:49.6037023+00:00 ContainerStream: 
+2026-05-19T09:28:49.6037040+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-05-19T09:28:49.6037055+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-05-19T09:28:49.6037071+00:00 ContainerStream: 		export PORT=8080
+2026-05-19T09:28:49.6037165+00:00 ContainerStream: fi
+2026-05-19T09:28:49.6037180+00:00 ContainerStream: 
+2026-05-19T09:28:49.6233422+00:00 ContainerStream: PATH="$PATH:/home/site/wwwroot" node server.js
+2026-05-19T09:28:50.3768197+00:00 ContainerStream: node:internal/modules/cjs/loader:1386
+2026-05-19T09:28:50.3768576+00:00 ContainerStream:   throw err;
+2026-05-19T09:28:50.3768602+00:00 ContainerStream:   ^
+2026-05-19T09:28:50.3768616+00:00 ContainerStream: 
+2026-05-19T09:28:50.3768635+00:00 ContainerStream: Error: Cannot find module '/home/site/wwwroot/server.js'
+2026-05-19T09:28:50.3768652+00:00 ContainerStream:     at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+2026-05-19T09:28:50.3768762+00:00 ContainerStream:     at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+2026-05-19T09:28:50.3768785+00:00 ContainerStream:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+2026-05-19T09:28:50.3768803+00:00 ContainerStream:     at Function._load (node:internal/modules/cjs/loader:1192:37)
+2026-05-19T09:28:50.3768819+00:00 ContainerStream:     at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+2026-05-19T09:28:50.3768836+00:00 ContainerStream:     at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+2026-05-19T09:28:50.3768853+00:00 ContainerStream:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+2026-05-19T09:28:50.3768869+00:00 ContainerStream:     at node:internal/main/run_main_module:36:49 {
+2026-05-19T09:28:50.3768884+00:00 ContainerStream:   code: 'MODULE_NOT_FOUND',
+2026-05-19T09:28:50.3768899+00:00 ContainerStream:   requireStack: []
+2026-05-19T09:28:50.3768913+00:00 ContainerStream: }
+2026-05-19T09:28:50.3768927+00:00 ContainerStream: 
+2026-05-19T09:28:50.3768961+00:00 ContainerStream: Node.js v22.22.2
+2026-05-19T09:28:50.4574671+00:00 ContainerStatus: Container has finished running with exit code: 1.
+2026-05-19T09:28:50.4576079+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:28:50.4675861+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-05-19T09:28:50.4677089+00:00 ContainerStatus: Stopping container: 83a8b0ceb16f_clm-ndaflow-v2-2605191449.
+2026-05-19T09:28:50.5389721+00:00 ContainerStatus: Deleting container: 83a8b0ceb16f_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T09:28:50.7803434+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-05-19T09:28:50.7811397+00:00 ContainerStatus: Container is terminated. Total time elapsed: 322 ms.
+2026-05-19T09:28:50.7903457+00:00 ContainerStatus: Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T09:28:50.7909838+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:25:14, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:28:50.7996408+00:00 ContainerStatus: Site startup probe failed after 31.4586539 seconds.
+2026-05-19T09:28:50.9694789+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:28:51.0100389+00:00 ContainerStatus: Failed to start site. Revert by stopping site.
+2026-05-19T09:28:51.0205955+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:28:51.0211523+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:28:51.0211764+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 stopped.
+========== New Cold Start Attempt (2026-05-19T09:28:51.0306644+00:00) ==========
+2026-05-19T09:28:51.0306644+00:00 ContainerStatus: State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:28:51.3602669+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:28:51.6457930+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 will be blocked for 1 minutes till 05/19/2026 09:29:51
+2026-05-19T09:28:51.6459270+00:00 ContainerStatus: State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: clm-ndaflow-v2-2605191449 will be blocked for 1 minutes till 05/19/2026 09:29:51, DetailsLevel: WARN
+2026-05-19T09:28:51.6461912+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:28:51 (UTC), DetailsLevel: WARN
+2026-05-19T09:28:52.2039342+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:28:51 (UTC), DetailsLevel: WARN
+2026-05-19T09:29:51.6502102+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 is unblocked.
+2026-05-19T09:33:16.1360200+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:28:51 (UTC), DetailsLevel: WARN
+2026-05-19T09:33:18.1870963+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:28:51 (UTC), DetailsLevel: WARN
+2026-05-19T09:33:18.1970328+00:00 ContainerStatus: Container start method called.
+2026-05-19T09:33:18.1972602+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:33:18.1975105+00:00 ContainerStatus: Establishing network.
+2026-05-19T09:33:18.2063465+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:33:18.8320512+00:00 ContainerStatus: Container is starting.
+2026-05-19T09:33:18.8321607+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:33:18.8322732+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-05-19T09:33:18.8323807+00:00 ContainerStatus: Establishing network if not established already.
+2026-05-19T09:33:18.8522051+00:00 ContainerStatus: Mounting volumes.
+2026-05-19T09:33:18.8598354+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:33:18.9509083+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-05-19T09:33:18.9914181+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:33:18.9922049+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:33:19.1319820+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:33:19.8662491+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:33:19.8663805+00:00 ContainerStatus: Creating container.
+2026-05-19T09:33:19.8664572+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-05-19T09:33:19.9063967+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stdout_cd98d0704e794986a26f44ffbd8e35dc.
+2026-05-19T09:33:19.9249568+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stdout_cd98d0704e794986a26f44ffbd8e35dc.
+2026-05-19T09:33:19.9256141+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stdout_cd98d0704e794986a26f44ffbd8e35dc for reading in non-blocking mode.
+2026-05-19T09:33:19.9259412+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stdout_cd98d0704e794986a26f44ffbd8e35dc.
+2026-05-19T09:33:19.9260290+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stdout_cd98d0704e794986a26f44ffbd8e35dc.
+2026-05-19T09:33:19.9261461+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stderr_fa83b3598656440aa235f0f521b580d5.
+2026-05-19T09:33:19.9263024+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stderr_fa83b3598656440aa235f0f521b580d5.
+2026-05-19T09:33:19.9263720+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stderr_fa83b3598656440aa235f0f521b580d5 for reading in non-blocking mode.
+2026-05-19T09:33:19.9264613+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stderr_fa83b3598656440aa235f0f521b580d5.
+2026-05-19T09:33:19.9452706+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/a6f7d57d5528_clm-ndaflow-v2-2605191449/stderr_fa83b3598656440aa235f0f521b580d5.
+2026-05-19T09:33:19.9467881+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:33:21.4042393+00:00 ContainerStatus: Starting container: a6f7d57d5528_clm-ndaflow-v2-2605191449.
+2026-05-19T09:33:21.5856354+00:00 ContainerStatus: Starting watchers and probes.
+2026-05-19T09:33:21.6130675+00:00 ContainerStatus: Starting metrics collection.
+2026-05-19T09:33:21.6455796+00:00 ContainerStatus: Container is running.
+2026-05-19T09:33:21.6459773+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:33:21.8436913+00:00 ContainerStream:    _____                               
+2026-05-19T09:33:21.8437248+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-05-19T09:33:21.8437364+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-05-19T09:33:21.8437381+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-05-19T09:33:21.8437397+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-05-19T09:33:21.8437411+00:00 ContainerStream:         \/      \/                  \/ 
+2026-05-19T09:33:21.8437427+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-05-19T09:33:21.8437440+00:00 ContainerStream: 
+2026-05-19T09:33:21.8437456+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-05-19T09:33:21.8437471+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-05-19T09:33:21.8437486+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-05-19T09:33:21.8437501+00:00 ContainerStream: Instance Name    : lw0sdlwk000DCM
+2026-05-19T09:33:21.8437520+00:00 ContainerStream: Instance Id      : 978831a12b989a546f04a417ac73afab2417e3847711476ee09674c03af7af1b
+2026-05-19T09:33:21.8437554+00:00 ContainerStream: 
+2026-05-19T09:33:21.8437571+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-05-19T09:33:22.0761463+00:00 ContainerStatus: Container start method finished after 3878 ms.
+2026-05-19T09:33:22.0768388+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:33:22.1068159+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:33:27.5840665+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-05-19T09:33:27.6042566+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-05-19T09:33:27.6754875+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-05-19T09:33:52.0228784+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-05-19T09:33:52.0327447+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-05-19T09:33:52.8573419+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-05-19T09:33:52.9569532+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-05-19T09:33:52.9570122+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-05-19T09:33:52.9761765+00:00 ContainerStream: done.
+2026-05-19T09:33:53.0173532+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-05-19T09:33:53.3570371+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-05-19T09:33:53.5675169+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-05-19T09:33:53.5684970+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-05-19T09:33:53.5694944+00:00 ContainerStream: Build Operation ID: 91b7419b-e227-4f3c-ad14-1cc480018c85
+2026-05-19T09:33:53.9016222+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-05-19T09:33:53.9191999+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-05-19T09:33:53.9509765+00:00 ContainerStream: Running #!/bin/sh
+2026-05-19T09:33:53.9510359+00:00 ContainerStream: 
+2026-05-19T09:33:53.9510391+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-05-19T09:33:53.9510407+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-05-19T09:33:53.9510420+00:00 ContainerStream: 
+2026-05-19T09:33:53.9510439+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-05-19T09:33:53.9510453+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-05-19T09:33:53.9510468+00:00 ContainerStream: 		export PORT=8080
+2026-05-19T09:33:53.9510485+00:00 ContainerStream: fi
+2026-05-19T09:33:53.9510578+00:00 ContainerStream: 
+2026-05-19T09:33:53.9692938+00:00 ContainerStream: PATH="$PATH:/home/site/wwwroot" node server.js
+2026-05-19T09:33:54.5134454+00:00 ContainerStream: node:internal/modules/cjs/loader:1386
+2026-05-19T09:33:54.5135097+00:00 ContainerStream:   throw err;
+2026-05-19T09:33:54.5135118+00:00 ContainerStream:   ^
+2026-05-19T09:33:54.5135133+00:00 ContainerStream: 
+2026-05-19T09:33:54.5135150+00:00 ContainerStream: Error: Cannot find module '/home/site/wwwroot/server.js'
+2026-05-19T09:33:54.5135172+00:00 ContainerStream:     at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+2026-05-19T09:33:54.5135263+00:00 ContainerStream:     at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+2026-05-19T09:33:54.5135281+00:00 ContainerStream:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+2026-05-19T09:33:54.5135299+00:00 ContainerStream:     at Function._load (node:internal/modules/cjs/loader:1192:37)
+2026-05-19T09:33:54.5135315+00:00 ContainerStream:     at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+2026-05-19T09:33:54.5135333+00:00 ContainerStream:     at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+2026-05-19T09:33:54.5135350+00:00 ContainerStream:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+2026-05-19T09:33:54.5135365+00:00 ContainerStream:     at node:internal/main/run_main_module:36:49 {
+2026-05-19T09:33:54.5135381+00:00 ContainerStream:   code: 'MODULE_NOT_FOUND',
+2026-05-19T09:33:54.5135395+00:00 ContainerStream:   requireStack: []
+2026-05-19T09:33:54.5135408+00:00 ContainerStream: }
+2026-05-19T09:33:54.5711852+00:00 ContainerStream: 
+2026-05-19T09:33:54.5712163+00:00 ContainerStream: Node.js v22.22.2
+2026-05-19T09:33:54.7236630+00:00 ContainerStatus: Container has finished running with exit code: 1.
+2026-05-19T09:33:54.7321744+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:33:54.7337379+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-05-19T09:33:54.7338442+00:00 ContainerStatus: Stopping container: a6f7d57d5528_clm-ndaflow-v2-2605191449.
+2026-05-19T09:33:54.9342596+00:00 ContainerStatus: Deleting container: a6f7d57d5528_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T09:33:55.3476403+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-05-19T09:33:55.3564086+00:00 ContainerStatus: Container is terminated. Total time elapsed: 615 ms.
+2026-05-19T09:33:55.3567825+00:00 ContainerStatus: Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T09:33:55.3572274+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:28:50, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:33:55.3664628+00:00 ContainerStatus: Site startup probe failed after 33.2587142 seconds.
+2026-05-19T09:33:55.6390255+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:33:55.7091299+00:00 ContainerStatus: Failed to start site. Revert by stopping site.
+2026-05-19T09:33:55.7168798+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:33:55.7284492+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:33:55.7285458+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 stopped.
+========== New Cold Start Attempt (2026-05-19T09:33:55.7485139+00:00) ==========
+2026-05-19T09:33:55.7485139+00:00 ContainerStatus: State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:33:56.2415330+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:33:56.8638049+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 will be blocked for 1 minutes till 05/19/2026 09:34:56
+2026-05-19T09:33:56.8643053+00:00 ContainerStatus: State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: clm-ndaflow-v2-2605191449 will be blocked for 1 minutes till 05/19/2026 09:34:56, DetailsLevel: WARN
+2026-05-19T09:33:56.8734031+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:33:56 (UTC), DetailsLevel: WARN
+2026-05-19T09:33:57.5079995+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:33:56 (UTC), DetailsLevel: WARN
+2026-05-19T09:34:56.8453321+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 is unblocked.
+2026-05-19T09:36:26.4131494+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:33:56 (UTC), DetailsLevel: WARN
+2026-05-19T09:36:28.6843995+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:33:56 (UTC), DetailsLevel: WARN
+2026-05-19T09:36:28.6845175+00:00 ContainerStatus: Container start method called.
+2026-05-19T09:36:28.6845663+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:36:28.6846453+00:00 ContainerStatus: Establishing network.
+2026-05-19T09:36:28.6847330+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:36:28.9952749+00:00 ContainerStatus: Container is starting.
+2026-05-19T09:36:28.9954086+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:36:28.9955307+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-05-19T09:36:28.9956403+00:00 ContainerStatus: Establishing network if not established already.
+2026-05-19T09:36:28.9957724+00:00 ContainerStatus: Mounting volumes.
+2026-05-19T09:36:29.0041614+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:36:29.0464216+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-05-19T09:36:29.0963831+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:36:29.1277905+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:36:29.1878288+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:36:29.6002827+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:36:29.6008688+00:00 ContainerStatus: Creating container.
+2026-05-19T09:36:29.6015956+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-05-19T09:36:29.6020934+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stdout_76ae5533f999452e9398eb944815f545.
+2026-05-19T09:36:29.6023940+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stdout_76ae5533f999452e9398eb944815f545.
+2026-05-19T09:36:29.6100129+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stdout_76ae5533f999452e9398eb944815f545 for reading in non-blocking mode.
+2026-05-19T09:36:29.6102407+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stdout_76ae5533f999452e9398eb944815f545.
+2026-05-19T09:36:29.6103540+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stdout_76ae5533f999452e9398eb944815f545.
+2026-05-19T09:36:29.6196721+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stderr_fa7cc9aa5f2146e8bc2fd92b2ddbb4b3.
+2026-05-19T09:36:29.6202358+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stderr_fa7cc9aa5f2146e8bc2fd92b2ddbb4b3.
+2026-05-19T09:36:29.6204032+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stderr_fa7cc9aa5f2146e8bc2fd92b2ddbb4b3 for reading in non-blocking mode.
+2026-05-19T09:36:29.6205449+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stderr_fa7cc9aa5f2146e8bc2fd92b2ddbb4b3.
+2026-05-19T09:36:29.6206519+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/4fa854637631_clm-ndaflow-v2-2605191449/stderr_fa7cc9aa5f2146e8bc2fd92b2ddbb4b3.
+2026-05-19T09:36:29.6210587+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:36:31.1934212+00:00 ContainerStatus: Starting container: 4fa854637631_clm-ndaflow-v2-2605191449.
+2026-05-19T09:36:31.5381594+00:00 ContainerStatus: Starting watchers and probes.
+2026-05-19T09:36:31.5388190+00:00 ContainerStream:    _____                               
+2026-05-19T09:36:31.5388353+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-05-19T09:36:31.5388395+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-05-19T09:36:31.5388412+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-05-19T09:36:31.5388427+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-05-19T09:36:31.5388442+00:00 ContainerStream:         \/      \/                  \/ 
+2026-05-19T09:36:31.5388457+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-05-19T09:36:31.5388470+00:00 ContainerStream: 
+2026-05-19T09:36:31.5388486+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-05-19T09:36:31.5388501+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-05-19T09:36:31.5388517+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-05-19T09:36:31.5388532+00:00 ContainerStream: Instance Name    : lw0sdlwk000DCM
+2026-05-19T09:36:31.5388550+00:00 ContainerStream: Instance Id      : 978831a12b989a546f04a417ac73afab2417e3847711476ee09674c03af7af1b
+2026-05-19T09:36:31.5388585+00:00 ContainerStream: 
+2026-05-19T09:36:31.5388600+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-05-19T09:36:31.5484253+00:00 ContainerStatus: Starting metrics collection.
+2026-05-19T09:36:31.5494345+00:00 ContainerStatus: Container is running.
+2026-05-19T09:36:31.5673744+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:36:31.9210124+00:00 ContainerStatus: Container start method finished after 3236 ms.
+2026-05-19T09:36:31.9288827+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:36:31.9289966+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:36:34.8172419+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-05-19T09:36:34.8450467+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-05-19T09:36:34.9052212+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-05-19T09:36:58.4184261+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-05-19T09:36:58.4273392+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-05-19T09:36:58.7412330+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-05-19T09:36:58.8212589+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-05-19T09:36:58.8302205+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-05-19T09:36:58.8500830+00:00 ContainerStream: done.
+2026-05-19T09:36:58.8709884+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-05-19T09:36:59.1573959+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-05-19T09:36:59.4096072+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-05-19T09:36:59.4173426+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-05-19T09:36:59.4173699+00:00 ContainerStream: Build Operation ID: d9d16122-23b5-491e-b55f-d0d20839e67d
+2026-05-19T09:36:59.8000438+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-05-19T09:36:59.8107884+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-05-19T09:36:59.8404988+00:00 ContainerStream: Running #!/bin/sh
+2026-05-19T09:36:59.8405561+00:00 ContainerStream: 
+2026-05-19T09:36:59.8405594+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-05-19T09:36:59.8405610+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-05-19T09:36:59.8405624+00:00 ContainerStream: 
+2026-05-19T09:36:59.8405640+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-05-19T09:36:59.8405655+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-05-19T09:36:59.8405673+00:00 ContainerStream: 		export PORT=8080
+2026-05-19T09:36:59.8405689+00:00 ContainerStream: fi
+2026-05-19T09:36:59.8405796+00:00 ContainerStream: 
+2026-05-19T09:36:59.8417081+00:00 ContainerStream: PATH="$PATH:/home/site/wwwroot" node server.js
+2026-05-19T09:37:00.6060181+00:00 ContainerStatus: Container has finished running with exit code: 1.
+2026-05-19T09:37:00.6235277+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:37:00.6866296+00:00 ContainerStream: node:internal/modules/cjs/loader:1386
+2026-05-19T09:37:00.6866692+00:00 ContainerStream:   throw err;
+2026-05-19T09:37:00.6866714+00:00 ContainerStream:   ^
+2026-05-19T09:37:00.6866729+00:00 ContainerStream: 
+2026-05-19T09:37:00.6866747+00:00 ContainerStream: Error: Cannot find module '/home/site/wwwroot/server.js'
+2026-05-19T09:37:00.6866768+00:00 ContainerStream:     at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+2026-05-19T09:37:00.6866809+00:00 ContainerStream:     at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+2026-05-19T09:37:00.6866826+00:00 ContainerStream:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+2026-05-19T09:37:00.6866843+00:00 ContainerStream:     at Function._load (node:internal/modules/cjs/loader:1192:37)
+2026-05-19T09:37:00.6866858+00:00 ContainerStream:     at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+2026-05-19T09:37:00.6866874+00:00 ContainerStream:     at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+2026-05-19T09:37:00.6866892+00:00 ContainerStream:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+2026-05-19T09:37:00.6866909+00:00 ContainerStream:     at node:internal/main/run_main_module:36:49 {
+2026-05-19T09:37:00.6866924+00:00 ContainerStream:   code: 'MODULE_NOT_FOUND',
+2026-05-19T09:37:00.6866939+00:00 ContainerStream:   requireStack: []
+2026-05-19T09:37:00.6866952+00:00 ContainerStream: }
+2026-05-19T09:37:00.6867096+00:00 ContainerStream: 
+2026-05-19T09:37:00.6867132+00:00 ContainerStream: Node.js v22.22.2
+2026-05-19T09:37:00.7055288+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-05-19T09:37:00.7063108+00:00 ContainerStatus: Stopping container: 4fa854637631_clm-ndaflow-v2-2605191449.
+2026-05-19T09:37:00.8969837+00:00 ContainerStatus: Deleting container: 4fa854637631_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T09:37:01.3188791+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-05-19T09:37:01.3197351+00:00 ContainerStatus: Container is terminated. Total time elapsed: 695 ms.
+2026-05-19T09:37:01.3202906+00:00 ContainerStatus: Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T09:37:01.3207880+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:33:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:37:01.3389780+00:00 ContainerStatus: Site startup probe failed after 29.4070535 seconds.
+2026-05-19T09:37:02.1187607+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:37:02.1354547+00:00 ContainerStatus: Failed to start site. Revert by stopping site.
+2026-05-19T09:37:02.1382495+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:37:02.1387702+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:37:02.1387897+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 stopped.
+========== New Cold Start Attempt (2026-05-19T09:37:02.1421237+00:00) ==========
+2026-05-19T09:37:02.1421237+00:00 ContainerStatus: State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:37:03.0257809+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:37:03.7301268+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 09:39:03
+2026-05-19T09:37:03.7304577+00:00 ContainerStatus: State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 09:39:03, DetailsLevel: WARN
+2026-05-19T09:37:03.7484743+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:37:03 (UTC), DetailsLevel: WARN
+2026-05-19T09:37:04.4333181+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:37:03 (UTC), DetailsLevel: WARN
+2026-05-19T09:37:10.5878060+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:39:03, DetailsLevel: WARN
+2026-05-19T09:37:10.5878742+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T09:37:19.7331684+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:39:03, DetailsLevel: WARN
+2026-05-19T09:37:19.7332211+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T09:37:26.5870071+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:39:03, DetailsLevel: WARN
+2026-05-19T09:37:26.5870532+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T09:39:03.7322310+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 is unblocked.
+2026-05-19T09:42:27.5431277+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:39:03, DetailsLevel: WARN
+2026-05-19T09:42:29.5357954+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:39:03, DetailsLevel: WARN
+2026-05-19T09:42:29.5464185+00:00 ContainerStatus: Container start method called.
+2026-05-19T09:42:29.5557628+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:42:29.5560223+00:00 ContainerStatus: Establishing network.
+2026-05-19T09:42:29.5567564+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:42:30.2592356+00:00 ContainerStatus: Container is starting.
+2026-05-19T09:42:30.2596588+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T09:42:30.2598268+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-05-19T09:42:30.2599682+00:00 ContainerStatus: Establishing network if not established already.
+2026-05-19T09:42:30.2601935+00:00 ContainerStatus: Mounting volumes.
+2026-05-19T09:42:30.2693467+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:42:30.3309173+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-05-19T09:42:30.3703234+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:42:30.3900762+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:42:30.3915217+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T09:42:31.1241370+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:42:31.1243790+00:00 ContainerStatus: Creating container.
+2026-05-19T09:42:31.1245172+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-05-19T09:42:31.1246336+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stdout_a9148e773e5c49ccb38c047fe509f310.
+2026-05-19T09:42:31.1855622+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stdout_a9148e773e5c49ccb38c047fe509f310.
+2026-05-19T09:42:31.1858944+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stdout_a9148e773e5c49ccb38c047fe509f310 for reading in non-blocking mode.
+2026-05-19T09:42:31.2141817+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stdout_a9148e773e5c49ccb38c047fe509f310.
+2026-05-19T09:42:31.2154672+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stdout_a9148e773e5c49ccb38c047fe509f310.
+2026-05-19T09:42:31.2157278+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stderr_5c5fa61a347f491e9e285b0aa5817435.
+2026-05-19T09:42:31.2247384+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stderr_5c5fa61a347f491e9e285b0aa5817435.
+2026-05-19T09:42:31.2249276+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stderr_5c5fa61a347f491e9e285b0aa5817435 for reading in non-blocking mode.
+2026-05-19T09:42:31.2251017+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stderr_5c5fa61a347f491e9e285b0aa5817435.
+2026-05-19T09:42:31.2252349+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/09909af833a1_clm-ndaflow-v2-2605191449/stderr_5c5fa61a347f491e9e285b0aa5817435.
+2026-05-19T09:42:31.2256215+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:42:32.0474899+00:00 ContainerStatus: Starting container: 09909af833a1_clm-ndaflow-v2-2605191449.
+2026-05-19T09:42:32.1496718+00:00 ContainerStatus: Starting watchers and probes.
+2026-05-19T09:42:32.1784354+00:00 ContainerStatus: Starting metrics collection.
+2026-05-19T09:42:32.1794643+00:00 ContainerStatus: Container is running.
+2026-05-19T09:42:32.1795961+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:42:32.4092638+00:00 ContainerStatus: Container start method finished after 2843 ms.
+2026-05-19T09:42:32.4098524+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:42:32.4103967+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:42:32.7626639+00:00 ContainerStream:    _____                               
+2026-05-19T09:42:32.7627103+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-05-19T09:42:32.7627124+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-05-19T09:42:32.7627142+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-05-19T09:42:32.7627161+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-05-19T09:42:32.7627177+00:00 ContainerStream:         \/      \/                  \/ 
+2026-05-19T09:42:32.7627191+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-05-19T09:42:32.7627205+00:00 ContainerStream: 
+2026-05-19T09:42:32.7627220+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-05-19T09:42:32.7627238+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-05-19T09:42:32.7627253+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-05-19T09:42:32.7627361+00:00 ContainerStream: Instance Name    : lw0sdlwk000DCM
+2026-05-19T09:42:32.7627382+00:00 ContainerStream: Instance Id      : 978831a12b989a546f04a417ac73afab2417e3847711476ee09674c03af7af1b
+2026-05-19T09:42:32.7627395+00:00 ContainerStream: 
+2026-05-19T09:42:32.7627411+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-05-19T09:42:37.3780075+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-05-19T09:42:37.3982772+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-05-19T09:42:37.4569010+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-05-19T09:42:58.1089824+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-05-19T09:42:58.1168032+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-05-19T09:42:58.3906963+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-05-19T09:42:58.4494992+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-05-19T09:42:58.4501699+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-05-19T09:42:58.4897872+00:00 ContainerStream: done.
+2026-05-19T09:42:58.5617586+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-05-19T09:42:58.7530096+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-05-19T09:42:59.0938907+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-05-19T09:42:59.0939315+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-05-19T09:42:59.0939339+00:00 ContainerStream: Build Operation ID: 992aa726-68da-4ad5-afef-95b79f6ae079
+2026-05-19T09:42:59.4544594+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-05-19T09:42:59.4932777+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-05-19T09:42:59.6033895+00:00 ContainerStream: Running #!/bin/sh
+2026-05-19T09:42:59.6034400+00:00 ContainerStream: 
+2026-05-19T09:42:59.6034528+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-05-19T09:42:59.6034544+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-05-19T09:42:59.6034557+00:00 ContainerStream: 
+2026-05-19T09:42:59.6034576+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-05-19T09:42:59.6034591+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-05-19T09:42:59.6034606+00:00 ContainerStream: 		export PORT=8080
+2026-05-19T09:42:59.6034619+00:00 ContainerStream: fi
+2026-05-19T09:42:59.6034718+00:00 ContainerStream: 
+2026-05-19T09:42:59.6034735+00:00 ContainerStream: PATH="$PATH:/home/site/wwwroot" node server.js
+2026-05-19T09:43:00.6986551+00:00 ContainerStream: node:internal/modules/cjs/loader:1386
+2026-05-19T09:43:00.6987170+00:00 ContainerStream:   throw err;
+2026-05-19T09:43:00.6987191+00:00 ContainerStream:   ^
+2026-05-19T09:43:00.6987210+00:00 ContainerStream: 
+2026-05-19T09:43:00.6987231+00:00 ContainerStream: Error: Cannot find module '/home/site/wwwroot/server.js'
+2026-05-19T09:43:00.6987248+00:00 ContainerStream:     at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+2026-05-19T09:43:00.6987352+00:00 ContainerStream:     at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+2026-05-19T09:43:00.6987374+00:00 ContainerStream:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+2026-05-19T09:43:00.6987389+00:00 ContainerStream:     at Function._load (node:internal/modules/cjs/loader:1192:37)
+2026-05-19T09:43:00.6987405+00:00 ContainerStream:     at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+2026-05-19T09:43:00.6987422+00:00 ContainerStream:     at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+2026-05-19T09:43:00.6987440+00:00 ContainerStream:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+2026-05-19T09:43:00.6987455+00:00 ContainerStream:     at node:internal/main/run_main_module:36:49 {
+2026-05-19T09:43:00.6987470+00:00 ContainerStream:   code: 'MODULE_NOT_FOUND',
+2026-05-19T09:43:00.6987484+00:00 ContainerStream:   requireStack: []
+2026-05-19T09:43:00.6987497+00:00 ContainerStream: }
+2026-05-19T09:43:00.7002849+00:00 ContainerStream: 
+2026-05-19T09:43:00.7003147+00:00 ContainerStream: Node.js v22.22.2
+2026-05-19T09:43:00.7788203+00:00 ContainerStatus: Container has finished running with exit code: 1.
+2026-05-19T09:43:00.7799832+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:43:00.7909117+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-05-19T09:43:00.7911938+00:00 ContainerStatus: Stopping container: 09909af833a1_clm-ndaflow-v2-2605191449.
+2026-05-19T09:43:00.8807731+00:00 ContainerStatus: Deleting container: 09909af833a1_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T09:43:01.1207354+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-05-19T09:43:01.1308690+00:00 ContainerStatus: Container is terminated. Total time elapsed: 348 ms.
+2026-05-19T09:43:01.1317499+00:00 ContainerStatus: Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T09:43:01.1347407+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:37:02, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:43:01.1553038+00:00 ContainerStatus: Site startup probe failed after 28.6947143 seconds.
+2026-05-19T09:43:01.4630105+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:43:01.5652560+00:00 ContainerStatus: Failed to start site. Revert by stopping site.
+2026-05-19T09:43:01.5755580+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:43:01.6051107+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:43:01.6051593+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 stopped.
+========== New Cold Start Attempt (2026-05-19T09:43:01.6164435+00:00) ==========
+2026-05-19T09:43:01.6164435+00:00 ContainerStatus: State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:43:02.1464030+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:43:02.7606632+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 09:45:02
+2026-05-19T09:43:02.7623286+00:00 ContainerStatus: State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 09:45:02, DetailsLevel: WARN
+2026-05-19T09:43:02.7818633+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:43:02 (UTC), DetailsLevel: WARN
+2026-05-19T09:43:03.5492532+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:43:02 (UTC), DetailsLevel: WARN
+2026-05-19T09:45:02.7604336+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 is unblocked.
+2026-05-19T10:17:30.2629338+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:43:02 (UTC), DetailsLevel: WARN
+2026-05-19T10:17:33.4407386+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:43:02 (UTC), DetailsLevel: WARN
+2026-05-19T10:17:33.5014143+00:00 ContainerStatus: Container start method called.
+2026-05-19T10:17:33.5027316+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T10:17:33.5607023+00:00 ContainerStatus: Establishing network.
+2026-05-19T10:17:33.5809926+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T10:17:34.3847135+00:00 ContainerStatus: Container is starting.
+2026-05-19T10:17:34.3853179+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T10:17:34.3862973+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-05-19T10:17:34.3869242+00:00 ContainerStatus: Establishing network if not established already.
+2026-05-19T10:17:34.4046309+00:00 ContainerStatus: Mounting volumes.
+2026-05-19T10:17:34.4154718+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T10:17:34.4773992+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-05-19T10:17:34.5174593+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T10:17:34.6775404+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T10:17:34.6782325+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T10:17:35.3303518+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T10:17:35.3498860+00:00 ContainerStatus: Creating container.
+2026-05-19T10:17:35.3509276+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-05-19T10:17:35.3514111+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stdout_cd083ac94af544f0af363ddd9e837d85.
+2026-05-19T10:17:35.3702041+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stdout_cd083ac94af544f0af363ddd9e837d85.
+2026-05-19T10:17:35.3785105+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stdout_cd083ac94af544f0af363ddd9e837d85 for reading in non-blocking mode.
+2026-05-19T10:17:35.3798339+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stdout_cd083ac94af544f0af363ddd9e837d85.
+2026-05-19T10:17:35.3806419+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stdout_cd083ac94af544f0af363ddd9e837d85.
+2026-05-19T10:17:35.3815462+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stderr_fdef47d452914079bd2a50fa58040e27.
+2026-05-19T10:17:35.3902662+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stderr_fdef47d452914079bd2a50fa58040e27.
+2026-05-19T10:17:35.3908574+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stderr_fdef47d452914079bd2a50fa58040e27 for reading in non-blocking mode.
+2026-05-19T10:17:35.3912776+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stderr_fdef47d452914079bd2a50fa58040e27.
+2026-05-19T10:17:35.3989724+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/9fa5ae19aecc_clm-ndaflow-v2-2605191449/stderr_fdef47d452914079bd2a50fa58040e27.
+2026-05-19T10:17:35.4000835+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T10:17:36.8014808+00:00 ContainerStatus: Starting container: 9fa5ae19aecc_clm-ndaflow-v2-2605191449.
+2026-05-19T10:17:36.9840548+00:00 ContainerStatus: Starting watchers and probes.
+2026-05-19T10:17:37.0121821+00:00 ContainerStatus: Starting metrics collection.
+2026-05-19T10:17:37.0133464+00:00 ContainerStatus: Container is running.
+2026-05-19T10:17:37.0135468+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T10:17:37.5060468+00:00 ContainerStatus: Container start method finished after 4004 ms.
+2026-05-19T10:17:37.5062274+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T10:17:37.5062618+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T10:17:37.8790231+00:00 ContainerStream:    _____                               
+2026-05-19T10:17:37.8977709+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-05-19T10:17:37.8977922+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-05-19T10:17:37.8977945+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-05-19T10:17:37.8977962+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-05-19T10:17:37.8978058+00:00 ContainerStream:         \/      \/                  \/ 
+2026-05-19T10:17:37.8978073+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-05-19T10:17:37.8978088+00:00 ContainerStream: 
+2026-05-19T10:17:37.8978104+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-05-19T10:17:37.8978119+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-05-19T10:17:37.8978134+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-05-19T10:17:37.8978149+00:00 ContainerStream: Instance Name    : lw0sdlwk000DCM
+2026-05-19T10:17:37.8978189+00:00 ContainerStream: Instance Id      : 978831a12b989a546f04a417ac73afab2417e3847711476ee09674c03af7af1b
+2026-05-19T10:17:37.8978203+00:00 ContainerStream: 
+2026-05-19T10:17:37.8978218+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-05-19T10:17:42.9455527+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-05-19T10:17:42.9778294+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-05-19T10:17:43.0351659+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-05-19T10:18:04.6996585+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-05-19T10:18:04.7308855+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-05-19T10:18:05.3912122+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-05-19T10:18:05.4726032+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-05-19T10:18:05.4726489+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-05-19T10:18:05.4726515+00:00 ContainerStream: done.
+2026-05-19T10:18:05.5019499+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-05-19T10:18:05.7245173+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-05-19T10:18:06.1576843+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-05-19T10:18:06.1750894+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-05-19T10:18:06.1760605+00:00 ContainerStream: Build Operation ID: d742ae7c-5d65-4121-8bc9-bbbebd91359f
+2026-05-19T10:18:07.3099419+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-05-19T10:18:07.3216843+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-05-19T10:18:07.4005180+00:00 ContainerStream: Running #!/bin/sh
+2026-05-19T10:18:07.4005788+00:00 ContainerStream: 
+2026-05-19T10:18:07.4005816+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-05-19T10:18:07.4005838+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-05-19T10:18:07.4005923+00:00 ContainerStream: 
+2026-05-19T10:18:07.4005941+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-05-19T10:18:07.4005956+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-05-19T10:18:07.4005970+00:00 ContainerStream: 		export PORT=8080
+2026-05-19T10:18:07.4005983+00:00 ContainerStream: fi
+2026-05-19T10:18:07.4005996+00:00 ContainerStream: 
+2026-05-19T10:18:07.4020827+00:00 ContainerStream: PATH="$PATH:/home/site/wwwroot" node server.js
+2026-05-19T10:18:08.5363275+00:00 ContainerStream: node:internal/modules/cjs/loader:1386
+2026-05-19T10:18:08.5363853+00:00 ContainerStream:   throw err;
+2026-05-19T10:18:08.5363876+00:00 ContainerStream:   ^
+2026-05-19T10:18:08.5363892+00:00 ContainerStream: 
+2026-05-19T10:18:08.5363909+00:00 ContainerStream: Error: Cannot find module '/home/site/wwwroot/server.js'
+2026-05-19T10:18:08.5363929+00:00 ContainerStream:     at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+2026-05-19T10:18:08.5364045+00:00 ContainerStream:     at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+2026-05-19T10:18:08.5364065+00:00 ContainerStream:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+2026-05-19T10:18:08.5364081+00:00 ContainerStream:     at Function._load (node:internal/modules/cjs/loader:1192:37)
+2026-05-19T10:18:08.5364096+00:00 ContainerStream:     at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+2026-05-19T10:18:08.5364113+00:00 ContainerStream:     at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+2026-05-19T10:18:08.5364131+00:00 ContainerStream:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+2026-05-19T10:18:08.5364146+00:00 ContainerStream:     at node:internal/main/run_main_module:36:49 {
+2026-05-19T10:18:08.5364161+00:00 ContainerStream:   code: 'MODULE_NOT_FOUND',
+2026-05-19T10:18:08.5364176+00:00 ContainerStream:   requireStack: []
+2026-05-19T10:18:08.5364189+00:00 ContainerStream: }
+2026-05-19T10:18:08.5770234+00:00 ContainerStream: 
+2026-05-19T10:18:08.5770531+00:00 ContainerStream: Node.js v22.22.2
+2026-05-19T10:18:08.6481397+00:00 ContainerStatus: Container has finished running with exit code: 1.
+2026-05-19T10:18:08.6556664+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-05-19T10:18:08.6576518+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-05-19T10:18:08.6578740+00:00 ContainerStatus: Stopping container: 9fa5ae19aecc_clm-ndaflow-v2-2605191449.
+2026-05-19T10:18:08.7585879+00:00 ContainerStatus: Deleting container: 9fa5ae19aecc_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T10:18:09.0679831+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-05-19T10:18:09.0694782+00:00 ContainerStatus: Container is terminated. Total time elapsed: 412 ms.
+2026-05-19T10:18:09.0696333+00:00 ContainerStatus: Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T10:18:09.0786659+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:43:01, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:18:09.1345237+00:00 ContainerStatus: Site startup probe failed after 31.3888842 seconds.
+2026-05-19T10:18:09.3130357+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:18:09.3518654+00:00 ContainerStatus: Failed to start site. Revert by stopping site.
+2026-05-19T10:18:09.3951983+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:18:09.4028263+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:18:09.4032547+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 stopped.
+========== New Cold Start Attempt (2026-05-19T10:18:09.4234661+00:00) ==========
+2026-05-19T10:18:09.4234661+00:00 ContainerStatus: State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:18:09.8849437+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:18:10.4296558+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 10:20:10
+2026-05-19T10:18:10.4475503+00:00 ContainerStatus: State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 10:20:10, DetailsLevel: WARN
+2026-05-19T10:18:10.4691830+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 10:18:10 (UTC), DetailsLevel: WARN
+2026-05-19T10:18:11.1334447+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 10:18:10 (UTC), DetailsLevel: WARN
+2026-05-19T10:19:09.5764522+00:00 ContainerStream:     __ __          __      __    _ __     
+2026-05-19T10:19:09.6253833+00:00 ContainerStream:    / //_/_  _ ____/ /_  __/ /   (_) /____ 
+2026-05-19T10:19:09.6254029+00:00 ContainerStream:   / ,< / / / / __  / / / / /   / / __/ _  
+2026-05-19T10:19:09.6254050+00:00 ContainerStream:  / /| / /_/ / /_/ / /_/ / /___/ / /_/  __/
+2026-05-19T10:19:09.6254071+00:00 ContainerStream: /_/ |_\__,_/\__,_/\__,_/_____/_/\__/\___/ 
+2026-05-19T10:19:09.6254091+00:00 ContainerStream: 
+2026-05-19T10:19:09.6254128+00:00 ContainerStream:                                           
+2026-05-19T10:19:09.6254166+00:00 ContainerStream: DEBUG CONSOLE | AZURE APP SERVICE ON LINUX
+2026-05-19T10:19:09.6254183+00:00 ContainerStream: 
+2026-05-19T10:19:09.6254201+00:00 ContainerStream: Documentation: http://aka.ms/webapp-linux
+2026-05-19T10:19:09.6254220+00:00 ContainerStream: Kudu Version : 20260420.5
+2026-05-19T10:19:09.6254242+00:00 ContainerStream: Commit       : 7a094e2df1cfed4581bd19068ff5e3be7c578796
+2026-05-19T10:19:09.6254261+00:00 ContainerStream: Instance Name: lw0sdlwk000DCM
+2026-05-19T10:19:09.6254289+00:00 ContainerStream: Instance Id  : 978831a12b989a546f04a417ac73afab2417e3847711476ee09674c03af7af1b
+2026-05-19T10:19:09.6254305+00:00 ContainerStream: 
+2026-05-19T10:19:10.1583008+00:00 ContainerStream: chown: changing ownership of '/temp': Operation not permitted
+2026-05-19T10:19:10.1785619+00:00 ContainerStream: chmod: changing permissions of '/temp': Operation not permitted
+2026-05-19T10:19:13.4562194+00:00 ContainerStream: Restarting OpenBSD Secure Shell server: sshd.
+2026-05-19T10:19:13.5981738+00:00 ContainerStream: node not running, starting node /opt/webssh/index.js
+2026-05-19T10:19:26.6924760+00:00 ContainerStream: Tue May 19 10:19:26 UTC 2026 running .net core
+2026-05-19T10:19:27.9056794+00:00 ContainerStream: Startup : 10.19.27.876483
+2026-05-19T10:19:27.9862577+00:00 ContainerStream: Configure Services : 10.19.27.985693
+2026-05-19T10:19:28.4752956+00:00 ContainerStream: Configure : 10.19.28.468495
+2026-05-19T10:19:29.1943884+00:00 ContainerStream: Setting Up Routes : 10.19.29.194200
+2026-05-19T10:19:29.2339436+00:00 ContainerStream: Exiting Configure : 10.19.29.233829
+2026-05-19T10:19:29.3370457+00:00 ContainerStream: warn: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[35]
+2026-05-19T10:19:29.3455422+00:00 ContainerStream:       No XML encryptor configured. Key {2180726c-0952-40af-a06b-0ca5e92193ec} may be persisted to storage in unencrypted form.
+2026-05-19T10:19:29.6088911+00:00 ContainerStream: Hosting environment: Production
+2026-05-19T10:19:29.6193598+00:00 ContainerStream: Content root path: /opt/Kudu
+2026-05-19T10:19:29.6277582+00:00 ContainerStream: Now listening on: http://0.0.0.0:8181
+2026-05-19T10:19:29.6283501+00:00 ContainerStream: Application started. Press Ctrl+C to shut down.
+2026-05-19T10:19:37.5080611+00:00 ContainerStream: Deploy Async
+2026-05-19T10:19:41.1039757+00:00 ContainerStream: Run rsync from: /tmp/zipdeploy/extracted/ to: /home/site/wwwroot/ in 8 parallel threads
+2026-05-19T10:19:41.1636200+00:00 ContainerStream: Delete options: clean=False, use manifest=False, directory to ignore=
+2026-05-19T10:19:41.2231354+00:00 ContainerStream: Prev manifest = /opt/Kudu/Scripts/firstDeploymentManifest and next /home/site/deployments/6eea008b-6849-4ca7-b861-506d2f836809/manifest
+2026-05-19T10:19:41.2421576+00:00 ContainerStream: ls: cannot access '/tmp//splits/split.*': No such file or directory
+2026-05-19T10:19:41.2666253+00:00 ContainerStream: Cleaning up /tmp//filelist.txt and /tmp//splits
+2026-05-19T10:19:41.2838529+00:00 ContainerStream: Creating a list of all files at /tmp//filelist.txt
+2026-05-19T10:19:41.2966216+00:00 ContainerStream: No directory to exclude.
+2026-05-19T10:19:41.3092144+00:00 ContainerStream: Created /tmp//filelist.txt. Total number of files to be synced = 0.
+2026-05-19T10:19:41.3218867+00:00 ContainerStream: Created batches from the list of files. Processing 1 files in each thread
+2026-05-19T10:19:41.3342799+00:00 ContainerStream: Completed successfully in 0 seconds
+2026-05-19T10:20:10.4332532+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 is unblocked.
+2026-05-19T10:47:03.9261848+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 10:18:10 (UTC), DetailsLevel: WARN
+2026-05-19T10:47:05.9168344+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 10:18:10 (UTC), DetailsLevel: WARN
+2026-05-19T10:47:05.9171993+00:00 ContainerStatus: Container start method called.
+2026-05-19T10:47:05.9181289+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T10:47:05.9183000+00:00 ContainerStatus: Establishing network.
+2026-05-19T10:47:05.9279093+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T10:47:06.4112041+00:00 ContainerStatus: Container is starting.
+2026-05-19T10:47:06.4118236+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T10:47:06.4125740+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-05-19T10:47:06.4193073+00:00 ContainerStatus: Establishing network if not established already.
+2026-05-19T10:47:06.4197026+00:00 ContainerStatus: Mounting volumes.
+2026-05-19T10:47:06.4218706+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T10:47:06.4620999+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-05-19T10:47:06.6020238+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T10:47:06.6717276+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T10:47:06.7420719+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T10:47:07.4349901+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T10:47:07.4352044+00:00 ContainerStatus: Creating container.
+2026-05-19T10:47:07.4353389+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-05-19T10:47:07.4354489+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stdout_417f8dbea55d4040b992c526bd5630ea.
+2026-05-19T10:47:07.4856120+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stdout_417f8dbea55d4040b992c526bd5630ea.
+2026-05-19T10:47:07.4862252+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stdout_417f8dbea55d4040b992c526bd5630ea for reading in non-blocking mode.
+2026-05-19T10:47:07.5945627+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stdout_417f8dbea55d4040b992c526bd5630ea.
+2026-05-19T10:47:07.5953458+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stdout_417f8dbea55d4040b992c526bd5630ea.
+2026-05-19T10:47:07.6056797+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stderr_e199ffa0081647e79c34d2ee51b668e6.
+2026-05-19T10:47:07.6061229+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stderr_e199ffa0081647e79c34d2ee51b668e6.
+2026-05-19T10:47:07.6064054+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stderr_e199ffa0081647e79c34d2ee51b668e6 for reading in non-blocking mode.
+2026-05-19T10:47:07.6065792+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stderr_e199ffa0081647e79c34d2ee51b668e6.
+2026-05-19T10:47:07.6066965+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/31e256022f6e_clm-ndaflow-v2-2605191449/stderr_e199ffa0081647e79c34d2ee51b668e6.
+2026-05-19T10:47:07.6856323+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T10:47:09.0447771+00:00 ContainerStatus: Starting container: 31e256022f6e_clm-ndaflow-v2-2605191449.
+2026-05-19T10:47:09.2831067+00:00 ContainerStatus: Starting watchers and probes.
+2026-05-19T10:47:09.2954580+00:00 ContainerStatus: Starting metrics collection.
+2026-05-19T10:47:09.3052597+00:00 ContainerStatus: Container is running.
+2026-05-19T10:47:09.3054689+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T10:47:09.6268899+00:00 ContainerStatus: Container start method finished after 3709 ms.
+2026-05-19T10:47:09.7757623+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T10:47:09.7758552+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T10:47:09.9652867+00:00 ContainerStream:    _____                               
+2026-05-19T10:47:09.9657077+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-05-19T10:47:09.9657147+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-05-19T10:47:09.9657165+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-05-19T10:47:09.9657181+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-05-19T10:47:09.9657198+00:00 ContainerStream:         \/      \/                  \/ 
+2026-05-19T10:47:09.9657213+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-05-19T10:47:09.9657227+00:00 ContainerStream: 
+2026-05-19T10:47:09.9657303+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-05-19T10:47:09.9657320+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-05-19T10:47:09.9657335+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-05-19T10:47:09.9657350+00:00 ContainerStream: Instance Name    : lw0sdlwk000DCM
+2026-05-19T10:47:09.9657373+00:00 ContainerStream: Instance Id      : 978831a12b989a546f04a417ac73afab2417e3847711476ee09674c03af7af1b
+2026-05-19T10:47:09.9657387+00:00 ContainerStream: 
+2026-05-19T10:47:09.9657404+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-05-19T10:47:25.3273857+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-05-19T10:47:25.3994287+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-05-19T10:47:25.5700938+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-05-19T10:47:56.7102023+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-05-19T10:47:56.7281504+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-05-19T10:47:57.1016594+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-05-19T10:47:57.1812833+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-05-19T10:47:57.1813425+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-05-19T10:47:57.2011287+00:00 ContainerStream: done.
+2026-05-19T10:47:57.2408440+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-05-19T10:47:57.4140111+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-05-19T10:47:57.6636277+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-05-19T10:47:57.6644626+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-05-19T10:47:57.6652038+00:00 ContainerStream: Build Operation ID: b5b6b263-8d4a-4953-81cb-b94aa4785801
+2026-05-19T10:47:58.2062422+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-05-19T10:47:58.2266343+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-05-19T10:47:58.2779430+00:00 ContainerStream: Running #!/bin/sh
+2026-05-19T10:47:58.2780026+00:00 ContainerStream: 
+2026-05-19T10:47:58.2780055+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-05-19T10:47:58.2780071+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-05-19T10:47:58.2780088+00:00 ContainerStream: 
+2026-05-19T10:47:58.2780107+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-05-19T10:47:58.2780121+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-05-19T10:47:58.2780135+00:00 ContainerStream: 		export PORT=8080
+2026-05-19T10:47:58.2780149+00:00 ContainerStream: fi
+2026-05-19T10:47:58.2780240+00:00 ContainerStream: 
+2026-05-19T10:47:58.2880121+00:00 ContainerStream: PATH="$PATH:/home/site/wwwroot" node server.js
+2026-05-19T10:47:59.3925348+00:00 ContainerStream: node:internal/modules/cjs/loader:1386
+2026-05-19T10:47:59.3926001+00:00 ContainerStream:   throw err;
+2026-05-19T10:47:59.3926020+00:00 ContainerStream:   ^
+2026-05-19T10:47:59.3926033+00:00 ContainerStream: 
+2026-05-19T10:47:59.3926051+00:00 ContainerStream: Error: Cannot find module '/home/site/wwwroot/server.js'
+2026-05-19T10:47:59.3926068+00:00 ContainerStream:     at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+2026-05-19T10:47:59.3926085+00:00 ContainerStream:     at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+2026-05-19T10:47:59.3926107+00:00 ContainerStream:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+2026-05-19T10:47:59.3926123+00:00 ContainerStream:     at Function._load (node:internal/modules/cjs/loader:1192:37)
+2026-05-19T10:47:59.3926139+00:00 ContainerStream:     at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+2026-05-19T10:47:59.3926155+00:00 ContainerStream:     at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+2026-05-19T10:47:59.3926190+00:00 ContainerStream:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+2026-05-19T10:47:59.3926206+00:00 ContainerStream:     at node:internal/main/run_main_module:36:49 {
+2026-05-19T10:47:59.3926221+00:00 ContainerStream:   code: 'MODULE_NOT_FOUND',
+2026-05-19T10:47:59.3926235+00:00 ContainerStream:   requireStack: []
+2026-05-19T10:47:59.3926248+00:00 ContainerStream: }
+2026-05-19T10:47:59.3938088+00:00 ContainerStream: 
+2026-05-19T10:47:59.3938272+00:00 ContainerStream: Node.js v22.22.2
+2026-05-19T10:47:59.4928252+00:00 ContainerStatus: Container has finished running with exit code: 1.
+2026-05-19T10:47:59.4942776+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-05-19T10:47:59.5026634+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-05-19T10:47:59.5027852+00:00 ContainerStatus: Stopping container: 31e256022f6e_clm-ndaflow-v2-2605191449.
+2026-05-19T10:47:59.6152754+00:00 ContainerStatus: Deleting container: 31e256022f6e_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T10:48:00.0295230+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-05-19T10:48:00.0384393+00:00 ContainerStatus: Container is terminated. Total time elapsed: 542 ms.
+2026-05-19T10:48:00.0386809+00:00 ContainerStatus: Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T10:48:00.0753023+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:18:09, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:48:00.1388963+00:00 ContainerStatus: Site startup probe failed after 50.3217512 seconds.
+2026-05-19T10:48:00.3620929+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:48:00.4125953+00:00 ContainerStatus: Failed to start site. Revert by stopping site.
+2026-05-19T10:48:00.4233381+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:48:00.4326153+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:48:00.4326467+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 stopped.
+========== New Cold Start Attempt (2026-05-19T10:48:00.4536688+00:00) ==========
+2026-05-19T10:48:00.4536688+00:00 ContainerStatus: State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:48:01.0266310+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:48:01.4780768+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 10:50:01
+2026-05-19T10:48:01.4791416+00:00 ContainerStatus: State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 10:50:01, DetailsLevel: WARN
+2026-05-19T10:48:01.4969925+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 10:48:01 (UTC), DetailsLevel: WARN
+2026-05-19T10:48:02.2304256+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 10:48:01 (UTC), DetailsLevel: WARN
+2026-05-19T10:48:12.2597102+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:50:01, DetailsLevel: WARN
+2026-05-19T10:48:12.2597833+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:48:20.9476938+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:50:01, DetailsLevel: WARN
+2026-05-19T10:48:20.9477604+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:48:26.2853566+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:50:01, DetailsLevel: WARN
+2026-05-19T10:48:26.2853948+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:48:31.4132029+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:50:01, DetailsLevel: WARN
+2026-05-19T10:48:31.4132918+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:48:36.8684292+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:50:01, DetailsLevel: WARN
+2026-05-19T10:48:36.8684623+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:48:42.1197771+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:50:01, DetailsLevel: WARN
+2026-05-19T10:48:42.1199689+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:48:46.5767059+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 is unblocked.
+2026-05-19T10:49:17.4452883+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:50:01, DetailsLevel: WARN
+2026-05-19T10:49:20.3022516+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:50:01, DetailsLevel: WARN
+2026-05-19T10:49:20.3027872+00:00 ContainerStatus: Container start method called.
+2026-05-19T10:49:20.3105727+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T10:49:20.3131900+00:00 ContainerStatus: Establishing network.
+2026-05-19T10:49:20.3205585+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T10:49:20.5438077+00:00 ContainerStatus: Container is starting.
+2026-05-19T10:49:20.5444263+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T10:49:20.5524969+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-05-19T10:49:20.5529947+00:00 ContainerStatus: Establishing network if not established already.
+2026-05-19T10:49:20.5534001+00:00 ContainerStatus: Mounting volumes.
+2026-05-19T10:49:20.5545987+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T10:49:20.5736561+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-05-19T10:49:20.5947267+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T10:49:20.6037221+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T10:49:20.6752870+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T10:49:21.3159868+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T10:49:21.3160998+00:00 ContainerStatus: Creating container.
+2026-05-19T10:49:21.3161790+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-05-19T10:49:21.3162515+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stdout_5a88ef7ae94e458fa27b70bbd3cfec10.
+2026-05-19T10:49:21.3272093+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stdout_5a88ef7ae94e458fa27b70bbd3cfec10.
+2026-05-19T10:49:21.3279388+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stdout_5a88ef7ae94e458fa27b70bbd3cfec10 for reading in non-blocking mode.
+2026-05-19T10:49:21.3283382+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stdout_5a88ef7ae94e458fa27b70bbd3cfec10.
+2026-05-19T10:49:21.3286053+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stdout_5a88ef7ae94e458fa27b70bbd3cfec10.
+2026-05-19T10:49:21.3364341+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stderr_d880cdd9ad9743eb8dd6df7a57ca9919.
+2026-05-19T10:49:21.3368384+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stderr_d880cdd9ad9743eb8dd6df7a57ca9919.
+2026-05-19T10:49:21.3369569+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stderr_d880cdd9ad9743eb8dd6df7a57ca9919 for reading in non-blocking mode.
+2026-05-19T10:49:21.3372207+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stderr_d880cdd9ad9743eb8dd6df7a57ca9919.
+2026-05-19T10:49:21.3374974+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/2d4eed092e67_clm-ndaflow-v2-2605191449/stderr_d880cdd9ad9743eb8dd6df7a57ca9919.
+2026-05-19T10:49:21.3377863+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T10:49:21.8343675+00:00 ContainerStatus: Starting container: 2d4eed092e67_clm-ndaflow-v2-2605191449.
+2026-05-19T10:49:21.9554437+00:00 ContainerStatus: Starting watchers and probes.
+2026-05-19T10:49:21.9653878+00:00 ContainerStatus: Starting metrics collection.
+2026-05-19T10:49:21.9659382+00:00 ContainerStatus: Container is running.
+2026-05-19T10:49:21.9660695+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T10:49:22.0542606+00:00 ContainerStream:    _____                               
+2026-05-19T10:49:22.0542988+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-05-19T10:49:22.0543009+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-05-19T10:49:22.0543027+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-05-19T10:49:22.0543042+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-05-19T10:49:22.0543056+00:00 ContainerStream:         \/      \/                  \/ 
+2026-05-19T10:49:22.0543072+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-05-19T10:49:22.0543086+00:00 ContainerStream: 
+2026-05-19T10:49:22.0543101+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-05-19T10:49:22.0543117+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-05-19T10:49:22.0543132+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-05-19T10:49:22.0543147+00:00 ContainerStream: Instance Name    : lw0sdlwk000DCM
+2026-05-19T10:49:22.0543181+00:00 ContainerStream: Instance Id      : 978831a12b989a546f04a417ac73afab2417e3847711476ee09674c03af7af1b
+2026-05-19T10:49:22.0543194+00:00 ContainerStream: 
+2026-05-19T10:49:22.0543211+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-05-19T10:49:22.3172038+00:00 ContainerStatus: Container start method finished after 2014 ms.
+2026-05-19T10:49:22.3455835+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T10:49:22.3459472+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T10:49:24.9399515+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-05-19T10:49:24.9603261+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-05-19T10:49:25.0302742+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-05-19T10:49:48.9938238+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-05-19T10:49:48.9950319+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-05-19T10:49:49.2659240+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-05-19T10:49:49.3367839+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-05-19T10:49:49.3766715+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-05-19T10:49:49.3767195+00:00 ContainerStream: done.
+2026-05-19T10:49:49.4055338+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-05-19T10:49:49.6675997+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-05-19T10:49:49.8498860+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-05-19T10:49:49.8570366+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-05-19T10:49:49.8577905+00:00 ContainerStream: Build Operation ID: 466e9c6b-14ac-497e-b0d3-573fb6c3c240
+2026-05-19T10:49:50.1505278+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-05-19T10:49:50.1692999+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-05-19T10:49:50.2193665+00:00 ContainerStream: Running #!/bin/sh
+2026-05-19T10:49:50.2194280+00:00 ContainerStream: 
+2026-05-19T10:49:50.2194306+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-05-19T10:49:50.2194334+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-05-19T10:49:50.2194347+00:00 ContainerStream: 
+2026-05-19T10:49:50.2194363+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-05-19T10:49:50.2194377+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-05-19T10:49:50.2194392+00:00 ContainerStream: 		export PORT=8080
+2026-05-19T10:49:50.2194408+00:00 ContainerStream: fi
+2026-05-19T10:49:50.2194502+00:00 ContainerStream: 
+2026-05-19T10:49:50.2204284+00:00 ContainerStream: PATH="$PATH:/home/site/wwwroot" node server.js
+2026-05-19T10:49:50.6621988+00:00 ContainerStream: node:internal/modules/cjs/loader:1386
+2026-05-19T10:49:50.6622620+00:00 ContainerStream:   throw err;
+2026-05-19T10:49:50.6622640+00:00 ContainerStream:   ^
+2026-05-19T10:49:50.6622654+00:00 ContainerStream: 
+2026-05-19T10:49:50.6622671+00:00 ContainerStream: Error: Cannot find module '/home/site/wwwroot/server.js'
+2026-05-19T10:49:50.6622687+00:00 ContainerStream:     at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+2026-05-19T10:49:50.6622794+00:00 ContainerStream:     at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+2026-05-19T10:49:50.6622814+00:00 ContainerStream:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+2026-05-19T10:49:50.6622835+00:00 ContainerStream:     at Function._load (node:internal/modules/cjs/loader:1192:37)
+2026-05-19T10:49:50.6622851+00:00 ContainerStream:     at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+2026-05-19T10:49:50.6622868+00:00 ContainerStream:     at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+2026-05-19T10:49:50.6622886+00:00 ContainerStream:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+2026-05-19T10:49:50.6622901+00:00 ContainerStream:     at node:internal/main/run_main_module:36:49 {
+2026-05-19T10:49:50.6622916+00:00 ContainerStream:   code: 'MODULE_NOT_FOUND',
+2026-05-19T10:49:50.6622931+00:00 ContainerStream:   requireStack: []
+2026-05-19T10:49:50.6622944+00:00 ContainerStream: }
+2026-05-19T10:49:50.6634346+00:00 ContainerStream: 
+2026-05-19T10:49:50.6634548+00:00 ContainerStream: Node.js v22.22.2
+2026-05-19T10:49:50.7441466+00:00 ContainerStatus: Container has finished running with exit code: 1.
+2026-05-19T10:49:50.7526609+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-05-19T10:49:50.7540953+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-05-19T10:49:50.7541933+00:00 ContainerStatus: Stopping container: 2d4eed092e67_clm-ndaflow-v2-2605191449.
+2026-05-19T10:49:50.9355332+00:00 ContainerStatus: Deleting container: 2d4eed092e67_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T10:49:51.3266757+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-05-19T10:49:51.3268880+00:00 ContainerStatus: Container is terminated. Total time elapsed: 573 ms.
+2026-05-19T10:49:51.3269811+00:00 ContainerStatus: Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T10:49:51.3270878+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:48:00, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:49:51.3455624+00:00 ContainerStatus: Site startup probe failed after 28.9989898 seconds.
+2026-05-19T10:49:51.7676706+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:49:51.7687626+00:00 ContainerStatus: Failed to start site. Revert by stopping site.
+2026-05-19T10:49:51.7698974+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:49:51.7702240+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:49:51.7702388+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 stopped.
+========== New Cold Start Attempt (2026-05-19T10:49:51.8389354+00:00) ==========
+2026-05-19T10:49:51.8389354+00:00 ContainerStatus: State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:49:52.1910006+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:49:52.7839157+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 10:51:52
+2026-05-19T10:49:52.7844118+00:00 ContainerStatus: State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: clm-ndaflow-v2-2605191449 will be blocked for 2 minutes till 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:49:52.7850962+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 10:49:52 (UTC), DetailsLevel: WARN
+2026-05-19T10:49:53.3092493+00:00 ContainerStatus: State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 10:49:52 (UTC), DetailsLevel: WARN
+2026-05-19T10:49:57.6479373+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:49:57.6480341+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:50:02.8074796+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:50:02.8075108+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:50:07.9743963+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:50:07.9746734+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:50:18.0660203+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:50:18.0660767+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:50:28.2249244+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:50:28.2250544+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:50:38.4030227+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:50:38.4031833+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:50:48.5237234+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:50:48.5237759+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:50:58.6961467+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:50:58.6962470+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:51:08.8446450+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:51:08.8447013+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:51:19.0399568+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:51:19.0401636+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:51:29.1779814+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:51:29.1783323+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:51:39.3089336+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:51:39.3089871+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:51:49.3843063+00:00 ContainerStatus: State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:51:49.3843361+00:00 ContainerStatus: Start site prohibitted because the site is being blocked.
+2026-05-19T10:51:52.7894987+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 is unblocked.
+2026-05-19T10:51:59.5152122+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:52:01.1215309+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 10:51:52, DetailsLevel: WARN
+2026-05-19T10:52:01.1220896+00:00 ContainerStatus: Container start method called.
+2026-05-19T10:52:01.1239325+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T10:52:01.1241450+00:00 ContainerStatus: Establishing network.
+2026-05-19T10:52:01.1243004+00:00 ContainerStatus: Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T10:52:01.3652297+00:00 ContainerStatus: Container is starting.
+2026-05-19T10:52:01.3653150+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for clm-ndaflow-v2-2605191449., DetailsLevel: INFO
+2026-05-19T10:52:01.3654155+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-05-19T10:52:01.3654976+00:00 ContainerStatus: Establishing network if not established already.
+2026-05-19T10:52:01.3655861+00:00 ContainerStatus: Mounting volumes.
+2026-05-19T10:52:01.3846124+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T10:52:01.4042979+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-05-19T10:52:01.4253131+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T10:52:01.4454834+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T10:52:01.4553160+00:00 ContainerStatus: Nested mountpoint 
+2026-05-19T10:52:02.2880673+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for clm-ndaflow-v2-2605191449. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T10:52:02.2884534+00:00 ContainerStatus: Creating container.
+2026-05-19T10:52:02.2972565+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-05-19T10:52:02.2977949+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stdout_474d92baaf344106ae99d9255a39d9a4.
+2026-05-19T10:52:02.2981596+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stdout_474d92baaf344106ae99d9255a39d9a4.
+2026-05-19T10:52:02.2982899+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stdout_474d92baaf344106ae99d9255a39d9a4 for reading in non-blocking mode.
+2026-05-19T10:52:02.3069202+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stdout_474d92baaf344106ae99d9255a39d9a4.
+2026-05-19T10:52:02.3072786+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stdout_474d92baaf344106ae99d9255a39d9a4.
+2026-05-19T10:52:02.3263559+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stderr_698bced4acd0462983f2a98030a7cf9d.
+2026-05-19T10:52:02.3269493+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stderr_698bced4acd0462983f2a98030a7cf9d.
+2026-05-19T10:52:02.3270642+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stderr_698bced4acd0462983f2a98030a7cf9d for reading in non-blocking mode.
+2026-05-19T10:52:02.3271835+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stderr_698bced4acd0462983f2a98030a7cf9d.
+2026-05-19T10:52:02.3272965+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/0d248bab7bc2_clm-ndaflow-v2-2605191449/stderr_698bced4acd0462983f2a98030a7cf9d.
+2026-05-19T10:52:02.3274536+00:00 ContainerStatus: Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T10:52:04.1743848+00:00 ContainerStatus: Starting container: 0d248bab7bc2_clm-ndaflow-v2-2605191449.
+2026-05-19T10:52:04.3839546+00:00 ContainerStatus: Starting watchers and probes.
+2026-05-19T10:52:04.3847258+00:00 ContainerStatus: Starting metrics collection.
+2026-05-19T10:52:04.3850721+00:00 ContainerStatus: Container is running.
+2026-05-19T10:52:04.3851937+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T10:52:04.8474205+00:00 ContainerStatus: Container start method finished after 3625 ms.
+2026-05-19T10:52:04.8495465+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container clm-ndaflow-v2-2605191449 successfully created and is running., DetailsLevel: INFO
+2026-05-19T10:52:04.8496130+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T10:52:04.9097336+00:00 ContainerStream:    _____                               
+2026-05-19T10:52:04.9097635+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-05-19T10:52:04.9097657+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-05-19T10:52:04.9097676+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-05-19T10:52:04.9097702+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-05-19T10:52:04.9097722+00:00 ContainerStream:         \/      \/                  \/ 
+2026-05-19T10:52:04.9097736+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-05-19T10:52:04.9097749+00:00 ContainerStream: 
+2026-05-19T10:52:04.9097764+00:00 ContainerStream: Documentation    : http://aka.ms/webapp-linux
+2026-05-19T10:52:04.9097827+00:00 ContainerStream: NodeJS quickstart: https://aka.ms/node-qs
+2026-05-19T10:52:04.9097843+00:00 ContainerStream: NodeJS Version   : v22.22.2
+2026-05-19T10:52:04.9099444+00:00 ContainerStream: Instance Name    : lw0sdlwk000DCM
+2026-05-19T10:52:04.9099469+00:00 ContainerStream: Instance Id      : 978831a12b989a546f04a417ac73afab2417e3847711476ee09674c03af7af1b
+2026-05-19T10:52:04.9099483+00:00 ContainerStream: 
+2026-05-19T10:52:04.9099498+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-05-19T10:52:09.8898102+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-05-19T10:52:09.9328965+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-05-19T10:52:10.0001325+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-05-19T10:52:47.2575482+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-05-19T10:52:47.2773632+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-05-19T10:52:48.3720901+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-05-19T10:52:48.4321104+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-05-19T10:52:48.4325856+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-05-19T10:52:48.4427087+00:00 ContainerStream: done.
+2026-05-19T10:52:48.4643247+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-05-19T10:52:48.6740092+00:00 ContainerStream: Starting periodic command scheduler: cron.
+2026-05-19T10:52:48.8239329+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-05-19T10:52:48.8243718+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-05-19T10:52:48.8246657+00:00 ContainerStream: Build Operation ID: bce74d27-f056-483a-81bc-761423f81790
+2026-05-19T10:52:49.2287247+00:00 ContainerStream: Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2026-05-19T10:52:49.2385935+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-05-19T10:52:49.2976990+00:00 ContainerStream: Running #!/bin/sh
+2026-05-19T10:52:49.2977611+00:00 ContainerStream: 
+2026-05-19T10:52:49.2977637+00:00 ContainerStream: # Enter the source directory to make sure the script runs where the user expects
+2026-05-19T10:52:49.2977655+00:00 ContainerStream: cd "/home/site/wwwroot"
+2026-05-19T10:52:49.2977674+00:00 ContainerStream: 
+2026-05-19T10:52:49.2977691+00:00 ContainerStream: export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2026-05-19T10:52:49.2977704+00:00 ContainerStream: if [ -z "$PORT" ]; then
+2026-05-19T10:52:49.2977719+00:00 ContainerStream: 		export PORT=8080
+2026-05-19T10:52:49.2977817+00:00 ContainerStream: fi
+2026-05-19T10:52:49.2977832+00:00 ContainerStream: 
+2026-05-19T10:52:49.2989228+00:00 ContainerStream: PATH="$PATH:/home/site/wwwroot" node server.js
+2026-05-19T10:52:50.2015618+00:00 ContainerStream: node:internal/modules/cjs/loader:1386
+2026-05-19T10:52:50.2016131+00:00 ContainerStream:   throw err;
+2026-05-19T10:52:50.2016153+00:00 ContainerStream:   ^
+2026-05-19T10:52:50.2016168+00:00 ContainerStream: 
+2026-05-19T10:52:50.2016188+00:00 ContainerStream: Error: Cannot find module '/home/site/wwwroot/server.js'
+2026-05-19T10:52:50.2016207+00:00 ContainerStream:     at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+2026-05-19T10:52:50.2016301+00:00 ContainerStream:     at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+2026-05-19T10:52:50.2016319+00:00 ContainerStream:     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+2026-05-19T10:52:50.2016335+00:00 ContainerStream:     at Function._load (node:internal/modules/cjs/loader:1192:37)
+2026-05-19T10:52:50.2016351+00:00 ContainerStream:     at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+2026-05-19T10:52:50.2016368+00:00 ContainerStream:     at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+2026-05-19T10:52:50.2016386+00:00 ContainerStream:     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+2026-05-19T10:52:50.2016402+00:00 ContainerStream:     at node:internal/main/run_main_module:36:49 {
+2026-05-19T10:52:50.2016418+00:00 ContainerStream:   code: 'MODULE_NOT_FOUND',
+2026-05-19T10:52:50.2016433+00:00 ContainerStream:   requireStack: []
+2026-05-19T10:52:50.2016447+00:00 ContainerStream: }
+2026-05-19T10:52:50.2016652+00:00 ContainerStream: 
+2026-05-19T10:52:50.2016691+00:00 ContainerStream: Node.js v22.22.2
+2026-05-19T10:52:50.3326672+00:00 ContainerStatus: Container has finished running with exit code: 1.
+2026-05-19T10:52:50.3330653+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-05-19T10:52:50.3927851+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-05-19T10:52:50.3929311+00:00 ContainerStatus: Stopping container: 0d248bab7bc2_clm-ndaflow-v2-2605191449.
+2026-05-19T10:52:50.4731860+00:00 ContainerStatus: Deleting container: 0d248bab7bc2_clm-ndaflow-v2-2605191449. Retry count = 0
+2026-05-19T10:52:50.7147615+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-05-19T10:52:50.7346154+00:00 ContainerStatus: Container is terminated. Total time elapsed: 400 ms.
+2026-05-19T10:52:50.7351530+00:00 ContainerStatus: Site container: clm-ndaflow-v2-2605191449 terminated during site startup.
+2026-05-19T10:52:50.7435875+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:49:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:52:50.7549719+00:00 ContainerStatus: Site startup probe failed after 45.8665921 seconds.
+2026-05-19T10:52:51.0948671+00:00 ContainerStatus: State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:52:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:52:51.1266575+00:00 ContainerStatus: Failed to start site. Revert by stopping site.
+2026-05-19T10:52:51.1272513+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:52:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:52:51.1474086+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 10:52:51, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: clm-ndaflow-v2-2605191449 terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T10:52:51.1474639+00:00 ContainerStatus: Site: clm-ndaflow-v2-2605191449 stopped.
