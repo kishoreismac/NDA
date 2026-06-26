@@ -32,3 +32,23 @@
  GET /api/requests 200 in 20ms
 [signatures] store path: C:\Contract management\NDA\.data\signatures.json
  GET /api/signatures 200 in 27ms
+ GET /api/requests 200 in 14ms
+ GET /api/signatures 200 in 11ms
+ GET /api/requests 200 in 78ms
+ GET /api/signatures 200 in 44ms
+ GET /api/requests 200 in 26ms
+ GET /api/signatures 200 in 12ms
+ GET /api/requests 200 in 30ms
+ GET /api/signatures 200 in 14ms
+ GET /api/requests 200 in 28ms
+ GET /api/signatures 200 in 17ms
+ GET /api/requests 200 in 16ms
+ GET /api/signatures 200 in 14ms
+ GET /api/requests 200 in 12ms
+ GET /api/signatures 200 in 14ms
+ GET /api/requests 200 in 35ms
+ GET /api/signatures 200 in 38ms
+ GET /api/requests 200 in 20ms
+ GET /api/signatures 200 in 44ms
+ GET /api/requests 200 in 12ms
+ GET /api/signatures 200 in 12ms
