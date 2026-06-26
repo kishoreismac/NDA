@@ -130,7 +130,9 @@ export default function DashboardPage() {
         actions={
           role?.id !== "exec" ? (
             <Link href="/requests/new-contract" className="btn-primary">
+              <span data-testid="topbar-new-contract-action" className="contents">
               <FilePlus2 className="w-4 h-4" /> New Contract Request
+              </span>
             </Link>
           ) : null
         }
@@ -144,6 +146,7 @@ export default function DashboardPage() {
             const Icon = c.icon;
             return (
               <Link
+                data-testid={`dashboard-cta-${c.label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`}
                 key={c.label}
                 href={c.href}
                 className={`group relative overflow-hidden rounded-2xl p-4 border border-white/10 bg-gradient-to-br ${c.gradient} hover:scale-[1.03] transition shadow-lg`}
@@ -182,6 +185,7 @@ export default function DashboardPage() {
         <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
           {summary.map((s) => (
             <button
+              data-testid={`dashboard-status-tab-${s.label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`}
               key={s.label}
               onClick={() =>
                 router.push(s.to || `/repository?${s.filter}`)

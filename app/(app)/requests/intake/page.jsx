@@ -104,6 +104,7 @@ function Stepper({ current, onJump, invalidSteps, form }) {
           return (
             <li key={s.id} className="flex items-center">
               <button
+                data-testid={`intake-step-${s.key}`}
                 type="button"
                 onClick={() => onJump?.(s.id)}
                 title={`Go to ${s.title}`}
@@ -584,16 +585,17 @@ function IntakeInner() {
 
       <Stepper current={step} onJump={(id) => setStep(id)} invalidSteps={invalidSteps} form={form} />
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6" data-testid="nda-intake-workflow">
         <div className="xl:col-span-2 space-y-6">
           {/* STEP 1 — Counterparty */}
           {step === 1 && (
-            <GlassCard>
+            <GlassCard data-testid="intake-section-counterparty">
               <h3 className="font-semibold text-white text-lg mb-4">Counterparty Details</h3>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="sm:col-span-2">
                   <label className="label">Pick from existing parties</label>
                   <select
+                    data-testid="field-counterparty-id"
                     className="input"
                     value={form.counterpartyId}
                     onChange={(e) => onPickCounterparty(e.target.value)}
@@ -609,6 +611,7 @@ function IntakeInner() {
                 <div>
                   <RequiredLabel>Legal name</RequiredLabel>
                   <input
+                    data-testid="field-counterparty-name"
                     className={`input ${missingFields.has("counterpartyName") ? "border-rose-400/70" : ""}`}
                     placeholder="Acme Robotics Inc."
                     value={form.counterpartyName}
@@ -626,6 +629,7 @@ function IntakeInner() {
                 <div className="sm:col-span-2">
                   <RequiredLabel>Registered address</RequiredLabel>
                   <input
+                    data-testid="field-counterparty-address"
                     className={`input ${missingFields.has("counterpartyAddress") ? "border-rose-400/70" : ""}`}
                     placeholder="500 Industrial Way, San Jose, CA 95110, USA"
                     value={form.counterpartyAddress}
@@ -644,6 +648,7 @@ function IntakeInner() {
                 <div>
                   <RequiredLabel>Contact email</RequiredLabel>
                   <input
+                    data-testid="field-counterparty-email"
                     className={`input ${missingFields.has("counterpartyEmail") ? "border-rose-400/70" : ""}`}
                     placeholder="jane.doe@acme.com"
                     value={form.counterpartyEmail}
@@ -653,6 +658,7 @@ function IntakeInner() {
                 <div>
                   <RequiredLabel>Authorized signer name</RequiredLabel>
                   <input
+                    data-testid="field-counterparty-signer-name"
                     className={`input ${missingFields.has("counterpartySignerName") ? "border-rose-400/70" : ""}`}
                     placeholder="Jane Doe"
                     value={form.counterpartySignerName}
@@ -683,6 +689,7 @@ function IntakeInner() {
                   <div>
                     <RequiredLabel>Start Date</RequiredLabel>
                     <input
+                      data-testid="field-effective-date"
                       type="date"
                       className={`input ${missingFields.has("effectiveDate") ? "border-rose-400/70" : ""}`}
                       value={form.effectiveDate}
@@ -692,6 +699,7 @@ function IntakeInner() {
                   <div>
                     <label className="label">End Date</label>
                     <input
+                      data-testid="field-end-date"
                       type="date"
                       className="input"
                       value={form.endDate}
@@ -703,6 +711,7 @@ function IntakeInner() {
                     <label className="label">Term Time</label>
                     {isCustomTerm ? (
                       <input
+                        data-testid="field-term-time"
                         type="text"
                         readOnly
                         className="input bg-white/[0.02] text-cyan-200 font-medium"
@@ -711,6 +720,7 @@ function IntakeInner() {
                       />
                     ) : (
                       <select
+                        data-testid="field-term-time"
                         className="input"
                         value={form.term}
                         onChange={(e) => handleTermChange(e.target.value)}
@@ -728,12 +738,13 @@ function IntakeInner() {
 
           {/* STEP 2 — Record + Company */}
           {step === 2 && (
-            <GlassCard>
+            <GlassCard data-testid="intake-section-record">
               <h3 className="font-semibold text-white text-lg mb-4">Record Details</h3>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="sm:col-span-2">
                   <RequiredLabel>Engagement / project title</RequiredLabel>
                   <input
+                    data-testid="field-record-title"
                     className={`input ${missingFields.has("recordTitle") ? "border-rose-400/70" : ""}`}
                     placeholder="Joint R&D — autonomous platform"
                     value={form.recordTitle}
@@ -759,6 +770,7 @@ function IntakeInner() {
                 <div className="sm:col-span-2">
                   <RequiredLabel>Purpose of disclosure</RequiredLabel>
                   <textarea
+                    data-testid="field-purpose"
                     rows={3}
                     className={`input ${missingFields.has("purpose") ? "border-rose-400/70" : ""}`}
                     placeholder="Briefly describe what will be shared and why..."
@@ -840,6 +852,7 @@ function IntakeInner() {
                   <div>
                     <RequiredLabel>Company name</RequiredLabel>
                     <input
+                      data-testid="field-company-name"
                       className={`input ${missingFields.has("companyName") ? "border-rose-400/70" : ""}`}
                       value={form.companyName}
                       onChange={(e) => updateField("companyName", e.target.value)}
@@ -848,6 +861,7 @@ function IntakeInner() {
                   <div>
                     <RequiredLabel>Company address</RequiredLabel>
                     <input
+                      data-testid="field-company-address"
                       className={`input ${missingFields.has("companyAddress") ? "border-rose-400/70" : ""}`}
                       value={form.companyAddress}
                       onChange={(e) => updateField("companyAddress", e.target.value)}
@@ -856,6 +870,7 @@ function IntakeInner() {
                   <div>
                     <RequiredLabel>Authorized signer (Company)</RequiredLabel>
                     <input
+                      data-testid="field-company-signer-name"
                       className={`input ${missingFields.has("companySignerName") ? "border-rose-400/70" : ""}`}
                       value={form.companySignerName}
                       onChange={(e) =>
@@ -891,7 +906,7 @@ function IntakeInner() {
 
           {/* STEP 3 — Template & Placeholders */}
           {step === 3 && (
-            <div className="space-y-5">
+            <div className="space-y-5" data-testid="intake-section-template">
               <GlassCard>
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-semibold text-white text-lg">Select NDA Template</h3>
@@ -904,6 +919,7 @@ function IntakeInner() {
                     const selected = form.templateId === t.id;
                     return (
                       <button
+                        data-testid={`template-option-${t.id}`}
                         key={t.id}
                         onClick={() => onChooseTemplate(t.id)}
                         className={
@@ -932,6 +948,7 @@ function IntakeInner() {
                   <div>
                     <RequiredLabel>Governing law</RequiredLabel>
                     <select
+                      data-testid="field-governing-law"
                       className={`input ${missingFields.has("governingLaw") ? "border-rose-400/70" : ""}`}
                       value={form.governingLaw}
                       onChange={(e) =>
@@ -953,6 +970,7 @@ function IntakeInner() {
                   <div>
                     <RequiredLabel>Jurisdiction</RequiredLabel>
                     <input
+                      data-testid="field-jurisdiction"
                       className={`input ${missingFields.has("jurisdiction") ? "border-rose-400/70" : ""}`}
                       value={form.jurisdiction}
                       onChange={(e) =>
@@ -971,6 +989,7 @@ function IntakeInner() {
                   </div>
                   {templateSubStep === "select" ? (
                     <button
+                      data-testid="view-template-preview-placeholders"
                       type="button"
                       onClick={() => setTemplateSubStep("preview")}
                       className="btn-ghost"
@@ -979,6 +998,7 @@ function IntakeInner() {
                     </button>
                   ) : (
                     <button
+                      data-testid="hide-template-preview"
                       type="button"
                       onClick={() => setTemplateSubStep("select")}
                       className="btn-ghost"
@@ -991,7 +1011,7 @@ function IntakeInner() {
 
               {templateSubStep === "preview" && (
                 <>
-                  <GlassCard className="!p-0 overflow-hidden">
+                  <GlassCard className="!p-0 overflow-hidden" data-testid="template-preview-panel">
                     <div className="px-5 py-4 border-b border-white/10 flex items-center justify-between">
                       <div>
                         <div className="text-sm font-semibold text-white">
@@ -1031,10 +1051,12 @@ function IntakeInner() {
                     </div>
                   </GlassCard>
 
-                  <PlaceholderValidationPanel
-                    summary={summary}
-                    missingRequired={validation.missingRequired}
-                  />
+                  <div data-testid="placeholder-validation-panel">
+                    <PlaceholderValidationPanel
+                      summary={summary}
+                      missingRequired={validation.missingRequired}
+                    />
+                  </div>
                 </>
               )}
             </div>
@@ -1042,7 +1064,7 @@ function IntakeInner() {
 
           {/* STEP 4 */}
           {step === 4 && (
-            <GlassCard>
+            <GlassCard data-testid="intake-section-additional-questions">
               <h3 className="font-semibold text-white text-lg mb-2">Additional NDA Questions</h3>
               <p className="text-sm text-slate-400 mb-5">
                 Toggle any that apply. NDAFlow AI uses these to weight strategic and IP risk.
@@ -1057,7 +1079,7 @@ function IntakeInner() {
 
           {/* STEP 5 */}
           {step === 5 && (
-            <GlassCard>
+            <GlassCard data-testid="intake-section-pii-questions">
               <h3 className="font-semibold text-white text-lg mb-2">PII / Data Questions</h3>
               <p className="text-sm text-slate-400 mb-5">
                 Required for privacy and data residency assessment.
@@ -1068,8 +1090,8 @@ function IntakeInner() {
 
           {/* STEP 6 — Risk Review */}
           {step === 6 && (
-            <div className="space-y-6">
-              <GlassCard>
+            <div className="space-y-6" data-testid="intake-section-risk-review">
+              <GlassCard data-testid="risk-review-panel">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-semibold text-white text-lg flex items-center gap-2">
                     <GitBranch className="w-5 h-5 text-cyanglow" /> Auto-Assignment & Routing Rules
@@ -1113,7 +1135,7 @@ function IntakeInner() {
 
                 <div className="grid sm:grid-cols-3 gap-4 mb-6">
                   <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
-                    <div className="text-xs uppercase text-slate-400 tracking-wider">Risk score</div>
+                    <div data-testid="risk-score-label" className="text-xs uppercase text-slate-400 tracking-wider">Risk score</div>
                     <div className="text-3xl font-bold mt-1.5 gradient-text">{risk.score}/100</div>
                     <div className="mt-3 h-2 rounded-full bg-white/10 overflow-hidden">
                       <div
@@ -1123,7 +1145,7 @@ function IntakeInner() {
                     </div>
                   </div>
                   <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
-                    <div className="text-xs uppercase text-slate-400 tracking-wider">Risk flags</div>
+                    <div data-testid="risk-flags-label" className="text-xs uppercase text-slate-400 tracking-wider">Risk flags</div>
                     <div className="text-3xl font-bold mt-1.5">{risk.flags.length}</div>
                     <div className="text-xs text-slate-400 mt-1">
                       across {Object.keys(risk.categories).length} categories
@@ -1167,7 +1189,7 @@ function IntakeInner() {
                 </div>
 
                 <div className="mb-6">
-                  <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
+                  <h4 data-testid="recommended-workflow-heading" className="text-sm font-semibold mb-3 flex items-center gap-2">
                     <Workflow className="w-4 h-4 text-cyanglow" /> Recommended approval workflow
                   </h4>
                   <ol className="space-y-2">
@@ -1186,7 +1208,7 @@ function IntakeInner() {
                 </div>
 
                 <div>
-                  <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
+                  <h4 data-testid="clause-recommendations-heading" className="text-sm font-semibold mb-3 flex items-center gap-2">
                     <ListChecks className="w-4 h-4 text-violet-300" /> Clause recommendations
                   </h4>
                   <div className="grid sm:grid-cols-2 gap-2">
@@ -1213,26 +1235,28 @@ function IntakeInner() {
                 </div>
               </GlassCard>
 
-              <FinalDocumentDownloadPanel
-                template={template}
-                values={values}
-                validation={validation}
-                risk={risk}
-                workflow={workflow}
-                recordId={recordId}
-                recordTitle={
-                  form.recordTitle || `${form.counterpartyName || "New record"}`
-                }
-              />
+              <div data-testid="final-document-download-panel-risk">
+                <FinalDocumentDownloadPanel
+                  template={template}
+                  values={values}
+                  validation={validation}
+                  risk={risk}
+                  workflow={workflow}
+                  recordId={recordId}
+                  recordTitle={
+                    form.recordTitle || `${form.counterpartyName || "New record"}`
+                  }
+                />
+              </div>
             </div>
           )}
 
           {/* STEP 7 — Generate Final NDA */}
           {step === 7 && (
-            <div className="space-y-6">
+            <div className="space-y-6" data-testid="intake-section-final-document">
               <GlassCard>
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-semibold text-white text-lg">Final NDA Document</h3>
+                  <h3 data-testid="final-nda-document-heading" className="font-semibold text-white text-lg">Final NDA Document</h3>
                   <RiskBadge level={risk.level} />
                 </div>
                 <p className="text-sm text-slate-400 mb-5">
@@ -1264,20 +1288,23 @@ function IntakeInner() {
                 />
               </GlassCard>
 
-              <FinalDocumentDownloadPanel
-                template={template}
-                values={values}
-                validation={validation}
-                risk={risk}
-                workflow={workflow}
-                recordId={recordId}
-                recordTitle={
-                  form.recordTitle || `${form.counterpartyName || "New record"}`
-                }
-              />
+              <div data-testid="final-document-download-panel">
+                <FinalDocumentDownloadPanel
+                  template={template}
+                  values={values}
+                  validation={validation}
+                  risk={risk}
+                  workflow={workflow}
+                  recordId={recordId}
+                  recordTitle={
+                    form.recordTitle || `${form.counterpartyName || "New record"}`
+                  }
+                />
+              </div>
 
               <div className="flex flex-wrap items-center gap-3">
                 <button
+                  data-testid="submit-for-legal-review"
                   className="btn-primary"
                   disabled={!validation.isValid}
                   onClick={() => {
@@ -1333,6 +1360,7 @@ function IntakeInner() {
                   Submit for legal review
                 </button>
                 <button
+                  data-testid="save-draft"
                   className="btn-ghost"
                   onClick={() => {
                     upsertRequest({
@@ -1365,6 +1393,7 @@ function IntakeInner() {
                   Save as draft
                 </button>
                 <button
+                  data-testid="send-for-signature"
                   className="btn-ghost disabled:opacity-40 disabled:cursor-not-allowed"
                   disabled={(() => {
                     const r = getRequest(recordId);
@@ -1415,11 +1444,11 @@ function IntakeInner() {
 
           {/* Nav */}
           <div className="flex items-center justify-between">
-            <button onClick={back} disabled={step === 1} className="btn-ghost disabled:opacity-30">
+            <button data-testid="intake-back" onClick={back} disabled={step === 1} className="btn-ghost disabled:opacity-30">
               <ChevronLeft className="w-4 h-4" /> Back
             </button>
             {step < 7 && (
-              <button onClick={next} className="btn-primary">
+              <button data-testid="intake-continue" onClick={next} className="btn-primary">
                 Continue <ChevronRight className="w-4 h-4" />
               </button>
             )}

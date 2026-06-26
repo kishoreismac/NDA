@@ -72,10 +72,10 @@ export default function RulesPage() {
         subtitle="Conditional rules that route NDAs based on type, risk, party and data signals."
         actions={
           <div className="flex items-center gap-2">
-            <button onClick={onExport} className="btn-ghost">
+            <button data-testid="rules-export-csv" onClick={onExport} className="btn-ghost">
               <Download className="w-4 h-4" /> Export CSV
             </button>
-            <button onClick={() => setShowNew(true)} className="btn-primary">
+            <button data-testid="add-rule-open" onClick={() => setShowNew(true)} className="btn-primary">
               <Plus className="w-4 h-4" /> New Rule
             </button>
           </div>
@@ -214,6 +214,7 @@ function NewRuleModal({ onClose, onSave }) {
           <div>
             <label className="label">Rule name *</label>
             <input
+              data-testid="rule-name"
               className="input"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -223,6 +224,7 @@ function NewRuleModal({ onClose, onSave }) {
           <div>
             <label className="label">When (condition) *</label>
             <input
+              data-testid="rule-condition"
               className="input"
               value={form.when}
               onChange={(e) => setForm({ ...form, when: e.target.value })}
@@ -232,6 +234,7 @@ function NewRuleModal({ onClose, onSave }) {
           <div>
             <label className="label">Then (action) *</label>
             <input
+              data-testid="rule-action"
               className="input"
               value={form.action}
               onChange={(e) => setForm({ ...form, action: e.target.value })}
@@ -251,7 +254,7 @@ function NewRuleModal({ onClose, onSave }) {
           <button onClick={onClose} className="btn-ghost">
             Cancel
           </button>
-          <button onClick={submit} className="btn-primary">
+          <button data-testid="add-rule-submit" onClick={submit} className="btn-primary">
             <Plus className="w-4 h-4" /> Create Rule
           </button>
         </div>

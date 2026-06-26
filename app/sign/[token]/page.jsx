@@ -180,7 +180,7 @@ export default function SignPage({ params }) {
 
   if (done || sig.status === "signed") {
     return (
-      <div className="min-h-screen px-6 py-10 flex items-center justify-center">
+      <div data-testid="signing-confirmation-page" className="min-h-screen px-6 py-10 flex items-center justify-center">
         <div className="max-w-2xl w-full bg-white/5 border border-emerald-400/30 rounded-2xl p-10 text-center">
           <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center mx-auto mb-4">
             <CheckCircle2 className="w-9 h-9 text-emerald-300" />
@@ -224,6 +224,7 @@ export default function SignPage({ params }) {
           )}
           <div className="mt-6">
             <button
+              data-testid="download-signed-nda"
               onClick={async () => {
                 setError("");
                 setDownloading(true);
@@ -331,7 +332,7 @@ export default function SignPage({ params }) {
   };
 
   return (
-    <div className="min-h-screen px-4 sm:px-6 py-8">
+    <div data-testid="signing-page-root" className="min-h-screen px-4 sm:px-6 py-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="bg-gradient-to-r from-indigo-600/30 to-cyan-600/20 border border-white/10 rounded-2xl p-6 mb-6">
@@ -364,6 +365,7 @@ export default function SignPage({ params }) {
             </div>
             <div className="flex flex-wrap gap-2">
               <button
+                data-testid="signing-preview-document"
                 type="button"
                 onClick={() => {
                   setShowPreview((v) => {
@@ -384,6 +386,7 @@ export default function SignPage({ params }) {
                 {showPreview ? "Hide Preview" : "Preview Document"}
               </button>
               <button
+                data-testid="signing-download-docx"
                 type="button"
                 onClick={() => onDownloadDoc("docx")}
                 disabled={!docContext || !!downloadingDoc}
@@ -397,6 +400,7 @@ export default function SignPage({ params }) {
                 Download DOCX
               </button>
               <button
+                data-testid="signing-download-pdf"
                 type="button"
                 onClick={() => onDownloadDoc("pdf")}
                 disabled={!docContext || !!downloadingDoc}
@@ -547,6 +551,7 @@ export default function SignPage({ params }) {
             <label className="block">
               <span className="text-xs text-slate-400">Full Name</span>
               <input
+                data-testid="signer-name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="mt-1 w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-cyan-400/50"
@@ -556,6 +561,7 @@ export default function SignPage({ params }) {
             <label className="block">
               <span className="text-xs text-slate-400">Title</span>
               <input
+                data-testid="signer-title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="mt-1 w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white outline-none focus:border-cyan-400/50"
@@ -591,6 +597,7 @@ export default function SignPage({ params }) {
             )}
             <label className="sm:col-span-2 flex items-start gap-2 text-sm text-slate-200">
               <input
+                data-testid="signing-agreement-checkbox"
                 type="checkbox"
                 checked={agree}
                 onChange={(e) => setAgree(e.target.checked)}
@@ -612,12 +619,14 @@ export default function SignPage({ params }) {
 
           <div className="mt-6 flex flex-wrap items-center justify-end gap-3">
             <button
+              data-testid="decline-signature"
               onClick={() => setShowDecline(true)}
               className="text-sm text-slate-300 hover:text-rose-300 px-3 py-2"
             >
               Decline to sign
             </button>
             <button
+              data-testid="sign-and-return"
               onClick={onSign}
               disabled={submitting}
               className="inline-flex items-center gap-2 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-100 px-5 py-2.5 rounded-xl text-sm font-medium disabled:opacity-50"

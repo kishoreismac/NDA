@@ -69,6 +69,7 @@ export default function Sidebar() {
             (item.href !== "/dashboard" && pathname.startsWith(item.href));
           return (
             <Link
+              data-testid={`sidebar-link-${item.label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`}
               key={item.href}
               href={item.href}
               className={`nav-link ${active ? "nav-link-active" : ""}`}

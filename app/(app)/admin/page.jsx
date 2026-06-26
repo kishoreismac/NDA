@@ -183,6 +183,7 @@ export default function AdminPage() {
               <div className="grid sm:grid-cols-2 gap-3">
                 <button
                   type="button"
+                  data-testid="theme-dark"
                   onClick={() => pickTheme("dark")}
                   className={
                     "text-left rounded-2xl border p-4 transition " +
@@ -213,6 +214,7 @@ export default function AdminPage() {
 
                 <button
                   type="button"
+                  data-testid="theme-white"
                   onClick={() => pickTheme("light")}
                   className={
                     "text-left rounded-2xl border p-4 transition " +
@@ -294,6 +296,7 @@ export default function AdminPage() {
                   <div className="sm:col-span-1">
                     <label className="label">Title</label>
                     <select
+                      data-testid="user-title"
                       className="input"
                       value={newUser.title}
                       onChange={(e) => setNewUser({ ...newUser, title: e.target.value })}
@@ -309,6 +312,7 @@ export default function AdminPage() {
                   <div className="sm:col-span-2">
                     <label className="label">First name</label>
                     <input
+                      data-testid="user-first-name"
                       className="input"
                       placeholder="e.g. Sarah"
                       value={newUser.firstName}
@@ -320,6 +324,7 @@ export default function AdminPage() {
                   <div className="sm:col-span-2">
                     <label className="label">Last name</label>
                     <input
+                      data-testid="user-last-name"
                       className="input"
                       placeholder="e.g. Johnson"
                       value={newUser.lastName}
@@ -331,6 +336,7 @@ export default function AdminPage() {
                   <div className="sm:col-span-1">
                     <label className="label">Role</label>
                     <select
+                      data-testid="user-role"
                       className="input"
                       value={newUser.role}
                       onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
@@ -349,6 +355,7 @@ export default function AdminPage() {
                     <label className="label">Email</label>
                     <input
                       type="email"
+                      data-testid="user-email"
                       className="input"
                       placeholder="sarah.johnson@contoso.com"
                       value={newUser.email}
@@ -360,7 +367,7 @@ export default function AdminPage() {
                   <div className="text-xs text-rose-300">{userError}</div>
                 )}
                 <div className="flex justify-end">
-                  <button type="submit" className="btn-primary">
+                  <button data-testid="add-user-submit" type="submit" className="btn-primary">
                     + Add User
                   </button>
                 </div>

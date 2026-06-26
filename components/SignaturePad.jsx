@@ -165,6 +165,7 @@ export default function SignaturePad({ defaultName = "", onChange }) {
   // --- UI ---------------------------------------------------------------
   const Tab = ({ id, icon: Icon, label }) => (
     <button
+      data-testid={`signature-mode-${id}`}
       type="button"
       onClick={() => setMode(id)}
       className={`px-3 py-1.5 rounded-lg text-xs inline-flex items-center gap-1.5 border transition ${
@@ -227,6 +228,7 @@ export default function SignaturePad({ defaultName = "", onChange }) {
       {mode === "type" && (
         <div>
           <input
+            data-testid="signature-typed-name"
             value={typed}
             onChange={(e) => setTyped(e.target.value)}
             placeholder="Type your full legal name"

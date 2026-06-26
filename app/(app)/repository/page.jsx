@@ -287,6 +287,7 @@ function RepositoryInner() {
   };
   const onDelete = (record) => {
     if (guard(ACTIONS.DELETE, toast)) return;
+    if (!confirm(`Delete ${record.id}? This cannot be undone.`)) return;
     deleteRequest(record.id);
     logAuditEvent({
       action: "Record deleted",
@@ -346,7 +347,7 @@ function RepositoryInner() {
         title="Contract Repository"
         subtitle="Search, filter, inspect, tag, edit and renew every contract in your organization."
         actions={
-          <button onClick={onExport} className="btn-ghost">
+          <button data-testid="repository-export-csv" onClick={onExport} className="btn-ghost">
             <Download className="w-4 h-4" /> Export CSV
           </button>
         }
@@ -357,23 +358,24 @@ function RepositoryInner() {
           <div className="md:col-span-2 flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2">
             <Search className="w-4 h-4 text-slate-400" />
             <input
+              data-testid="repository-search"
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="Search by ID, title, party, owner…"
               className="bg-transparent outline-none text-sm w-full placeholder-slate-500"
             />
           </div>
-          <select className="input" value={type} onChange={(e) => setType(e.target.value)}>
+          <select data-testid="repository-type-filter" className="input" value={type} onChange={(e) => setType(e.target.value)}>
             {["All", "Mutual", "One-Way In", "One-Way Out", "Vendor", "M&A"].map((t) => (
               <option key={t}>{t}</option>
             ))}
           </select>
-          <select className="input" value={risk} onChange={(e) => setRisk(e.target.value)}>
+          <select data-testid="repository-risk-filter" className="input" value={risk} onChange={(e) => setRisk(e.target.value)}>
             {["All", "Low", "Medium", "High"].map((t) => (
               <option key={t}>{t}</option>
             ))}
           </select>
-          <select className="input" value={status} onChange={(e) => setStatus(e.target.value)}>
+          <select data-testid="repository-status-filter" className="input" value={status} onChange={(e) => setStatus(e.target.value)}>
             {[
               "All",
               "In Review",
@@ -426,6 +428,9 @@ function RepositoryInner() {
               {filtered.map((r) => (
                 <tr
                   key={r.id}
+                  data-testid="repository-row"
+                  data-record-id={r.id}
+                  data-status={r.status}
                   className="table-row cursor-pointer"
                   onClick={() => setOpenId(r.id)}
                 >
@@ -494,6 +499,7 @@ function RepositoryInner() {
                   >
                     <div className="flex items-center justify-end gap-1">
                       <button
+                        data-testid="repository-view"
                         onClick={() => setOpenId(r.id)}
                         className="btn-ghost !py-1 !px-2 text-xs"
                       >
@@ -501,6 +507,7 @@ function RepositoryInner() {
                       </button>
                       {r.status === "Signed" && (
                         <button
+                          data-testid="repository-download-signed-pdf"
                           onClick={() => onDownloadSignedPdf(r)}
                           className="btn-ghost !py-1 !px-2 text-xs text-emerald-300"
                           title="Download signed PDF with embedded signature"
@@ -510,6 +517,7 @@ function RepositoryInner() {
                       )}
                       {can(ACTIONS.DELETE) && (
                         <button
+                          data-testid="repository-delete"
                           onClick={() => {
                             if (
                               confirm(
@@ -526,6 +534,7 @@ function RepositoryInner() {
                         </button>
                       )}
                       <button
+                        data-testid="repository-row-actions"
                         onClick={() =>
                           setMenuOpenId((id) => (id === r.id ? null : r.id))
                         }
@@ -541,18 +550,21 @@ function RepositoryInner() {
                         className="absolute right-4 top-full mt-1 w-44 bg-navy-950 border border-white/10 rounded-xl shadow-2xl z-30 overflow-hidden"
                       >
                         <button
+                          data-testid="repository-add-tag"
                           onClick={() => onAddTag(r)}
                           className="w-full text-left px-3 py-2 text-sm text-slate-200 hover:bg-white/5 flex items-center gap-2"
                         >
                           <Tag className="w-3.5 h-3.5 text-cyanglow" /> Add tag
                         </button>
                         <button
+                          data-testid="repository-edit-nda"
                           onClick={() => onEditNda(r)}
                           className="w-full text-left px-3 py-2 text-sm text-slate-200 hover:bg-white/5 flex items-center gap-2"
                         >
                           <Pencil className="w-3.5 h-3.5 text-violet-300" /> Edit NDA
                         </button>
                         <button
+                          data-testid="repository-renew-nda"
                           onClick={() => onRenewNda(r)}
                           className="w-full text-left px-3 py-2 text-sm text-slate-200 hover:bg-white/5 flex items-center gap-2"
                         >
@@ -771,7 +783,7 @@ function RecordDetailDrawer({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex" onClick={onClose}>
+    <div data-testid="repository-detail-drawer" className="fixed inset-0 z-50 flex" onClick={onClose}>
       <div className="flex-1 bg-black/60 backdrop-blur-sm" />
       <aside
         className="w-full max-w-2xl h-full bg-navy-950 border-l border-white/10 overflow-auto shadow-2xl"
@@ -817,6 +829,7 @@ function RecordDetailDrawer({
             </div>
             <div className="flex flex-wrap gap-2">
               <button
+                data-testid="repository-detail-send-for-sign"
                 onClick={() => onSendForSign(record)}
                 disabled={record.status !== "Approved"}
                 title={
@@ -829,6 +842,7 @@ function RecordDetailDrawer({
                 Send for Sign
               </button>
               <button
+                data-testid="repository-detail-mark-signed"
                 onClick={() => onMarkSigned(record)}
                 disabled={record.status !== "Awaiting Signature"}
                 title={
@@ -850,11 +864,8 @@ function RecordDetailDrawer({
                 Cancel NDA
               </button>
               <button
-                onClick={() => {
-                  if (confirm(`Delete ${record.id}? This cannot be undone.`)) {
-                    onDelete(record);
-                  }
-                }}
+                data-testid="repository-detail-delete"
+                onClick={() => onDelete(record)}
                 className="btn-ghost text-xs text-rose-300 ml-auto"
               >
                 <Trash2 className="w-3 h-3" /> Delete
@@ -865,10 +876,11 @@ function RecordDetailDrawer({
           {/* Final NDA Document — full rendered view with embedded signature
               (when signed) and DOCX/PDF download. Replaces the old separate
               Preview + Final Signed + Documents list sections. */}
-          <FinalDocumentSection
-            record={record}
-            busy={busy}
-            onDownload={async (format) => {
+          <div data-testid="repository-final-document-section">
+            <FinalDocumentSection
+              record={record}
+              busy={busy}
+              onDownload={async (format) => {
               const template = getTemplateById(record.templateId);
               if (!template) {
                 toast.error("Template missing", "Cannot generate document.");
@@ -943,8 +955,9 @@ function RecordDetailDrawer({
               } finally {
                 setBusy(null);
               }
-            }}
-          />
+              }}
+            />
+          </div>
 
           {/* Audit trail for this record */}
           <DocumentAuditTrail
@@ -1054,6 +1067,7 @@ function FinalDocumentSection({ record, busy, onDownload }) {
         </div>
         <div className="flex gap-2">
           <button
+            data-testid="repository-document-preview"
             onClick={() => setShowPreview((v) => !v)}
             className="btn-ghost text-xs"
             title={showPreview ? "Hide document preview" : "Preview the full document inline"}
@@ -1066,6 +1080,7 @@ function FinalDocumentSection({ record, busy, onDownload }) {
             {showPreview ? "Hide Preview" : "Preview"}
           </button>
           <button
+            data-testid="repository-download-docx"
             onClick={() => onDownload("docx")}
             disabled={!!busy}
             className="btn-ghost text-xs disabled:opacity-40"
@@ -1079,6 +1094,7 @@ function FinalDocumentSection({ record, busy, onDownload }) {
             Download DOCX
           </button>
           <button
+            data-testid="repository-download-pdf"
             onClick={() => onDownload("pdf")}
             disabled={!!busy}
             className={

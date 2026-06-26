@@ -58,6 +58,7 @@ export default function RoleSelector() {
   return (
     <div className="relative" ref={ref}>
       <button
+        data-testid="role-selector-trigger"
         onClick={() => setOpen((v) => !v)}
         className="flex items-center gap-2 px-2 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition"
       >
@@ -76,7 +77,7 @@ export default function RoleSelector() {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full mt-2 w-[360px] bg-navy-950 border border-white/10 rounded-2xl shadow-2xl z-50 overflow-hidden">
+        <div data-testid="role-selector-menu" className="absolute right-0 top-full mt-2 w-[360px] bg-navy-950 border border-white/10 rounded-2xl shadow-2xl z-50 overflow-hidden">
           <div className="px-4 py-3 border-b border-white/10 bg-gradient-to-r from-violet-500/10 to-cyan-500/10">
             <div className="text-sm font-semibold text-white">Select a Demo Role</div>
             <div className="text-[11px] text-slate-400 mt-0.5">
@@ -94,6 +95,7 @@ export default function RoleSelector() {
                 const active = r.id === role.id;
                 return (
                   <button
+                    data-testid={`role-option-${r.id}`}
                     key={r.id}
                     onClick={() => choose(r, r.users[0])}
                     className={`text-left rounded-xl p-2.5 border transition ${
@@ -120,6 +122,7 @@ export default function RoleSelector() {
                 const active = u.id === user.id;
                 return (
                   <button
+                    data-testid={`role-user-option-${u.id}`}
                     key={u.id}
                     onClick={() => choose(role, u)}
                     className={`w-full flex items-center gap-3 p-2 rounded-lg text-left transition ${

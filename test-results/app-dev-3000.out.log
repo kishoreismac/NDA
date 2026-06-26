@@ -1,0 +1,34 @@
+
+> ndaflow-ai@0.1.0 dev
+> next dev -H 127.0.0.1 -p 3000
+
+  ▲ Next.js 14.2.5
+  - Local:        http://127.0.0.1:3000
+  - Network:      http://127.0.0.1:3000
+  - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 2.7s
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 1524ms (964 modules)
+ GET /dashboard 200 in 1747ms
+ GET /dashboard 200 in 153ms
+ GET /dashboard 200 in 90ms
+ ✓ Compiled /api/requests in 497ms (490 modules)
+[requests] store path: C:\Contract management\NDA\.data\requests.json
+ GET /api/requests 200 in 633ms
+ GET /api/requests 200 in 638ms
+ ✓ Compiled /api/signatures in 313ms (492 modules)
+[signatures] store path: C:\Contract management\NDA\.data\signatures.json
+ GET /api/signatures 200 in 443ms
+ ○ Compiling /legal-queue ...
+ ✓ Compiled /legal-queue in 959ms (1009 modules)
+ ✓ Compiled /requests/new-contract in 456ms (1024 modules)
+ ✓ Compiled /api/templates in 198ms (522 modules)
+[templates] store path: C:\Contract management\NDA\.data\templates.json
+ GET /api/templates 200 in 309ms
+ GET /api/templates 200 in 315ms
+[requests] store path: C:\Contract management\NDA\.data\requests.json
+ GET /api/requests 200 in 20ms
+[signatures] store path: C:\Contract management\NDA\.data\signatures.json
+ GET /api/signatures 200 in 27ms

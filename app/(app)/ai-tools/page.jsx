@@ -49,6 +49,7 @@ export default function AiToolsPage() {
               const active = tab === t.id;
               return (
                 <button
+                  data-testid={`ai-search-tab-${t.id}`}
                   key={t.id}
                   onClick={() => setTab(t.id)}
                   className={
@@ -126,6 +127,7 @@ function RepositoryPicker({ value, onPick, onClear }) {
       ) : (
         <>
           <input
+            data-testid="ai-repository-picker-search"
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search NDAs by ID, counterparty, owner…"
@@ -139,6 +141,7 @@ function RepositoryPicker({ value, onPick, onClear }) {
             ) : (
               filtered.map((r) => (
                 <button
+                  data-testid="ai-repository-picker-option"
                   key={r.id}
                   onClick={() => onPick(r)}
                   className="w-full text-left bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg px-2.5 py-1.5"
@@ -675,6 +678,7 @@ function ChatTab() {
         </div>
         <div className="p-3 border-t border-white/10 flex gap-2">
           <input
+            data-testid="ai-search-input"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && send()}
@@ -682,6 +686,7 @@ function ChatTab() {
             className="flex-1 bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm text-white outline-none focus:border-cyan-400/40"
           />
           <button
+            data-testid="ai-search-send"
             onClick={() => send()}
             className="inline-flex items-center gap-1.5 bg-grad-primary text-white px-4 py-2 rounded-xl text-sm shadow-glow"
           >

@@ -93,13 +93,14 @@ export default function RequestNewContractPage() {
         }
       />
 
-      <GlassCard className="mb-6">
+      <GlassCard className="mb-6" data-testid="quick-templates-section">
         <div className="text-[11px] uppercase tracking-wider text-slate-400 mb-3">
           Quick Templates
         </div>
         <div className="grid sm:grid-cols-3 gap-4">
           {quick.map((t) => (
             <button
+              data-testid={`quick-template-${t.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`}
               key={t.id}
               onClick={() => pick(t.id)}
               className="text-left rounded-xl border border-white/10 bg-gradient-to-br from-indigo-600/20 to-cyan-600/10 hover:from-indigo-600/30 hover:to-cyan-600/20 p-5 transition"
@@ -119,13 +120,14 @@ export default function RequestNewContractPage() {
         </div>
       </GlassCard>
 
-      <GlassCard className="mb-6">
+      <GlassCard className="mb-6" data-testid="select-more-templates-section">
         <div className="text-[11px] uppercase tracking-wider text-slate-400 mb-3">
           Select More Templates
         </div>
         <div className="grid sm:grid-cols-[1fr_auto] gap-3">
           <div className="relative">
             <select
+              data-testid="select-more-templates-dropdown"
               value={selectedId}
               onChange={(e) => setSelectedId(e.target.value)}
               className="input w-full appearance-none pr-10"
@@ -140,6 +142,7 @@ export default function RequestNewContractPage() {
             <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
           <button
+            data-testid="select-more-templates-continue"
             type="button"
             onClick={proceedSelected}
             disabled={!selectedId}

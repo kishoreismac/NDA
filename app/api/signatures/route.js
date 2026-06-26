@@ -90,6 +90,22 @@ export async function POST(req) {
   try {
     const body = await req.json();
     const { token, action = "upsert", patch } = body || {};
+    if (action === "reset") {
+      if (process.env.NODE_ENV === "production") {
+        return Response.json(
+          { ok: false, error: "Reset is not available in production." },
+          { status: 403 }
+        );
+      }
+      const ok = writeAll({});
+      if (!ok) {
+        return Response.json(
+          { ok: false, error: "Failed to reset signature store." },
+          { status: 500 }
+        );
+      }
+      return Response.json({ ok: true });
+    }
     if (!token) {
       return Response.json({ ok: false, error: "Missing token." }, { status: 400 });
     }

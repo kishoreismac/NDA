@@ -92,10 +92,10 @@ export default function PartiesPage() {
         subtitle="Manage counterparties, view their NDA history and risk profile."
         actions={
           <div className="flex items-center gap-2">
-            <button onClick={onExport} className="btn-ghost">
+            <button data-testid="parties-export-csv" onClick={onExport} className="btn-ghost">
               <Download className="w-4 h-4" /> Export CSV
             </button>
-            <button onClick={() => setShowAdd(true)} className="btn-primary">
+            <button data-testid="add-party-open" onClick={() => setShowAdd(true)} className="btn-primary">
               <UserPlus className="w-4 h-4" /> Add Party
             </button>
           </div>
@@ -209,6 +209,7 @@ function AddPartyModal({ onClose, onSave }) {
           <div className="col-span-2">
             <label className="label">Legal name *</label>
             <input
+              data-testid="party-name"
               className="input"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -218,6 +219,7 @@ function AddPartyModal({ onClose, onSave }) {
           <div>
             <label className="label">Country</label>
             <input
+              data-testid="party-country"
               className="input"
               value={form.country}
               onChange={(e) => setForm({ ...form, country: e.target.value })}
@@ -226,6 +228,7 @@ function AddPartyModal({ onClose, onSave }) {
           <div>
             <label className="label">Industry</label>
             <input
+              data-testid="party-industry"
               className="input"
               value={form.industry}
               onChange={(e) => setForm({ ...form, industry: e.target.value })}
@@ -234,6 +237,7 @@ function AddPartyModal({ onClose, onSave }) {
           <div>
             <label className="label">Risk</label>
             <select
+              data-testid="party-risk"
               className="input"
               value={form.risk}
               onChange={(e) => setForm({ ...form, risk: e.target.value })}
@@ -248,7 +252,7 @@ function AddPartyModal({ onClose, onSave }) {
           <button onClick={onClose} className="btn-ghost">
             Cancel
           </button>
-          <button onClick={submit} className="btn-primary">
+          <button data-testid="add-party-submit" onClick={submit} className="btn-primary">
             <Plus className="w-4 h-4" /> Add Party
           </button>
         </div>

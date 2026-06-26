@@ -121,7 +121,7 @@ export default function TemplatesPage() {
         subtitle="Approved NDA templates. Final documents are generated from these originals — never rewritten by AI."
         actions={
           isAdmin ? (
-            <button className="btn-primary" onClick={() => setShowCreate(true)}>
+            <button data-testid="new-template-open" className="btn-primary" onClick={() => setShowCreate(true)}>
               <Plus className="w-4 h-4" /> New Template
             </button>
           ) : null
@@ -398,6 +398,7 @@ function NewTemplateModal({ onClose, onSave }) {
                   Template name <span className="text-rose-400">*</span>
                 </label>
                 <input
+                  data-testid="new-template-name"
                   className="input"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -407,6 +408,7 @@ function NewTemplateModal({ onClose, onSave }) {
               <div>
                 <label className="label">Type</label>
                 <input
+                  data-testid="new-template-type"
                   className="input"
                   value={type}
                   onChange={(e) => setType(e.target.value)}
@@ -416,6 +418,7 @@ function NewTemplateModal({ onClose, onSave }) {
               <div>
                 <label className="label">Jurisdiction</label>
                 <input
+                  data-testid="new-template-jurisdiction"
                   className="input"
                   value={jurisdiction}
                   onChange={(e) => setJurisdiction(e.target.value)}
@@ -424,6 +427,7 @@ function NewTemplateModal({ onClose, onSave }) {
               <div>
                 <label className="label">Version</label>
                 <input
+                  data-testid="new-template-version"
                   className="input"
                   value={version}
                   onChange={(e) => setVersion(e.target.value)}
@@ -433,6 +437,7 @@ function NewTemplateModal({ onClose, onSave }) {
             <div>
               <label className="label">Description</label>
               <input
+                data-testid="new-template-description"
                 className="input"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -444,6 +449,7 @@ function NewTemplateModal({ onClose, onSave }) {
                 Template body <span className="text-rose-400">*</span>
               </label>
               <textarea
+                data-testid="new-template-body"
                 rows={18}
                 className="input font-mono text-[12px] leading-5"
                 value={body}
@@ -516,6 +522,7 @@ function NewTemplateModal({ onClose, onSave }) {
             Cancel
           </button>
           <button
+            data-testid="new-template-save"
             onClick={submit}
             disabled={submitting}
             className="btn-primary text-sm"

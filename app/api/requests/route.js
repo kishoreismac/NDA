@@ -76,6 +76,22 @@ export async function POST(req) {
     const { action = "upsert" } = body || {};
     const all = readAll();
 
+    if (action === "reset") {
+      if (process.env.NODE_ENV === "production") {
+        return Response.json(
+          { ok: false, error: "Reset is not available in production." },
+          { status: 403 }
+        );
+      }
+      if (!writeAll({})) {
+        return Response.json(
+          { ok: false, error: "Failed to reset requests store." },
+          { status: 500 }
+        );
+      }
+      return Response.json({ ok: true });
+    }
+
     if (action === "upsert") {
       const entry = body.entry;
       if (!entry || !entry.id) {
