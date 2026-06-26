@@ -52,3 +52,7 @@
  GET /api/signatures 200 in 44ms
  GET /api/requests 200 in 12ms
  GET /api/signatures 200 in 12ms
+ GET /api/requests 200 in 57ms
+ GET /api/signatures 200 in 66ms
+ GET /api/requests 200 in 41ms
+ GET /api/signatures 200 in 27ms
